@@ -1,0 +1,25 @@
+{
+  "section": "changelog",
+  "title": "Wekelijkse agent-updates",
+  "updatedAt": "2026-11-21",
+  "runs": [
+    {
+      "id": "init-2026-w47",
+      "date": "2026-11-21",
+      "week": "2026-W47",
+      "agent": "Bootstrap (Startversie)",
+      "summary": "Eerste volledige kennisbank opgezet met 7 geverifieerde/gerapporteerde AI-verdieners, 5 opkomende kansen, 7 kernpatronen, 5 valkuilen, 4 concrete uitvoerbare playbooks, 7 praktijktips, 8 kernbronnen en 7 blinde vlekken.",
+      "itemsAdded": 46,
+      "sectionsTouched": [
+        "earners",
+        "emerging",
+        "patterns",
+        "pitfalls",
+        "actions",
+        "tips",
+        "resources",
+        "blindspots"
+      ]
+    }
+  ]
+}

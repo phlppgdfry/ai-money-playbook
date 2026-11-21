@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AI Money Playbook — Verifieerbare AI-inkomsten, patronen & playbooks</title>
+  <meta name="description" content="Nuchtere, verifieerbare kennisbank over wie echt geld verdient met AI, onderliggende patronen, valkuilen, uitvoerbare playbooks en blinde vlekken. Wekelijks uitgebreid door agents." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <a class="brand" href="#top">
+        <span class="brand-mark" aria-hidden="true">AI</span>
+        <span class="brand-text">
+          <strong>AI Money Playbook</strong>
+          <span id="header-meta">Laden...</span>
+        </span>
+      </a>
+
+      <div class="search-wrap">
+        <label class="sr-only" for="global-search">Zoek in alle onderwerpen</label>
+        <input id="global-search" type="search" placeholder="Zoek op naam, model, tool, valkuil... (druk /)" autocomplete="off" />
+        <button id="clear-search" class="clear-btn" type="button" hidden aria-label="Wis zoekopdracht">×</button>
+      </div>
+
+      <div class="topbar-actions">
+        <a id="repo-link" class="btn-ghost" href="https://github.com/phlppgdfry/ai-money-playbook" target="_blank" rel="noopener">GitHub repo</a>
+        <button id="theme-toggle" class="btn-ghost" type="button" aria-label="Wissel licht en donker thema">Donker</button>
+      </div>
+    </div>
+
+    <nav class="subnav" aria-label="Onderwerpen">
+      <div class="container subnav-inner" id="section-nav">
+        <a href="#earners" class="nav-pill active">Verdieners</a>
+        <a href="#emerging" class="nav-pill">Nieuwe kansen</a>
+        <a href="#patterns" class="nav-pill">Patronen</a>
+        <a href="#actions" class="nav-pill">Concrete acties</a>
+        <a href="#tips" class="nav-pill">Tips & tricks</a>
+        <a href="#pitfalls" class="nav-pill">Valkuilen</a>
+        <a href="#resources" class="nav-pill">Tools & bronnen</a>
+        <a href="#blindspots" class="nav-pill">Blinde vlekken</a>
+        <a href="#agents" class="nav-pill">Wekelijkse agents</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="top" class="container main-content">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <h1 id="hero-title">Wie echt geld verdient met AI, en hoe je het zelf nabouwt.</h1>
+        <p class="hero-lead">
+          Een levende, nuchtere kennisbank zonder hype of ongecontroleerde screenshots. Alle cijfers dragen een expliciet verificatielabel en acht wekelijkse agents breiden elk onderwerp via Pull Requests uit.
+        </p>
+        <div class="hero-stats" id="hero-stats"></div>
+      </div>
+
+      <div class="hero-visual" aria-label="Visuele omzetvergelijking">
+        <div class="visual-header">
+          <div>
+            <h2>Omzetlandschap per model</h2>
+            <p class="muted">Geschatte maandelijkse bruto-omzet (USD, logaritmische schaal) — klik op een balk voor details.</p>
+          </div>
+          <div class="segmented" id="hero-team-filter" role="group" aria-label="Filter teamgrootte">
+            <button type="button" class="seg-btn active" data-team="all">Alles</button>
+            <button type="button" class="seg-btn" data-team="solo">Solo</button>
+            <button type="button" class="seg-btn" data-team="small-team">Team</button>
+            <button type="button" class="seg-btn" data-team="agency">Bureau</button>
+          </div>
+        </div>
+        <div id="revenue-chart" class="revenue-chart"></div>
+      </div>
+    </section>
+
+    <div id="search-banner" class="search-banner" hidden>
+      <span id="search-summary"></span>
+      <button type="button" id="reset-all-filters" class="btn-link">Alle filters wissen</button>
+    </div>
+
+    <section id="earners" class="section">
+      <div class="section-head">
+        <div>
+          <h2>Wie echt geld verdient</h2>
+          <p class="muted">Richtwaarden op basis van geverifieerde overnames, TrustMRR/Stripe-koppelingen, publieke zelfrapportages en marktschattingen.</p>
+        </div>
+        <div class="controls">
+          <select id="earner-sort" aria-label="Sorteer verdieners">
+            <option value="revenue">Sorteer: Hoogste omzet</option>
+            <option value="verification">Sorteer: Verificatiegraad</option>
+            <option value="newest">Sorteer: Nieuwste eerst</option>
+          </select>
+        </div>
+      </div>
+      <div id="earners-list" class="earners-grid"></div>
+    </section>
+
+    <section id="emerging" class="section">
+      <div class="section-head">
+        <div>
+          <h2>Nieuwe dingen & opkomende kansen</h2>
+          <p class="muted">Verschuivingen waar timing, nieuwe modellen of lokale markten (BE/NL) nu voorsprong geven.</p>
+        </div>
+        <div class="segmented" id="emerging-filter">
+          <button type="button" class="seg-btn active" data-stage="all">Alles</button>
+          <button type="button" class="seg-btn" data-stage="Vroeg">Vroeg</button>
+          <button type="button" class="seg-btn" data-stage="Groeiend">Groeiend</button>
+          <button type="button" class="seg-btn" data-stage="Bewezen">Bewezen</button>
+        </div>
+      </div>
+      <div id="emerging-list" class="two-col-grid"></div>
+    </section>
+
+    <section id="patterns" class="section">
+      <div class="section-head">
+        <div>
+          <h2>Patronen achter het succes</h2>
+          <p class="muted">De terugkerende mechanismen die winnaars delen, los van welk AI-model eronder draait.</p>
+        </div>
+      </div>
+      <div id="patterns-list" class="pattern-list"></div>
+    </section>
+
+    <section id="actions" class="section">
+      <div class="section-head">
+        <div>
+          <h2>Concrete acties & playbooks</h2>
+          <p class="muted">Uitvoerbare stappenplannen. Je voortgang wordt automatisch lokaal in je browser bewaard.</p>
+        </div>
+        <button type="button" id="reset-progress" class="btn-ghost">Voortgang resetten</button>
+      </div>
+      <div id="actions-list" class="actions-grid"></div>
+    </section>
+
+    <section id="tips" class="section">
+      <div class="section-head">
+        <div>
+          <h2>Tips & tricks uit de praktijk</h2>
+          <p class="muted">Kleine ingrepen op betaalmuren, distributie en pricing met groot effect op omzet.</p>
+        </div>
+        <div class="segmented" id="tips-filter"></div>
+      </div>
+      <div id="tips-list" class="two-col-grid"></div>
+    </section>
+
+    <section id="pitfalls" class="section">
+      <div class="section-head">
+        <div>
+          <h2>Valkuilen & anti-patronen</h2>
+          <p class="muted">Waar geld, tijd en focus verloren gaan — en wat in de praktijk wél werkt.</p>
+        </div>
+      </div>
+      <div id="pitfalls-list" class="pitfalls-list"></div>
+    </section>
+
+    <section id="resources" class="section">
+      <div class="section-head">
+        <div>
+          <h2>Handige tools, bronnen & benchmarks</h2>
+          <p class="muted">De compacte gereedschapskist om te valideren, bouwen, meten en factureren.</p>
+        </div>
+      </div>
+      <div id="resources-list" class="directory-grid"></div>
+    </section>
+
+    <section id="blindspots" class="section">
+      <div class="section-head">
+        <div>
+          <h2>Dingen die we vaak vergeten</h2>
+          <p class="muted">Juridische, fiscale, technische en platform-risico's die vooral voor Europese (BE/NL) bouwers cruciaal zijn.</p>
+        </div>
+      </div>
+      <div id="blindspots-list" class="two-col-grid"></div>
+    </section>
+
+    <section id="agents" class="section">
+      <div class="section-head">
+        <div>
+          <h2>Wekelijkse agents & onderhoud</h2>
+          <p class="muted">Acht gespecialiseerde agents breiden elke maandag automatisch de JSON-databestanden uit via een GitHub Pull Request.</p>
+        </div>
+        <a class="btn-primary" href="https://github.com/phlppgdfry/ai-money-playbook/actions/workflows/weekly-agents.yml" target="_blank" rel="noopener">Agents handmatig starten</a>
+      </div>
+      <div class="agents-layout">
+        <div id="agents-roster" class="agents-roster"></div>
+        <aside class="changelog-panel">
+          <h3>Recente uitbreidingen</h3>
+          <div id="changelog-list" class="changelog-list"></div>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <p>AI Money Playbook — Statische kennisbank uit <code>data/*.json</code>, automatisch gebouwd en gepubliceerd via GitHub Pages.</p>
+      <p id="footer-updated" class="muted"></p>
+    </div>
+  </footer>
+
+  <!-- INLINE_DATA -->
+  <script src="./app.js" defer></script>
+</body>
+</html>

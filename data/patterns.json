@@ -1,0 +1,70 @@
+{
+  "section": "patterns",
+  "title": "Patronen achter het succes",
+  "updatedAt": "2026-11-21",
+  "items": [
+    {
+      "id": "distribution-beats-code",
+      "title": "Distributie is belangrijker dan bouwen",
+      "category": "Groei",
+      "summary": "Door AI is software bouwen bijna gratis geworden. De bottleneck is verschoven van 'kan ik het bouwen?' naar 'hoe bereik ik elke dag betalende klanten?'.",
+      "mechanism": "Winnaars beginnen bij het kanaal: micro-creators op TikTok (Cal AI), een dagelijks publiek op X/LinkedIn (Levels, Shlomo), SEO op koopgerichte zoektermen (Postma) of koude acquisitie in één lokale sector.",
+      "evidence": "HeadshotPro, Photo AI, Cal AI, Base44",
+      "addedAt": "2026-11-21"
+    },
+    {
+      "id": "sell-outcome-not-ai",
+      "title": "Verkoop een resultaat, geen AI",
+      "category": "Positionering",
+      "summary": "Klanten willen geen 'GPT-tool' of 'AI-agent'. Ze willen een strakke LinkedIn-foto zonder fotograaf, of nooit meer een gemiste klant aan de telefoon.",
+      "mechanism": "Koppel je prijs aan het bestaande alternatief (fotograaf €250, receptioniste €2.500/mnd, diëtist €80/uur) in plaats van aan andere €9-apps.",
+      "evidence": "HeadshotPro, Lokale AI-bureaus",
+      "addedAt": "2026-11-21"
+    },
+    {
+      "id": "remove-one-friction-step",
+      "title": "Haal één stap weg waar mensen nu op afhaken",
+      "category": "Product",
+      "summary": "Je hoeft geen nieuwe categorie uit te vinden. Pak een bewezen markt waar gebruikers al betalen en elimineer het vervelendste moment in de flow.",
+      "mechanism": "Cal AI deed niets nieuws qua calorietelling, maar maakte van 5 minuten handmatig typen en wegen één foto van 3 seconden.",
+      "evidence": "Cal AI",
+      "addedAt": "2026-11-21"
+    },
+    {
+      "id": "paywall-pricing-leverage",
+      "title": "Betaalmuur en prijs testen levert vaak meer op dan nieuwe features",
+      "category": "Monetisatie",
+      "summary": "Een indie-ontwikkelaar verdubbelde zijn omzet in 6 maanden met precies even veel downloads, puur door zijn betaalmuur en prijsstructuur systematisch te testen.",
+      "mechanism": "Anker een aantrekkelijk jaarabonnement naast een duurdere weekprijs, gebruik korte proefperiodes (3 dagen met herinnering), en toon de betaalmuur op het moment van hoogste intentie.",
+      "evidence": "Cal AI (Superwall), indie iOS-apps",
+      "addedAt": "2026-11-21"
+    },
+    {
+      "id": "portfolio-of-small-bets",
+      "title": "Meerdere kleine apps of experimenten tegelijk",
+      "category": "Strategie",
+      "summary": "Niemand voorspelt vooraf met zekerheid welke niche aanslaat. Bouw snel, meet harde conversie, stop wat niet beweegt en verdubbel wat wel werkt.",
+      "mechanism": "Pieter Levels lanceerde tientallen projecten; een klein deel draagt de volledige omzet. Beperk elke eerste versie tot 1–2 weken bouwtijd.",
+      "evidence": "Pieter Levels, Marc Lou",
+      "addedAt": "2026-11-21"
+    },
+    {
+      "id": "b2c-to-b2b-ladder",
+      "title": "Van particulier naar bedrijf (B2C → B2B)",
+      "category": "Lange termijn",
+      "summary": "Consumenten ontdekken je product snel, maar zeggen ook sneller op. Zodra medewerkers je tool op werk gebruiken, kun je een Teams- of bedrijfsversie verkopen.",
+      "mechanism": "Bedrijven betalen 5–10× meer, hebben lagere churn en betalen van zakelijk budget (rechtenbeheer, facturatie op bedrijfsnaam, gedeelde werkruimte).",
+      "evidence": "TypingMind, HeadshotPro for Teams",
+      "addedAt": "2026-11-21"
+    },
+    {
+      "id": "agency-first-product-second",
+      "title": "Bureau eerst, softwareproduct daarna",
+      "category": "Lange termijn",
+      "summary": "Doe het werk eerst deels handmatig voor 5–10 betalende klanten in één sector. Je verdient direct geld en ziet exact welke knelpunten steeds terugkomen.",
+      "mechanism": "In plaats van maanden gokken in een lege kamer, financier je je eigen productontwikkeling met klanten die al bewezen hebben dat ze willen betalen.",
+      "evidence": "Lokale AI-bureaus → verticale SaaS",
+      "addedAt": "2026-11-21"
+    }
+  ]
+}

@@ -1,0 +1,119 @@
+{
+  "section": "actions",
+  "title": "Concrete acties & playbooks",
+  "updatedAt": "2026-11-21",
+  "items": [
+    {
+      "id": "playbook-appstore-cal-ai",
+      "title": "Spoor 1: App Store portfolio volgens het Cal AI-recept",
+      "track": "Mobiele apps (iOS)",
+      "timeToFirstEuro": "3–6 weken",
+      "riskLevel": "Middel",
+      "fitReason": "Sluit direct aan op bestaande tooling voor App Store Connect, Appfigures en promovideo's.",
+      "steps": [
+        {
+          "id": "app-1",
+          "text": "Zoek in Appfigures naar zoektermen met hoog zoekvolume, zwakke concurrenten (oude UI, lage ratings) en 1–3 sterren reviews met klachten als 'te ingewikkeld' of 'te veel typen'."
+        },
+        {
+          "id": "app-2",
+          "text": "Kies 1 specifieke niche waar je een vervelende invoerstap vervangt door één foto, scan of spraakopname."
+        },
+        {
+          "id": "app-3",
+          "text": "Bouw een strakke MVP in max. 10–14 dagen met 1 kernfunctie, heldere onboarding-vragenlijst en directe 'aha-ervaring'."
+        },
+        {
+          "id": "app-4",
+          "text": "Integreer RevenueCat + Superwall voor een harde/slimme betaalmuur (weekprijs als anker + scherp geprijsd jaarabonnement met korte trial) en meet trial-start en conversie."
+        },
+        {
+          "id": "app-5",
+          "text": "Start distributie via micro-creators (TikTok/Reels) betaald op resultaat (CPM-staffel of commissie per betalende gebruiker) in plaats van hoge vaste bedragen."
+        },
+        {
+          "id": "app-6",
+          "text": "Herhaal het proces tot je 3–5 kleine apps live hebt. Stop apps zonder tractie na 30 dagen en verdubbel tijd & budget op de winnaar."
+        }
+      ],
+      "addedAt": "2026-11-21"
+    },
+    {
+      "id": "playbook-local-ai-receptionist",
+      "title": "Spoor 2: AI-telefoonreceptionist voor lokale BE/NL bedrijven",
+      "track": "Snelle B2B cashflow",
+      "timeToFirstEuro": "1–3 weken",
+      "riskLevel": "Laag",
+      "fitReason": "Drie klanten aan €750/maand dekken vaste kosten direct, en je leert een sector van binnenuit voor latere software.",
+      "steps": [
+        {
+          "id": "rec-1",
+          "text": "Kies één lokale beroepsgroep met hoge klantwaarde en veel gemiste oproepen: tandartsen, loodgieters/CV-installateurs, schoonheidsklinieken of autogarages."
+        },
+        {
+          "id": "rec-2",
+          "text": "Bouw één werkende Nederlandstalige/Vlaamse demo met Vapi of Retell + ElevenLabs + agenda-koppeling + automatische SMS bij gemiste oproep."
+        },
+        {
+          "id": "rec-3",
+          "text": "Maak een lijst van 50 lokale bedrijven (Google Maps) en bel ze zelf om te testen wie niet opneemt of slechte bereikbaarheid heeft."
+        },
+        {
+          "id": "rec-4",
+          "text": "Bied een risicovrije 14-dagen pilot aan met een live testnummer dat ze direct zelf kunnen bellen. Prijs na pilot: €1.500–2.500 opstart + €500–900/maand."
+        },
+        {
+          "id": "rec-5",
+          "text": "Documenteer elke herhalende vraag, integratie en uitzondering bij je eerste 5 klanten — dat wordt het fundament van je verticale SaaS."
+        }
+      ],
+      "addedAt": "2026-11-21"
+    },
+    {
+      "id": "playbook-agency-to-saas",
+      "title": "Spoor 3: Bureau eerst, verticale SaaS daarna",
+      "track": "Lange-termijn cashcow",
+      "timeToFirstEuro": "2–4 weken (dienst) → 3–6 mnd (product)",
+      "riskLevel": "Laag",
+      "fitReason": "Elimineert het risico van bouwen zonder vraag; klanten betalen je leercurve.",
+      "steps": [
+        {
+          "id": "a2s-1",
+          "text": "Los een duur administratief knelpunt (offertes, dossiercontrole, documentverwerking, planning) eerst deels handmatig op voor 3–5 bedrijven in dezelfde sector."
+        },
+        {
+          "id": "a2s-2",
+          "text": "Automatiseer elke week 20% van je eigen handwerk achter de schermen met AI-workflows (n8n, scripts, API's)."
+        },
+        {
+          "id": "a2s-3",
+          "text": "Verpak de gestandaardiseerde workflow in een eenvoudige web-app voor je bestaande klanten en schakel over op een maandelijks software-abonnement."
+        }
+      ],
+      "addedAt": "2026-11-21"
+    },
+    {
+      "id": "playbook-owned-audience",
+      "title": "Spoor 4: Eigen distributiekanaal bouwen (onafhankelijk van AI-modellen)",
+      "track": "Distributie-asset",
+      "timeToFirstEuro": "Doorlopend (hefboom op alle sporen)",
+      "riskLevel": "Laag",
+      "fitReason": "Welke LLM morgen ook wint, een eigen publiek op LinkedIn, X, YouTube of nieuwsbrief blijft van jou.",
+      "steps": [
+        {
+          "id": "aud-1",
+          "text": "Kies 1 primair platform waar jouw kopers zitten (LinkedIn voor BE/NL B2B, X/YouTube voor indie/tech, TikTok/Reels voor consumentenapps)."
+        },
+        {
+          "id": "aud-2",
+          "text": "Deel 3× per week concrete resultaten, voor/na-demos en echte cijfers uit je projecten in plaats van generieke AI-nieuwtjes."
+        },
+        {
+          "id": "aud-3",
+          "text": "Vang geïnteresseerden op in een simpele e-maillijst of wachtlijst zodat je elke nieuwe lancering zonder advertentiebudget op gang krijgt."
+        }
+      ],
+      "addedAt": "2026-11-21"
+    }
+  ]
+}

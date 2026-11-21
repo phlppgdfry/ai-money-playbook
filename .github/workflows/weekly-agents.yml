@@ -1,0 +1,74 @@
+name: Weekly AI Knowledge Expansion Agents
+
+on:
+  schedule:
+    # Elke maandag om 07:00 UTC (08:00/09:00 BE/NL tijd)
+    - cron: "0 7 * * 1"
+  workflow_dispatch:
+    inputs:
+      agent:
+        description: "Welke agent draaien? ('all' voor alle 8 onderwerpen)"
+        required: true
+        default: "all"
+        type: choice
+        options:
+          - all
+          - earners
+          - emerging
+          - patterns
+          - pitfalls
+          - actions
+          - tips
+          - resources
+          - blindspots
+
+permissions:
+  contents: write
+  pull-requests: write
+  models: read
+
+jobs:
+  expand-knowledge:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Run weekly expansion agents
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          TAVILY_API_KEY: ${{ secrets.TAVILY_API_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          TARGET="${{ github.event.inputs.agent || 'all' }}"
+          if [ "$TARGET" = "all" ]; then
+            node agents/run-weekly-expansion.mjs --all
+          else
+            node agents/run-weekly-expansion.mjs --agent "$TARGET"
+          fi
+
+      - name: Validate updated JSON and test site build
+        run: npm run build
+
+      - name: Create Pull Request with weekly findings
+        uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "chore(agents): wekelijkse kennisbank-uitbreiding"
+          title: "Wekelijkse AI Playbook-uitbreiding (automatische agents)"
+          body: |
+            ## Automatische wekelijkse uitbreiding
+
+            De wekelijkse onderzoeks-agents hebben nieuwe bevindingen toegevoegd aan `data/*.json` en de volledige validatie + site-build is geslaagd.
+
+            - Controleer de nieuwe items en verificatieniveaus in de diff.
+            - Na merge naar `main` wordt de GitHub Pages site automatisch opnieuw gedeployed.
+          branch: "weekly/agent-expansion"
+          delete-branch: true

@@ -1,0 +1,52 @@
+{
+  "section": "pitfalls",
+  "title": "Valkuilen & anti-patronen",
+  "updatedAt": "2026-11-21",
+  "items": [
+    {
+      "id": "faceless-youtube-courses",
+      "title": "\"Faceless YouTube / AI-dropshipping\"-cursussen",
+      "severity": "hoog",
+      "myth": "Met 10 minuten per dag AI-video's genereren en slapend €10k/maand verdienen.",
+      "reality": "De verkoper van de cursus verdient het echte geld. Platformen (YouTube, TikTok) dempen massale AI-slop steeds harder en ontmonetiseren herhalende kanalen.",
+      "instead": "Bouw een echt probleem-oplossend product, een lokale B2B-dienst of een herkenbaar eigen kanaal met echte expertise.",
+      "addedAt": "2026-11-21"
+    },
+    {
+      "id": "thin-chatgpt-wrapper",
+      "title": "Een dunne schil rond ChatGPT zonder eigen kanaal of data",
+      "severity": "hoog",
+      "myth": "Een nette UI + slimme system prompt rond een LLM is genoeg voor blijvende inkomsten.",
+      "reality": "De eerstvolgende update van OpenAI, Anthropic of Google maakt een generieke wrapper in één middag overbodig.",
+      "instead": "Veranker waarde in distributie (ASO/SEO/creators), workflow-integraties (agenda, ERP, telefoon), eigen data of een specifieke sector.",
+      "addedAt": "2026-11-21"
+    },
+    {
+      "id": "survivorship-bias",
+      "title": "Overlevingsbias in indie-cijfers",
+      "severity": "middel",
+      "myth": "Iedereen die een AI-app lanceert haalt binnen een paar maanden $10k/maand.",
+      "reality": "Ongeveer 50–68% van de kleine indie-projecten blijft onder $1k/maand, en slechts ~5–10% haalt $10k+. Veel virale X-posts tonen omzet zonder advertentiekosten, refunds of belasting.",
+      "instead": "Stuur vanaf week 1 op netto-eenheidseconomie (CAC, conversie, churn), bouw klein en reken erop dat pas poging 3–5 raak is.",
+      "addedAt": "2026-11-21"
+    },
+    {
+      "id": "building-in-silence",
+      "title": "Drie maanden bouwen zonder één klant te spreken",
+      "severity": "hoog",
+      "myth": "Als het product maar uitgebreid genoeg is, komen gebruikers vanzelf.",
+      "reality": "Zonder gevalideerd zoekvolume (Appfigures/SEO) of vooraf bereidwillige kopers bouw je vaak iets waar niemand naar zoekt.",
+      "instead": "Valideer eerst vraag (zoektermen, slechte reviews van concurrenten, of 3 voorverkochte lokale klanten) en lanceer een eerste versie binnen 14 dagen.",
+      "addedAt": "2026-11-21"
+    },
+    {
+      "id": "unverified-guru-screenshots",
+      "title": "Blind vertrouwen op niet-geverifieerde Stripe-screenshots",
+      "severity": "middel",
+      "myth": "Een hoog bedrag in een socialmedia-post bewijst dat een businessmodel werkt.",
+      "reality": "HTML in de browser aanpassen duurt 5 seconden, en hoge bruto-omzet kan gepaard gaan met verlieslatende Meta/TikTok-advertenties.",
+      "instead": "Controleer cijfers via geverifieerde bronnen (TrustMRR, officiële overnames, Appfigures-schattingen) en kijk altijd naar marge en distributiekosten.",
+      "addedAt": "2026-11-21"
+    }
+  ]
+}

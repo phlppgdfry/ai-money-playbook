@@ -1,0 +1,79 @@
+{
+  "schedule": "Elke maandag 07:00 UTC (GitHub Actions)",
+  "language": "nl",
+  "maxNewItemsPerAgent": 2,
+  "agents": [
+    {
+      "id": "earners",
+      "name": "Verdieners-Agent",
+      "file": "data/earners.json",
+      "role": "Speurt naar verifieerbare AI-ondernemers, solo-founders, micro-teams en lokale AI-bureaus met echte omzetcijfers.",
+      "searchQuery": "verified AI indie hacker MRR revenue TrustMRR bootstrapped 2026",
+      "focus": "Alleen concrete cases met duidelijke verificatiegraad (geverifieerd, zelf-gerapporteerd of schatting). Geen anonieme screenshots of hype-cursussen.",
+      "schemaHint": "{ id, name, teamSize, teamType ('solo'|'small-team'|'agency'), product, category, reportedRevenue, monthlyUsdEstimate (number), revenueModel, marginNote, distributionChannel, verification ('geverifieerd'|'zelf-gerapporteerd'|'schatting'|'analyse'), verificationNote, howItWorks, keyLesson, sourceUrl, addedAt }"
+    },
+    {
+      "id": "emerging",
+      "name": "Kansen-Agent",
+      "file": "data/emerging.json",
+      "role": "Signaleert nieuwe AI-verdienmodellen, verschuivingen in 2026+ en onderbediende niches (ook in BE/NL).",
+      "searchQuery": "emerging AI business models vertical AI micro-saas voice agents 2026",
+      "focus": "Concreet uitleggen waarom de kans nu ontstaat en welk voorbeeld het bewijst.",
+      "schemaHint": "{ id, title, stage ('Vroeg'|'Groeiend'|'Bewezen'), horizon, summary, whyNow, example, addedAt }"
+    },
+    {
+      "id": "patterns",
+      "name": "Patronen-Agent",
+      "file": "data/patterns.json",
+      "role": "Abstraheert herhaalbare succesmechanismen uit echte AI-bedrijven (distributie, pricing, retentie, B2C naar B2B).",
+      "searchQuery": "profitable AI apps growth patterns paywall distribution moat",
+      "focus": "Geen losse slogans maar een duidelijk mechanisme gekoppeld aan echte voorbeelden.",
+      "schemaHint": "{ id, title, category, summary, mechanism, evidence, addedAt }"
+    },
+    {
+      "id": "pitfalls",
+      "name": "Valkuilen-Agent",
+      "file": "data/pitfalls.json",
+      "role": "Ontmaskert AI-scams, overschatte hypes, platformrisico's en dure beginnersfouten met nuchtere cijfers.",
+      "searchQuery": "AI startup indie app failure reasons churn wrapper risks reality check",
+      "focus": "Altijd structureren als Mythe → Realiteit → Wat je wél doet.",
+      "schemaHint": "{ id, title, severity ('hoog'|'middel'|'laag'), myth, reality, instead, addedAt }"
+    },
+    {
+      "id": "actions",
+      "name": "Playbooks-Agent",
+      "file": "data/actions.json",
+      "role": "Ontwerpt concrete, uitvoerbare stappenplannen die solo of met een piepklein team direct uitvoerbaar zijn (App Store, lokale B2B, micro-SaaS).",
+      "searchQuery": "step by step playbook launch profitable AI app or local AI agency",
+      "focus": "Elke stap concreet en afvinkbaar, met realistische tijd-tot-eerste-euro en risiconiveau.",
+      "schemaHint": "{ id, title, track, timeToFirstEuro, riskLevel, fitReason, steps: [{ id, text }], addedAt }"
+    },
+    {
+      "id": "tips",
+      "name": "Tips & Tricks-Agent",
+      "file": "data/tips.json",
+      "role": "Verzamelt scherpe tactische optimalisaties voor paywalls, ASO/SEO, UGC-creators, pricing en B2B-upsells.",
+      "searchQuery": "mobile app paywall conversion tips Superwall ASO UGC creator deals",
+      "focus": "Direct toepasbare tactieken zonder vage theorie.",
+      "schemaHint": "{ id, category, title, detail, impact ('Hoog'|'Middel'|'Laag'), addedAt }"
+    },
+    {
+      "id": "resources",
+      "name": "Tools & Bronnen-Agent",
+      "file": "data/resources.json",
+      "role": "Houdt de gereedschapskist actueel met echt nuttige tools, benchmarks en verificatieplatformen.",
+      "searchQuery": "best tools indie AI founders monetization voice agents ASO benchmarks",
+      "focus": "Alleen bewezen, praktische tools met eerlijke prijsindicatie en duidelijke reden waarom ze nuttig zijn.",
+      "schemaHint": "{ id, name, category, pricing, url, whyUseful, addedAt }"
+    },
+    {
+      "id": "blindspots",
+      "name": "Blinde-Vlekken-Agent",
+      "file": "data/blindspots.json",
+      "role": "Vindt zaken die bouwers en AI-overzichten systematisch vergeten: wetgeving (EU AI Act/AVG), BTW/fiscaliteit (BE/NL), API-marge-erosie, platformregels, exits.",
+      "searchQuery": "EU AI Act GDPR SaaS VAT App Store review rejection API cost margin risks",
+      "focus": "Concreet risico + concrete voorzorgsmaatregel, relevant voor Europese (BE/NL) bouwers.",
+      "schemaHint": "{ id, area, title, risk, action, addedAt }"
+    }
+  ]
+}

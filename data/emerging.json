@@ -1,0 +1,57 @@
+{
+  "section": "emerging",
+  "title": "Nieuwe dingen & opkomende kansen",
+  "updatedAt": "2026-11-21",
+  "items": [
+    {
+      "id": "outcome-based-pricing",
+      "title": "Afrekenen per resultaat in plaats van per gebruiker",
+      "stage": "Groeiend",
+      "horizon": "Lange termijn",
+      "summary": "Nu AI het werk van meerdere medewerkers overneemt, krimpen traditionele 'per seat'-licenties. Slimme bouwers rekenen per geboekte afspraak, verwerkt dossier, opgelost ticket of gevalideerde factuur.",
+      "whyNow": "Bedrijven betalen liever €15 per effectief ingeplande tandartsafspraak of €2 per verwerkte vrachtbrief dan €99/maand voor 'nog een dashboard'.",
+      "example": "AI-klantenservice (Intercom Fin: ~$0,99 per opgelost ticket) en lokale voice-agents die per gekwalificeerde lead factureren.",
+      "addedAt": "2026-11-21"
+    },
+    {
+      "id": "vertical-ai-micro-saas",
+      "title": "Verticale AI-software voor één saaie sector",
+      "stage": "Bewezen",
+      "horizon": "Cashcow (3–5+ jaar)",
+      "summary": "Geen algemene AI-assistent, maar diepe workflow-software voor één specifieke beroepsgroep: bv. installateurs, advocatenkantoren, fysiotherapeuten, expediteurs of vastgoedbeheerders.",
+      "whyNow": "Algemene modellen (ChatGPT/Claude) kunnen geen sector-specifieke compliance, koppelingen met legacy-ERP's of klantspecifieke dossiers vervangen.",
+      "example": "Automatisch controleren van bouwvergunningen, douanedocumenten of medische verwijsbrieven met export naar bestaande vaksoftware.",
+      "addedAt": "2026-11-21"
+    },
+    {
+      "id": "voice-agents-benelux",
+      "title": "Nederlandstalige & Vlaamse AI-voice agents",
+      "stage": "Vroeg",
+      "horizon": "Snelle cashflow",
+      "summary": "De Engelstalige markt voor AI-receptionisten is druk, maar in België en Nederland klinken moderne Nederlandstalige/Vlaamse stemmen (ElevenLabs + Vapi/Retell) pas sinds kort natuurlijk genoeg voor echte klanten.",
+      "whyNow": "Lokale kmo's hebben personeelstekort aan de balie en spreken liever met een lokale aanbieder die GDPR, Belgische/Nederlandse telefoonnummers en lokale agenda-software (zoals Calendly, Exact, DentAdmin) snapt.",
+      "example": "24/7 storingslijn voor verwarmingsinstallateurs of afsprakenlijn voor schoonheidsklinieken en garages.",
+      "addedAt": "2026-11-21"
+    },
+    {
+      "id": "mcp-workflow-connectors",
+      "title": "MCP-connectors & interne AI-bruggen voor kmo's",
+      "stage": "Vroeg",
+      "horizon": "Middellang",
+      "summary": "Bedrijven willen hun AI-assistenten veilig koppelen aan hun eigen boekhouding, CRM, voorraad en e-mail via Model Context Protocol (MCP) en afgeschermde rechten.",
+      "whyNow": "Standaard modellen zijn sterk genoeg, maar de echte waarde zit in veilige toegang tot bedrijfsdata met audit-logs en goedkeuringsstappen.",
+      "example": "Betaalde connectors of maatwerk-installaties die Exact Online, Teamleader of AFAS veilig ontsluiten voor interne AI-agents.",
+      "addedAt": "2026-11-21"
+    },
+    {
+      "id": "camera-first-consumer-apps",
+      "title": "Camera-first consumentenapps (1 foto = direct antwoord)",
+      "stage": "Bewezen",
+      "horizon": "Snelle schaal",
+      "summary": "Apps die één vervelend invoerproces vervangen door een foto of korte spraakopname: planten, huidsignalen, recepten uit koelkast, antiek/rommelmarkt-waarde, huiswerk, bonnen.",
+      "whyNow": "Multimodale modellen zijn snel en spotgoedkoop geworden, terwijl TikTok/Reels-demos van 'richt camera → magisch resultaat' organisch viraal gaan.",
+      "example": "Cal AI bewees het model in voeding; dezelfde formule werkt in tientallen kleinere App Store-niches met hoge zoekvolumes en zwakke bestaande apps.",
+      "addedAt": "2026-11-21"
+    }
+  ]
+}

@@ -1,0 +1,63 @@
+{
+  "section": "tips",
+  "title": "Tips & tricks uit de praktijk",
+  "updatedAt": "2026-11-21",
+  "items": [
+    {
+      "id": "tip-paywall-anchoring",
+      "category": "Paywall",
+      "title": "Zet een weekprijs naast je jaarabonnement",
+      "detail": "Bij consumentenapps werkt €6,99/week naast €39,99/jaar (€0,77/week) consistent veel beter dan een maandabonnement van €9,99. Gebruikers kiezen massaal het jaarplan, wat direct je cashflow vooruit haalt en churn verlaagt.",
+      "impact": "Hoog",
+      "addedAt": "2026-11-21"
+    },
+    {
+      "id": "tip-trial-reminder",
+      "category": "Paywall",
+      "title": "Toon expliciet de tijdlijn van een proefperiode",
+      "detail": "Een visuele tijdlijn op de betaalmuur ('Vandaag: direct toegang → Dag 2: herinnering → Dag 3: start abonnement') verhoogt het vertrouwen en verhoogt trial-starts vaak met 20–40%.",
+      "impact": "Hoog",
+      "addedAt": "2026-11-21"
+    },
+    {
+      "id": "tip-aso-review-mining",
+      "category": "ASO/SEO",
+      "title": "Mijn 2- en 3-sterren reviews van topapps",
+      "detail": "1-ster reviews zijn vaak boze randgevallen; 2- en 3-sterren reviews beschrijven precies wat betalende gebruikers missen of irritant vinden. Gebruik die exacte woorden in je App Store-subtitel, screenshots en landingspagina.",
+      "impact": "Hoog",
+      "addedAt": "2026-11-21"
+    },
+    {
+      "id": "tip-ugc-performance-deals",
+      "category": "Distributie",
+      "title": "Betaal micro-creators met een kleine basis + resultaatbonus",
+      "detail": "Geef beginnende creators (1k–25k volgers) geen €1.500 vooraf. Werk met €50–150 basisvergoeding per video plus $1–2 per 1.000 weergaven (CPM) of 30% commissie via een eigen code/link.",
+      "impact": "Hoog",
+      "addedAt": "2026-11-21"
+    },
+    {
+      "id": "tip-b2b-invoice-pricing",
+      "category": "Pricing",
+      "title": "Maak B2B-prijzen makkelijk te verantwoorden op factuur",
+      "detail": "Voeg bij SaaS-tools altijd een 'Teams / Factuur op BTW-nummer'-optie toe aan 5× de consumentenprijs met simpele extra's (PDF-factuur met BTW-nummer, 3–5 seats, gedeelde bibliotheek).",
+      "impact": "Middel",
+      "addedAt": "2026-11-21"
+    },
+    {
+      "id": "tip-demo-in-5-seconds",
+      "category": "Distributie",
+      "title": "Laat het resultaat zien in de eerste 3 seconden",
+      "detail": "Voor zowel TikTok-reels als LinkedIn-posts en je landingspagina: geen uitleg over 'AI-technologie'. Start direct met input → resultaat (foto van bord → calorieën; gemiste oproep → ingeplande afspraak).",
+      "impact": "Hoog",
+      "addedAt": "2026-11-21"
+    },
+    {
+      "id": "tip-byok-margin-hack",
+      "category": "Pricing",
+      "title": "Overweeg BYOK (Bring Your Own Key) voor power-users",
+      "detail": "Laat technische gebruikers hun eigen OpenAI/Anthropic API-sleutel invullen voor een eenmalige licentie of laag maandbedrag. Zo bescherm je jezelf tegen grootverbruikers die je marge opeten.",
+      "impact": "Middel",
+      "addedAt": "2026-11-21"
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "section": "resources",
+  "title": "Handige tools, bronnen & benchmarks",
+  "updatedAt": "2026-11-21",
+  "items": [
+    {
+      "id": "res-trustmrr",
+      "name": "TrustMRR",
+      "category": "Verificatie & inspiratie",
+      "pricing": "Gratis te bekijken",
+      "url": "https://trustmrr.com",
+      "whyUseful": "Geverifieerde Stripe-omzetten van indie-founders. Ideaal om echte verdienmodellen te onderscheiden van neppe socialmedia-claims.",
+      "addedAt": "2026-11-21"
+    },
+    {
+      "id": "res-appfigures",
+      "name": "Appfigures",
+      "category": "ASO & App Store data",
+      "pricing": "Betaald (reeds gekoppeld)",
+      "url": "https://appfigures.com",
+      "whyUseful": "Zoekvolumes, concurrentiescores, omzetschattingen en reviews in de App Store om winstgevende app-niches te vinden vóór je code schrijft.",
+      "addedAt": "2026-11-21"
+    },
+    {
+      "id": "res-superwall",
+      "name": "Superwall",
+      "category": "Paywalls & A/B-testen",
+      "pricing": "Gratis tier + omzetstaffel",
+      "url": "https://superwall.com",
+      "whyUseful": "Test en wijzig mobiele betaalmuren live zonder een nieuwe App Store-update in te dienen. Essentieel onderdeel van het Cal AI-recept.",
+      "addedAt": "2026-11-21"
+    },
+    {
+      "id": "res-revenuecat",
+      "name": "RevenueCat",
+      "category": "Mobiele abonnementen",
+      "pricing": "Gratis tot $2.500 MTR",
+      "url": "https://www.revenuecat.com",
+      "whyUseful": "Standaard voor in-app aankopen, abonnementsstatus, cohort-retentie en publieke State of Subscription Apps-benchmarks.",
+      "addedAt": "2026-11-21"
+    },
+    {
+      "id": "res-vapi-retell",
+      "name": "Vapi & Retell AI",
+      "category": "Voice AI-receptionisten",
+      "pricing": "Pay-per-minute (~$0,07–0,15/min)",
+      "url": "https://vapi.ai",
+      "whyUseful": "Snelste platformen om telefonische AI-receptionisten met lage latentie, agenda-koppeling en Nederlandse stemmen live te zetten.",
+      "addedAt": "2026-11-21"
+    },
+    {
+      "id": "res-elevenlabs",
+      "name": "ElevenLabs",
+      "category": "Nederlandse / Vlaamse spraak",
+      "pricing": "Gratis tier + verbruik",
+      "url": "https://elevenlabs.io",
+      "whyUseful": "Meest natuurlijk klinkende stemmen in het Nederlands en Vlaams voor zowel voice-agents als promovideo's.",
+      "addedAt": "2026-11-21"
+    },
+    {
+      "id": "res-acquire",
+      "name": "Acquire.com",
+      "category": "Exits & waarderingen",
+      "pricing": "Gratis browsen",
+      "url": "https://acquire.com",
+      "whyUseful": "Zie live tegen welke multiples (vaak 3–5× jaarwinst) kleine SaaS- en AI-bedrijven daadwerkelijk verkocht worden.",
+      "addedAt": "2026-11-21"
+    },
+    {
+      "id": "res-stripe-tax",
+      "name": "Stripe / Paddle / Polar",
+      "category": "Betalingen & wereldwijde BTW",
+      "pricing": "Transactiekosten (~2,9%–5%)",
+      "url": "https://polar.sh",
+      "whyUseful": "Gebruik een Merchant of Record (Paddle, Lemon Squeezy of Polar) voor wereldwijde SaaS-verkopen zodat je niet handmatig in 50 landen BTW hoeft af te dragen.",
+      "addedAt": "2026-11-21"
+    }
+  ]
+}
