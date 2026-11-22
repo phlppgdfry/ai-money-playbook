@@ -1,98 +1,143 @@
 {
-  "schedule": "Elke maandag 07:00 UTC (GitHub Actions) + 08:00 lokaal (Appfigures + Live Websearch)",
-  "language": "nl",
-  "maxNewItemsPerAgent": 2,
-  "portfolioApps": ["Hand Mirror: HD, Light & Zoom (iOS)", "Mirror Mate - Menubar Mirror (macOS)", "RingSizer – Ring Size Tool (iOS)"],
+  "version": "2.0.0",
+  "timezone": "Europe/Brussels",
+  "schedule": {
+    "cloud": "Elke maandag 07:00 UTC (GitHub Actions → PR weekly/cloud-YYYY-WW)",
+    "localAppfigures": "Elke dinsdag 08:00 Europe/Brussels (Lokale Appfigures-sync → PR weekly/appfigures-YYYY-WW)"
+  },
+  "guardrails": {
+    "maxNewItemsPerAgent": 2,
+    "maxRunCostUsd": 0.50,
+    "requestTimeoutMs": 25000,
+    "maxRetries": 2,
+    "requireHumanApprovalForOutreach": true
+  },
+  "sharedResearchPools": {
+    "consumer-apps": "profitable indie consumer AI iOS macOS apps MRR retention complaints 2026",
+    "b2b-vertical-eu": "vertical B2B AI micro-saas Europe Benelux GDPR EU AI Act agency to saas 2026",
+    "monetization-risks": "RevenueCat subscription app conversion paywall churn failure stats valuation multiples 2026",
+    "distribution-deals": "AI app distribution arbitrage UGC creators programmatic SEO partnerships 2026"
+  },
   "agents": [
     {
-      "id": "consumer-ai-researcher",
-      "name": "Consumer AI Apps Researcher",
-      "tier": "Kern-onderzoeksagent",
-      "file": "data/earners.json",
-      "role": "Onderzoekt minder bekende, geverifieerde AI-consumentenapps (iOS/macOS/web) met hoge omzet en synergie met Hand Mirror, Mirror Mate en RingSizer.",
-      "searchQuery": "lesser known profitable consumer AI iOS macOS apps MRR revenue TrustMRR 2026",
-      "focus": "Focus op controleerbare omzet (geverifieerd, zelf-gerapporteerd of Appfigures-schatting), camera/utility/sizing-synergie en exacte distributie- en paywall-aanpak.",
-      "schemaHint": "{ id, name, teamSize, teamType ('solo'|'small-team'|'agency'), product, category, reportedRevenue, monthlyUsdEstimate (number), revenueModel, marginNote, distributionChannel, verification ('geverifieerd'|'zelf-gerapporteerd'|'schatting'|'analyse'), verificationNote, howItWorks, keyLesson, sourceUrl, addedAt }"
-    },
-    {
-      "id": "b2b-vertical-researcher",
-      "name": "B2B Vertical AI Researcher",
-      "tier": "Kern-onderzoeksagent",
+      "id": "money-leak-detector",
+      "name": "1. Money Leak Detector",
+      "tier": "Opportunity Engine",
+      "pool": "b2b-vertical-eu",
       "file": "data/emerging.json",
-      "role": "Onderzoekt stille B2B-cashcows, verticale micro-SaaS en de Agency-to-SaaS-route — specifiek met het NL/BE-taalvoordeel, lokale integraties en GDPR/EU AI Act.",
-      "searchQuery": "quiet B2B vertical AI micro-saas cashcows Europe Benelux GDPR agency to saas 2026",
-      "focus": "Zoek saaie, winstgevende B2B-niches waar Amerikaanse tools falen op taal, lokale software (Exact, Teamleader, DentAdmin) of Europese compliance.",
+      "role": "Speurt naar directe omzet- en tijdslekkage bij bedrijven (gemiste oproepen, trage offertes, handmatige dossiercontrole) waar AI onmiddellijk terugbetaalt.",
+      "focus": "Koppel elke lekkage aan concrete euro's verlies per maand en waarom bestaande software dit laat liggen.",
       "schemaHint": "{ id, title, stage ('Vroeg'|'Groeiend'|'Bewezen'), horizon, summary, whyNow, example, addedAt }"
     },
     {
-      "id": "pitfalls-strategy-analyst",
-      "name": "AI Pitfalls & Strategy Analyst",
-      "tier": "Kern-onderzoeksagent",
-      "file": "data/pitfalls.json",
-      "role": "Verzamelt harde faalcijfers (zoals RevenueCat benchmarks), valkuilen, platformrisico's en distributie-geheimen om alle voorstellen keihard op te toetsen.",
-      "searchQuery": "RevenueCat AI app churn failure stats App Store rejection wrapper pitfalls 2026",
-      "focus": "Altijd onderbouwen met concrete cijfers of praktijkbewijs in de structuur Mythe → Realiteit → Wat je wél doet.",
-      "schemaHint": "{ id, title, severity ('hoog'|'middel'|'laag'), myth, reality, instead, addedAt }"
-    },
-    {
-      "id": "appstore-niche-scout",
-      "name": "App Store Niche & ASO Scout",
-      "tier": "Portfolio-agent",
+      "id": "competitor-complaint-miner",
+      "name": "2. Competitor Complaint Miner",
+      "tier": "Opportunity Engine",
+      "pool": "consumer-apps",
       "file": "data/niches.json",
-      "role": "Speurt naar concrete iOS/macOS App Store-niches met bewezen betalingsbereidheid, zwakke concurrenten en cross-promo synergie met Hand Mirror, Mirror Mate en RingSizer.",
-      "searchQuery": "profitable iOS macOS utility AI app niche high ARPU low competition Appfigures 2026",
-      "focus": "Geef altijd een realistische Opportunity Score (0-100), synergie-app, zwakte van bestaande apps en concreet MVP + paywall-voorstel.",
-      "schemaHint": "{ id, title, platform, synergy ('Hand Mirror'|'Mirror Mate'|'RingSizer'|'Nieuw'), opportunityScore (number), primaryKeywords, appfiguresBenchmark, competitivenessNote, competitorWeakness, mvpConcept, monetization, addedAt }"
+      "role": "Analyseert 2–3 sterren reviews en klachten bij grote apps en SaaS-tools (ook rond Hand Mirror, Mirror Mate & RingSizer) om directe productgaten te vinden.",
+      "focus": "Focus op herhalende klachten die met één scherpere workflow of AI-stap zijn op te lossen.",
+      "schemaHint": "{ id, title, platform, synergy, opportunityScore (number), primaryKeywords, appfiguresBenchmark, competitivenessNote, competitorWeakness, mvpConcept, monetization, addedAt }"
     },
     {
-      "id": "patterns-synthesizer",
-      "name": "Succespatronen-Analyst",
-      "tier": "Strategie-agent",
+      "id": "demand-wtp-validator",
+      "name": "3. Demand & Willingness-to-Pay Validator",
+      "tier": "Validation Engine",
+      "pool": "consumer-apps",
+      "file": "data/earners.json",
+      "role": "Verifieert echte betalingsbereidheid via aantoonbare omzet, TrustMRR, Appfigures en gepubliceerde cijfers — minder bekende consumenten- en B2B-winnaars.",
+      "focus": "Nooit onbewezen screenshots als 'geverifieerd' labelen. Markeer onzekerheid eerlijk.",
+      "schemaHint": "{ id, name, teamSize, teamType ('solo'|'small-team'|'agency'), product, category, reportedRevenue, monthlyUsdEstimate (number), revenueModel, marginNote, distributionChannel, verification ('geverifieerd'|'zelf-gerapporteerd'|'schatting'|'analyse'), verificationNote, howItWorks, keyLesson, sourceUrl, addedAt }"
+    },
+    {
+      "id": "regulation-deadline-scout",
+      "name": "4. Regulation & Deadline Scout",
+      "tier": "Compliance Engine",
+      "pool": "b2b-vertical-eu",
+      "file": "data/blindspots.json",
+      "role": "Volgt EU AI Act (o.a. Art. 50), AVG/GDPR, e-facturatie (Peppol BE/NL) en App Store-regels die zowel risico's als lokale concurrentievoordelen creëren.",
+      "focus": "Vertaal wetgeving naar concreet risico én commerciële voorzorg voor BE/NL bouwers.",
+      "schemaHint": "{ id, area, title, risk, action, addedAt }"
+    },
+    {
+      "id": "distribution-arbitrage-analyst",
+      "name": "5. Distribution Arbitrage Analyst",
+      "tier": "Growth Engine",
+      "pool": "distribution-deals",
       "file": "data/patterns.json",
-      "role": "Abstraheert herhaalbare succesmechanismen uit echte AI-bedrijven (distributie, pricing, retentie, B2C naar B2B).",
-      "searchQuery": "profitable AI apps growth patterns paywall distribution moat",
-      "focus": "Geen losse slogans maar een duidelijk mechanisme gekoppeld aan echte voorbeelden.",
+      "role": "Ontdekt ondergewaardeerde distributiekanalen (in-app cross-promo, micro-UGC op prestatie, lokale Google Maps-audits, programmatic SEO).",
+      "focus": "Leg altijd het mechanisme uit en koppel het aan aantoonbaar praktijkbewijs.",
       "schemaHint": "{ id, title, category, summary, mechanism, evidence, addedAt }"
     },
     {
-      "id": "playbooks-architect",
-      "name": "Concrete Playbooks-Architect",
-      "tier": "Uitvoerings-agent",
+      "id": "agency-to-saas-builder",
+      "name": "6. Agency-to-SaaS Opportunity Builder",
+      "tier": "B2B Engine",
+      "pool": "b2b-vertical-eu",
       "file": "data/actions.json",
-      "role": "Ontwerpt concrete, afvinkbare stappenplannen die solo of met een klein team direct uitvoerbaar zijn (App Store, lokale B2B, micro-SaaS).",
-      "searchQuery": "step by step playbook launch profitable AI app or local AI agency",
-      "focus": "Elke stap concreet en afvinkbaar, met realistische tijd-tot-eerste-euro en risiconiveau.",
+      "role": "Ontwerpt concrete trajecten om een lokale BE/NL AI-dienst in 3–6 maanden om te vormen tot hoog-marge verticale micro-SaaS.",
+      "focus": "Concreet afvinkbaar stappenplan van eerste betaalde pilot naar herhaalbare software.",
       "schemaHint": "{ id, title, track, timeToFirstEuro, riskLevel, fitReason, steps: [{ id, text }], addedAt }"
     },
     {
-      "id": "monetization-paywall-optimizer",
-      "name": "Paywall, Pricing & Distributie-Optimizer",
-      "tier": "Groei-agent",
-      "file": "data/tips.json",
-      "role": "Verzamelt scherpe tactische optimalisaties voor paywalls, Web-to-App funnels, ASO/SEO, UGC-creators en B2B-bundels.",
-      "searchQuery": "Superwall RevenueCat paywall conversion web-to-app funnel UGC creator deals 2026",
-      "focus": "Direct toepasbare tactieken met concrete conversie- of marge-impact.",
-      "schemaHint": "{ id, category, title, detail, impact ('Hoog'|'Middel'|'Laag'), addedAt }"
-    },
-    {
-      "id": "tooling-stack-scout",
-      "name": "Tools & Benchmarks-Scout",
-      "tier": "Infra-agent",
+      "id": "acquisition-partnership-scout",
+      "name": "7. Acquisition & Partnership Scout",
+      "tier": "Growth Engine",
+      "pool": "distribution-deals",
       "file": "data/resources.json",
-      "role": "Houdt de gereedschapskist actueel met bewezen tools voor ASO, paywalls, voice-agents, EU-hosting en verificatie.",
-      "searchQuery": "best tools indie AI founders monetization voice agents ASO benchmarks EU hosting",
-      "focus": "Alleen praktische tools met eerlijke prijsindicatie en duidelijke reden waarom ze nuttig zijn.",
+      "role": "Signaleert strategische overnameplatformen (Acquire.com), partnerkanalen (boekhouders, juweliers, praktijksoftware) en nuttige markttools.",
+      "focus": "Alleen concrete, controleerbare platformen of partnermodellen.",
       "schemaHint": "{ id, name, category, pricing, url, whyUseful, addedAt }"
     },
     {
-      "id": "blindspots-compliance-watchdog",
-      "name": "Blinde Vlekken, GDPR & Exit-Watchdog",
-      "tier": "Risico-agent",
-      "file": "data/blindspots.json",
-      "role": "Bewaakt zaken die bouwers vergeten: EU AI Act Art. 50, AVG/GDPR, BE/NL BTW/MoR, API-marge-erosie, App Store-regels en exit-multiples.",
-      "searchQuery": "EU AI Act Article 50 GDPR SaaS VAT App Store review rejection exit multiples 2026",
-      "focus": "Concreet risico + concrete voorzorgsmaatregel, specifiek relevant voor BE/NL & EU bouwers.",
-      "schemaHint": "{ id, area, title, risk, action, addedAt }"
+      "id": "customer-acquisition-sales-strategist",
+      "name": "8. Customer Acquisition & Sales Strategist",
+      "tier": "Execution Engine",
+      "pool": "distribution-deals",
+      "file": "data/tips.json",
+      "role": "Verfijnt B2B-outreach, demo-scripts, in-app conversie en sales-tactieken (altijd met menselijke goedkeuring vóór verzending).",
+      "focus": "Direct toepasbare tactieken zonder spam of generieke cold-email templates.",
+      "schemaHint": "{ id, category, title, detail, impact ('Hoog'|'Middel'|'Laag'), addedAt }"
+    },
+    {
+      "id": "pricing-unit-economics-analyst",
+      "name": "9. Pricing, Profitability & Unit Economics Analyst",
+      "tier": "Financial Engine",
+      "pool": "monetization-risks",
+      "file": "data/tips.json",
+      "role": "Analyseert paywall-conversie, Web-to-App marges, bundelprijzen, LTV:CAC en API-kostenbescherming.",
+      "focus": "Onderbouw prijsadvies met harde benchmarks (zoals RevenueCat of B2B-marges).",
+      "schemaHint": "{ id, category, title, detail, impact ('Hoog'|'Middel'|'Laag'), addedAt }"
+    },
+    {
+      "id": "experiment-kill-criteria-analyst",
+      "name": "10. Experiment Designer & Kill-Criteria Analyst",
+      "tier": "Validation Engine",
+      "pool": "monetization-risks",
+      "file": "data/pitfalls.json",
+      "role": "Verzamelt harde faalcijfers, retentie-valkuilen en scherpe KILL/ITERATE-stopregels zodat tijd en budget nooit blijven lekken.",
+      "focus": "Altijd in Mythe → Realiteit (met cijfers) → Wat je wél doet.",
+      "schemaHint": "{ id, title, severity ('hoog'|'middel'|'laag'), myth, reality, instead, addedAt }"
+    },
+    {
+      "id": "evidence-quality-auditor",
+      "name": "11. Evidence Verification & Source Quality Auditor",
+      "tier": "Audit Engine",
+      "pool": "monetization-risks",
+      "file": "data/evidence.json",
+      "role": "Toetst bronkwaliteit, actualiteit en onzekerheid; voorkomt dat schattingen of hype als bewezen feiten worden opgeslagen.",
+      "focus": "Voeg alleen controleerbare bewijsstukken toe met status, datum en caveat.",
+      "schemaHint": "{ id, title, status ('VERIFIED'|'PARTIALLY_VERIFIED'|'UNVERIFIED'), sourceType, observedAt, uncertainty ('laag'|'middel'|'hoog'), summary, caveat, url }"
+    },
+    {
+      "id": "portfolio-capital-allocator",
+      "name": "12. Portfolio Learning & Capital Allocation Strategist",
+      "tier": "Strategy Engine",
+      "pool": "b2b-vertical-eu",
+      "file": "data/patterns.json",
+      "role": "Vertaalt lessen uit experimenten en portfolio-synergie (Hand Mirror, Mirror Mate, RingSizer + B2B) naar kapitaal- en tijdsallocatie.",
+      "focus": "Scherpe beslisregels voor focussen op maximaal 1–2 gevalideerde sporen tegelijk.",
+      "schemaHint": "{ id, title, category, summary, mechanism, evidence, addedAt }"
     }
   ]
 }

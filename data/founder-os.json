@@ -1,0 +1,113 @@
+{
+  "section": "founder-os",
+  "title": "Founder & Business Intelligence Layer (3.0)",
+  "updatedAt": "2026-11-22",
+  "constraints": {
+    "maxActiveValidations": 2,
+    "maxProductsInIntensiveBuild": 1,
+    "weeklyHoursAvailable": 20,
+    "validationBudgetEur": 350,
+    "targetMonthlyNetEur": 5000
+  },
+  "cycleStages": [
+    { "id": "discover", "label": "1. Discover", "desc": "Onderbediende markt + unfair advantage" },
+    { "id": "verify", "label": "2. Verify", "desc": "Bronnen, omzet & aannames toetsen" },
+    { "id": "sell-validate", "label": "3. Sell & Validate", "desc": "Betaalbereidheid bij echte klanten" },
+    { "id": "build-deliver", "label": "4. Build & Deliver", "desc": "Kleinst mogelijke waardevolle product" },
+    { "id": "retain-scale", "label": "5. Retain & Scale", "desc": "Retentie, marge & distributie opschalen" },
+    { "id": "learn-reallocate", "label": "6. Learn & Reallocate", "desc": "Resultaat → volgende kapitaalbeslissing" }
+  ],
+  "unfairAdvantages": [
+    {
+      "asset": "Bestaand Apple-portfolio (Hand Mirror, Mirror Mate, RingSizer)",
+      "advantage": "Organisch App Store-verkeer (#5–#21 op kerntermen) voor gratis in-app cross-promotie en directe Appfigures-data.",
+      "compoundReuse": "Camera-UX, StoreKit/Superwall-paywalls, ASO-pipeline en promovideo-workflow."
+    },
+    {
+      "asset": "België / Nederland markt & taal (Vlaams/NL + EU-compliance)",
+      "advantage": "Amerikaanse AI-voice en B2B-tools falen op dialecten, lokale agenda/ERP-software (Exact, Teamleader) en GDPR/EU AI Act Art. 50.",
+      "compoundReuse": "Herbruikbare EU-hosting, standaard DPA en lokale sales-aanpak over meerdere sectoren."
+    },
+    {
+      "asset": "AI- & automatisatie-stack (App Store Connect, Appfigures, ElevenLabs, workflows)",
+      "advantage": "Kan in dagen een werkende demo of smoke-test opzetten waar traditionele bureaus weken over doen.",
+      "compoundReuse": "Snelle validatiecyclus zonder grote voorinvestering."
+    }
+  ],
+  "capitalAllocationOptions": [
+    {
+      "id": "alloc-b2b-voice",
+      "name": "Experiment 1: B2B GDPR AI-Receptionist Pilot (BE/NL)",
+      "hoursNeeded": 12,
+      "cashNeededEur": 150,
+      "expectedMonthlyNetAt90dEur": 2400,
+      "probabilityPct": 35,
+      "unfairAdvantageMultiplier": 1.25,
+      "opportunityCostNote": "Snelste route naar echte cashflow zonder advertentiebudget; vraagt actieve lokale sales."
+    },
+    {
+      "id": "alloc-ringvalue",
+      "name": "Experiment 2: RingValue Smoke-Test (RingSizer Cross-Promo)",
+      "hoursNeeded": 8,
+      "cashNeededEur": 200,
+      "expectedMonthlyNetAt90dEur": 1800,
+      "probabilityPct": 28,
+      "unfairAdvantageMultiplier": 1.3,
+      "opportunityCostNote": "Hoge schaalbaarheid via App Store + UGC, maar hogere consumenten-churn en Apple-reviewrisico."
+    },
+    {
+      "id": "alloc-postureguard",
+      "name": "Mirror Mate Pro / PostureGuard (macOS)",
+      "hoursNeeded": 25,
+      "cashNeededEur": 50,
+      "expectedMonthlyNetAt90dEur": 900,
+      "probabilityPct": 30,
+      "unfairAdvantageMultiplier": 1.2,
+      "opportunityCostNote": "Gepauzeerd (WIP-limiet van max. 2 validaties bewaken)."
+    },
+    {
+      "id": "alloc-existing-optimization",
+      "name": "Bestaande apps optimaliseren (ASO/Paywall op Hand Mirror & RingSizer)",
+      "hoursNeeded": 10,
+      "cashNeededEur": 0,
+      "expectedMonthlyNetAt90dEur": 600,
+      "probabilityPct": 55,
+      "unfairAdvantageMultiplier": 1.15,
+      "opportunityCostNote": "Laag risico, direct effect op bestaand verkeer, beperkter plafond dan nieuw schaalbaar spoor."
+    }
+  ],
+  "redTeamCommittee": [
+    {
+      "opportunityId": "opp-b2b-gdpr-voice-benelux",
+      "title": "Red Team Kritiek — B2B GDPR AI-Receptionist",
+      "strongestCounterArguments": [
+        "Vlaamse/Nederlandse bellers kunnen afhaken zodra ze horen dat het een AI-stem is (EU AI Act Art. 50 vereist transparantie).",
+        "Koppelingen met lokale praktijksoftware (bv. DentAdmin, CareConnect) zijn vaak gesloten of traag — dit kan de opstart van 1 uur naar 2 weken rekken.",
+        "Tandartsen en installateurs zijn druk en wantrouwig tegenover koude benadering; zonder warm netwerk of directe demo-waarde kan conversie tegenvallen."
+      ],
+      "mitigationBeforeBuild": "Test eerst de eenvoudigste variant zonder zware ERP-koppeling: gemiste oproep opnemen → korte vraag stellen → binnen 10 sec SMS-samenvatting naar eigenaar. Meet eerst of 2 bedrijven €250 pilot betalen."
+    },
+    {
+      "opportunityId": "opp-b2c-ringvalue-jewelry-id",
+      "title": "Red Team Kritiek — RingValue Sieraden- & Antiektaxateur",
+      "strongestCounterArguments": [
+        "Eenmalig gebruik-valkuil: iemand taxeert 3 erfstukken en zegt daarna direct het abonnement op (hoge maand-1 churn).",
+        "Verkeerde waardeschatting of foutieve edelsteen-herkenning leidt snel tot 1-ster App Store-reviews en refunds.",
+        "Grote spelers (Next Vision / AntiqueWorth met $680k/mnd) hebben enorme ad-budgetten om op brede keywords te bieden."
+      ],
+      "mitigationBeforeBuild": "Positioneer expliciet als 'indicatieve schatting + keurmerk-gids' (geen officiële verzekeringstaxatie), test eenmalige credit-bundel naast jaarplan, en valideer eerst gratis via RingSizer cross-promo."
+    }
+  ],
+  "legalReadinessChecklist": [
+    { "id": "leg-1", "area": "Ondernemingsvorm (BE)", "text": "Bepaal geschikte structuur (bijberoep, eenmanszaak of BV) en verifieer vooraf eventuele impact op uitkeringen of statuut vóór eerste factuur." },
+    { "id": "leg-2", "area": "BTW & Facturatie", "text": "BTW-nummer activeren, keuze tussen vrijstellingsregeling (<€25.000 BE) of normale BTW-plicht + Peppol e-facturatie voorbereiden." },
+    { "id": "leg-3", "area": "GDPR & EU AI Act", "text": "Standaard verwerkersovereenkomst (DPA) en Art. 50 AI-transparantiemelding klaarzetten vóór eerste B2B voice-pilot." },
+    { "id": "leg-4", "area": "Verzekering & Aansprakelijkheid", "text": "Beroepsaansprakelijkheidsverzekering en algemene voorwaarden (met duidelijke aansprakelijkheidsbeperking op AI-schattingen) regelen." },
+    { "id": "leg-5", "area": "Business Continuity", "text": "Geen single-vendor lock-in: abstraheer LLM- en voice-calls zodat je binnen 1 dag kunt wisselen tussen OpenAI/Anthropic/Gemini en Vapi/Retell." }
+  ],
+  "metaTestcase30Days": {
+    "title": "30-Dagen Meta-Testcase: AI Money Playbook als eigen eerste bewijsstuk",
+    "goal": "Binnen 30 dagen via dit systeem één commercieel probleem valideren en minstens één echte betaalde pilot of betaalintentie-drempel realiseren.",
+    "commercialPotential": "Pas wanneer het systeem aantoonbaar eigen omzet helpt genereren, onderzoeken of een verpakte versie verkoopbaar is aan andere founders of agencies."
+  }
+}

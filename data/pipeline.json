@@ -1,0 +1,34 @@
+{
+  "section": "pipeline",
+  "title": "Revenue Execution Pipeline & Offertesjablonen",
+  "updatedAt": "2026-11-22",
+  "privacyNotice": "Publieke GitHub Pages bevatten NOOIT echte klantinformatie, e-mailadressen of telefoonnummers. Je eigen prospect-CRM wordt uitsluitend lokaal in je browser (localStorage) bewaard en kan als lokale JSON geëxporteerd worden.",
+  "stages": [
+    { "id": "research", "label": "1. Research", "gate": "Bewijs vastgelegd in Evidence Vault" },
+    { "id": "problem-validation", "label": "2. Probleemvalidatie", "gate": "Min. 5 bevestigde pijnpunten" },
+    { "id": "interviews", "label": "3. Klantinterviews", "gate": "Exacte taal & bezwaren genoteerd" },
+    { "id": "offer", "label": "4. Aanbod & Prijs", "gate": "Resultaat + prijsanker + risicoreductie" },
+    { "id": "demo", "label": "5. Demo / LP", "gate": "Werkende 60-sec demo of testnummer" },
+    { "id": "outreach-approval", "label": "6. Outreach (Goedkeuring)", "gate": "VERPLICHT: menselijke goedkeuring vóór verzending" },
+    { "id": "pilot", "label": "7. Betaalde Pilot", "gate": "Echte betaling + getekende DPA (indien B2B)" },
+    { "id": "retention-scale", "label": "8. Retentie → Schaal", "gate": "Expliciete SCALE / ITERATE / KILL beslissing" }
+  ],
+  "offerTemplates": [
+    {
+      "id": "tpl-b2b-voice-pilot",
+      "opportunityId": "opp-b2b-gdpr-voice-benelux",
+      "title": "B2B Pilot-Aanbod: 14 Dagen Nooit Meer Een Gemiste Oproep",
+      "subject": "Kort testnummer voor [Bedrijfsnaam] — geen gemiste oproepen tijdens werkuren",
+      "body": "Hallo [Naam],\n\nIk belde vandaag kort en merkte dat oproepen tijdens drukke uren soms op voicemail komen. Voor lokale [tandartspraktijken / installateurs] kost één gemiste nieuwe klant al snel €200–€600.\n\nIk heb een Nederlandstalige/Vlaamse AI-telefoonassistent opgezet (volledig EU-hosted, transparant volgens EU AI Act) die alleen opneemt wanneer jullie niet kunnen opnemen, direct de vraag noteert en jullie binnen 10 seconden een SMS-samenvatting stuurt.\n\nWil je deze week 2 minuten een live testnummer proberen? Bevalt het, dan draaien we een risicovrije 14-dagen pilot (€250 eenmalig, volledig verrekend als je doorgaat).\n\nGroet,\n[Jouw naam]",
+      "approvalRequired": true
+    },
+    {
+      "id": "tpl-b2c-ringsizer-crosspromo",
+      "opportunityId": "opp-b2c-ringvalue-jewelry-id",
+      "title": "B2C In-App Smoke-Test Kaart (RingSizer)",
+      "subject": "Nieuw: Wat is jouw ring of goudstempel waard?",
+      "body": "Meet je net een ring met RingSizer? Ontdek binnen 5 seconden het karaat (14k/18k/925), het tijdperk en de geschatte marktwaarde met één foto. [Tik voor vroege toegang — 1 gratis scan]",
+      "approvalRequired": true
+    }
+  ]
+}

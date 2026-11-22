@@ -1,0 +1,86 @@
+{
+  "section": "experiments",
+  "title": "Commercial Validation Lab & Kill-Criteria",
+  "updatedAt": "2026-11-22",
+  "policy": "Geen volledige productbouw zonder aantoonbare klantvraag. Externe outreach, advertentie-uitgaven en publicatie vereisen altijd expliciete menselijke goedkeuring.",
+  "items": [
+    {
+      "id": "exp-01-b2b-voice-pilot",
+      "opportunityId": "opp-b2b-gdpr-voice-benelux",
+      "title": "Validatie-Experiment 1 (B2B): Vlaamse/NL GDPR AI-Receptionist voor Tandartsen & CV-Installateurs",
+      "status": "READY_FOR_APPROVAL",
+      "decision": "PENDING",
+      "approvalGate": {
+        "outreachApproved": false,
+        "spendApproved": false,
+        "publishApproved": false,
+        "note": "Wacht op expliciete goedkeuring vóór eerste telefoontje/mail of domeinpublicatie."
+      },
+      "targetAudience": "Zelfstandige tandartspraktijken (2–5 stoelen) en CV-/loodgietersbedrijven (3–10 techniekers) in Vlaanderen en Zuid-Nederland die tijdens werkuren vaak niet opnemen.",
+      "customerProblem": "20–40% van inkomende oproepen wordt gemist tijdens behandelingen of op de werf; potentiële spoedklanten bellen direct de volgende op Google Maps (€150–€800 gemiste omzet per klus).",
+      "pricingOffer": "14-dagen risicovrije pilot aan €250 eenmalig (verrekend bij verlenging). Daarna €590/maand (incl. 350 belminuten, directe SMS-samenvatting, EU-hosting & GDPR-verwerkersovereenkomst) + €1.250 opstart.",
+      "demoSpec": "1 werkend Belgisch/Nederlands testnummer (Vapi/Retell + ElevenLabs NL/BE stem + Art. 50 transparantiemelding + directe SMS-samenvatting naar eigenaar) + 1-pagina demo-landingspagina.",
+      "prospectProfile": "30 lokale bedrijven geselecteerd op publieke Google Maps-reviews die klagen over 'slecht bereikbaar' of die bij een testoproep op voicemail belanden (prospects worden uitsluitend lokaal in je eigen CRM bewaard, nooit op GitHub).",
+      "maxBudgetEur": 150,
+      "budgetBreakdown": "€50 telefoonnummer & Vapi/ElevenLabs testbelminuten + €20 domein + €80 buffer.",
+      "durationDays": 14,
+      "metrics": {
+        "prospectsContacted": 0,
+        "demosBooked": 0,
+        "paidPilots": 0,
+        "revenueEur": 0,
+        "spentEur": 0
+      },
+      "successCriteria": [
+        "Min. 6 van de 30 benaderde bedrijven willen het live testnummer zelf uitproberen (≥20% interesse).",
+        "Min. 2 bedrijven tekenen en betalen de 14-dagen pilot (≥€500 echte cashflow binnen 14 dagen)."
+      ],
+      "stopRules": {
+        "SCALE": "≥2 betaalde pilots + ≥1 conversie naar €590/mnd doorlopend contract binnen 30 dagen.",
+        "ITERATE": "≥5 enthousiaste demo's maar bezwaar op prijs of agenda-koppeling → aanbod/prijs 1× aanscherpen en opnieuw testen op 15 bedrijven.",
+        "PAUSE": "Interesse aanwezig maar lokale agenda-integratie blokkeert directe levering → eerst eenvoudige SMS-terugbelvariant testen.",
+        "KILL": "<3 demo-aanvragen na 30 persoonlijke contacten óf 0 betalende pilots na 14 dagen → direct stoppen met deze sector."
+      },
+      "addedAt": "2026-11-22"
+    },
+    {
+      "id": "exp-02-b2c-ringvalue-smoke",
+      "opportunityId": "opp-b2c-ringvalue-jewelry-id",
+      "title": "Validatie-Experiment 2 (B2C iOS): RingValue — Sieraden-, Goudkeurmerk- & Antiektaxateur",
+      "status": "READY_FOR_APPROVAL",
+      "decision": "PENDING",
+      "approvalGate": {
+        "outreachApproved": false,
+        "spendApproved": false,
+        "publishApproved": false,
+        "note": "Wacht op goedkeuring vóór in-app cross-promo kaart in RingSizer of €150 TikTok/ASA smoke-test."
+      },
+      "targetAudience": "RingSizer-gebruikers, kopers/verkopers op Vinted/Marktplaats/rommelmarkten en mensen die erfstukken of 14k/18k sieraden willen controleren op echtheid en waarde.",
+      "customerProblem": "Geen idee wat een gevonden/geërfde ring of goudkeurmerk (585/750/925) waard is zonder naar een juwelier te gaan; huidige generieke identifier-apps missen sieraden- en stempelspecialisatie.",
+      "pricingOffer": "1 gratis proefscan → harde paywall: €6,99/week of €39,99/jaar (3 dagen trial met heldere tijdlijn) óf eenmalig €9,99 voor 10 taxaties.",
+      "demoSpec": "Klikbare smoke-test landingspagina (input: upload foto van ring/stempel → live voorbeeld van waarderapport) + subtiele 'Check waarde van je ring'-kaart in RingSizer + 3 korte voor/na TikTok-testvideo's.",
+      "prospectProfile": "Bestaande organische gebruikers van RingSizer (gratis verkeer) + max. €150 micro-test op 2–3 kleine thrift/jewelry TikTok-creators of Apple Search Ads op 'jewelry identifier'.",
+      "maxBudgetEur": 200,
+      "budgetBreakdown": "€150 micro-creator / ASA smoke-test + €30 Vision API testcredits + €20 domein.",
+      "durationDays": 14,
+      "metrics": {
+        "visitors": 0,
+        "scanIntentClicks": 0,
+        "paywallIntentClicks": 0,
+        "revenueEur": 0,
+        "spentEur": 0
+      },
+      "successCriteria": [
+        "≥8% van RingSizer-bezoekers of landingspagina-bezoekers klikt door op 'Waarde schatten'.",
+        "≥6% klikt door op een betaald plan (paywall-intentie) of laat e-mail achter voor vroege toegang (min. 30 intentiesignalen)."
+      ],
+      "stopRules": {
+        "SCALE": "≥8% scan-klik + ≥6% betaalintentie + CAC < €8 in smoke-test → bouw 10-dagen MVP met Superwall + RevenueCat.",
+        "ITERATE": "Hoge scan-klik (>10%) maar lage betaalintentie (<3%) → test eenmalige credit-bundel (€9,99) i.p.v. abonnement.",
+        "PAUSE": "Onvoldoende verkeer in 14 dagen (<300 bezoekers) → eerst 5 organische TikTok-demos testen zonder extra budget.",
+        "KILL": "<3% klikintentie na 500+ relevante bezoekers → geen MVP bouwen, door naar volgende kans (PostureGuard of Color Mirror)."
+      },
+      "addedAt": "2026-11-22"
+    }
+  ]
+}

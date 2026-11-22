@@ -1,0 +1,29 @@
+{
+  "section": "agent-telemetry",
+  "title": "Agent Activity, Costs & Reliability",
+  "updatedAt": "2026-11-22",
+  "runs": [
+    {
+      "id": "audit-2026-w47",
+      "date": "2026-11-22",
+      "week": "2026-W47",
+      "provider": "local-mcp-appfigures+websearch",
+      "liveResearchPoolsUsed": 4,
+      "totalPools": 4,
+      "enginesExecuted": 12,
+      "itemsAdded": 25,
+      "failures": [
+        {
+          "agent": "appfigures-keywords-rankingApps",
+          "error": "Appfigures API 500 (omzeild via apps_search + keywords_suggestions)"
+        },
+        {
+          "agent": "appfigures-keywords-related",
+          "error": "Appfigures API 403 Partner API vereist (gedocumenteerd in AUDIT.md)"
+        }
+      ],
+      "estimatedCostUsd": 0,
+      "durationMs": 42000
+    }
+  ]
+}
