@@ -1,22 +1,22 @@
 {
   "section": "blindspots",
   "title": "Dingen die we vaak vergeten (Blinde vlekken)",
-  "updatedAt": "2026-11-21",
+  "updatedAt": "2026-11-22",
   "items": [
+    {
+      "id": "bs-gdpr-eu-ai-act",
+      "area": "Juridisch (EU / BE / NL)",
+      "title": "EU AI Act Art. 50 & GDPR-grondslag voor Voice AI",
+      "risk": "Amerikaanse voice-agents lopen in Europa vast op grensoverschrijdende data-overdracht, ontbrekende verwerkersovereenkomsten (DPA) en het verschil tussen inkomende service (contractuele noodzaak) vs. uitgaande koude calls (expliciete opt-in vereist).",
+      "action": "Laat elke voice-agent aan het begin melden dat het een AI-assistent is (EU AI Act Art. 50), host transcripties in de EU (Hetzner/Scaleway/AWS Frankfurt) en lever standaard een NL/FR DPA mee — dat is meteen je sterkste verkoopargument.",
+      "addedAt": "2026-11-22"
+    },
     {
       "id": "bs-apple-small-business",
       "area": "App Store & Marges",
       "title": "Apple Small Business Program (15% i.p.v. 30% commissie)",
       "risk": "Vergeet je dit aan te vragen, dan betaal je vanaf dag 1 dubbel zoveel commissie aan Apple.",
       "action": "Meld je direct aan voor het Apple Small Business Program zodra je ontwikkelaarsaccount actief is (geldig tot $1M jaaromzet).",
-      "addedAt": "2026-11-21"
-    },
-    {
-      "id": "bs-gdpr-eu-ai-act",
-      "area": "Juridisch (EU / BE / NL)",
-      "title": "AVG/GDPR & EU AI Act bij voice-agents en foto-apps",
-      "risk": "Een AI-receptionist die gesprekken opneemt of persoonsgegevens verwerkt zonder melding en verwerkersovereenkomst (DPA) kan bij Belgische/Nederlandse kmo's tot directe blokkades of boetes leiden.",
-      "action": "Laat voice-agents altijd transparant melden dat de beller met een AI-assistent spreekt, kies EU-dataverwerking waar mogelijk en gebruik een standaard verwerkersovereenkomst voor B2B-klanten.",
       "addedAt": "2026-11-21"
     },
     {
@@ -32,7 +32,7 @@
       "area": "Financieel",
       "title": "Onbegrensde abonnementen met variabele AI-kosten",
       "risk": "Eén power-user op een 'onbeperkt €9,99/maand'-plan kan €80 aan LLM-, beeld- of voice-API-kosten veroorzaken en je volledige marge wegvagen.",
-      "action": "Werk altijd met redelijke gebruikslimieten (credits of fair-use plafond), cache herhaalde aanvragen en gebruik goedkopere snelle modellen voor simpele stappen.",
+      "action": "Werk altijd met redelijke gebruikslimieten (credits of fair-use plafond), cache herhaalde aanvragen en gebruik snelle goedkope modellen voor simpele stappen.",
       "addedAt": "2026-11-21"
     },
     {
@@ -47,8 +47,8 @@
       "id": "bs-churn-and-refunds",
       "area": "Retentie",
       "title": "Hoge maand-1 churn bij 'eenmalige probleem'-apps",
-      "risk": "Een gebruiker die zijn pasfoto's of verhuisplan heeft gemaakt, zegt een maandabonnement direct op. Een maandmodel past niet bij elk product.",
-      "action": "Match het betaalmodel met het gebruiksritme: eenmalige bundel/credits voor eenmalige klussen (zoals HeadshotPro), jaarabonnement voor gewoontes (zoals Cal AI), maandcontract voor B2B-infrastructuur.",
+      "risk": "Een gebruiker die zijn pasfoto's of ringtaxatie heeft gemaakt, zegt een maandabonnement direct op. Een maandmodel past niet bij elk product.",
+      "action": "Match het betaalmodel met het gebruiksritme: eenmalige bundel/credits voor eenmalige klussen (HeadshotPro), jaarabonnement voor gewoontes (Cal AI), maandcontract voor B2B-infrastructuur.",
       "addedAt": "2026-11-21"
     },
     {

@@ -7,6 +7,10 @@ const rootDir = path.resolve(__dirname, '..');
 const dataDir = path.join(rootDir, 'data');
 
 const RULES = {
+  niches: {
+    listKey: 'items',
+    required: ['id', 'title', 'platform', 'synergy', 'opportunityScore', 'primaryKeywords', 'appfiguresBenchmark', 'competitorWeakness', 'mvpConcept', 'monetization', 'addedAt']
+  },
   earners: {
     listKey: 'items',
     required: ['id', 'name', 'teamSize', 'teamType', 'product', 'category', 'reportedRevenue', 'monthlyUsdEstimate', 'revenueModel', 'distributionChannel', 'verification', 'howItWorks', 'keyLesson', 'addedAt'],

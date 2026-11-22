@@ -1,14 +1,29 @@
 {
   "section": "changelog",
   "title": "Wekelijkse agent-updates",
-  "updatedAt": "2026-11-21",
+  "updatedAt": "2026-11-22",
   "runs": [
+    {
+      "id": "live-research-2026-w47",
+      "date": "2026-11-22",
+      "week": "2026-W47",
+      "agent": "App Store Niche Scout + 3 Research Agents (Live Run)",
+      "summary": "Live Appfigures-onderzoek uitgevoerd op Hand Mirror, Mirror Mate & RingSizer + 5 concrete App Store-niches toegevoegd (o.a. Sieraden/Antiek-taxateur met $680k/mnd benchmark & macOS Posture Coach). Verrijkt met RevenueCat 2025/2026 faal- en conversiecijfers (115k+ apps), Umax, Yuka, Next Vision en EU AI Act Art. 50 / GDPR-voordeel.",
+      "itemsAdded": 15,
+      "sectionsTouched": [
+        "niches",
+        "earners",
+        "pitfalls",
+        "tips",
+        "blindspots"
+      ]
+    },
     {
       "id": "init-2026-w47",
       "date": "2026-11-21",
       "week": "2026-W47",
       "agent": "Bootstrap (Startversie)",
-      "summary": "Eerste volledige kennisbank opgezet met 7 geverifieerde/gerapporteerde AI-verdieners, 5 opkomende kansen, 7 kernpatronen, 5 valkuilen, 4 concrete uitvoerbare playbooks, 7 praktijktips, 8 kernbronnen en 7 blinde vlekken.",
+      "summary": "Eerste volledige kennisbank opgezet met 7 AI-verdieners, 5 opkomende kansen, 7 kernpatronen, 5 valkuilen, 4 uitvoerbare playbooks, 7 praktijktips, 8 kernbronnen en 7 blinde vlekken.",
       "itemsAdded": 46,
       "sectionsTouched": [
         "earners",

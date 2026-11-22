@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>AI Money Playbook — Verifieerbare AI-inkomsten, patronen & playbooks</title>
-  <meta name="description" content="Nuchtere, verifieerbare kennisbank over wie echt geld verdient met AI, onderliggende patronen, valkuilen, uitvoerbare playbooks en blinde vlekken. Wekelijks uitgebreid door agents." />
+  <title>AI Money Playbook — Verifieerbare AI-inkomsten, Appfigures-niches & simulator</title>
+  <meta name="description" content="Nuchtere, verifieerbare kennisbank over wie echt geld verdient met AI, live Appfigures App Store-niches, een interactieve verdienmodel-simulator, valkuilen en 9 wekelijkse agents." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
@@ -23,27 +23,30 @@
 
       <div class="search-wrap">
         <label class="sr-only" for="global-search">Zoek in alle onderwerpen</label>
-        <input id="global-search" type="search" placeholder="Zoek op naam, model, tool, valkuil... (druk /)" autocomplete="off" />
+        <input id="global-search" type="search" placeholder="Zoek op niche, naam, tool, GDPR, paywall... (druk /)" autocomplete="off" />
         <button id="clear-search" class="clear-btn" type="button" hidden aria-label="Wis zoekopdracht">×</button>
       </div>
 
       <div class="topbar-actions">
-        <a id="repo-link" class="btn-ghost" href="https://github.com/phlppgdfry/ai-money-playbook" target="_blank" rel="noopener">GitHub repo</a>
+        <button id="copy-md" class="btn-ghost" type="button">Kopieer MD</button>
+        <a id="repo-link" class="btn-ghost" href="https://github.com/phlppgdfry/ai-money-playbook" target="_blank" rel="noopener">GitHub</a>
         <button id="theme-toggle" class="btn-ghost" type="button" aria-label="Wissel licht en donker thema">Donker</button>
       </div>
     </div>
 
     <nav class="subnav" aria-label="Onderwerpen">
       <div class="container subnav-inner" id="section-nav">
-        <a href="#earners" class="nav-pill active">Verdieners</a>
+        <a href="#niches" class="nav-pill active">App Store Niches</a>
+        <a href="#simulator" class="nav-pill">Simulator</a>
+        <a href="#earners" class="nav-pill">Verdieners</a>
         <a href="#emerging" class="nav-pill">Nieuwe kansen</a>
         <a href="#patterns" class="nav-pill">Patronen</a>
         <a href="#actions" class="nav-pill">Concrete acties</a>
         <a href="#tips" class="nav-pill">Tips & tricks</a>
         <a href="#pitfalls" class="nav-pill">Valkuilen</a>
-        <a href="#resources" class="nav-pill">Tools & bronnen</a>
+        <a href="#resources" class="nav-pill">Tools</a>
         <a href="#blindspots" class="nav-pill">Blinde vlekken</a>
-        <a href="#agents" class="nav-pill">Wekelijkse agents</a>
+        <a href="#agents" class="nav-pill">9 Agents</a>
       </div>
     </nav>
   </header>
@@ -53,7 +56,7 @@
       <div class="hero-copy">
         <h1 id="hero-title">Wie echt geld verdient met AI, en hoe je het zelf nabouwt.</h1>
         <p class="hero-lead">
-          Een levende, nuchtere kennisbank zonder hype of ongecontroleerde screenshots. Alle cijfers dragen een expliciet verificatielabel en acht wekelijkse agents breiden elk onderwerp via Pull Requests uit.
+          Een levende, nuchtere kennisbank zonder hype. Gebouwd rond echte Appfigures-marktdata voor jouw app-portfolio, harde RevenueCat-benchmarks en 9 gespecialiseerde agents die elke week via Pull Requests uitbreiden.
         </p>
         <div class="hero-stats" id="hero-stats"></div>
       </div>
@@ -62,7 +65,7 @@
         <div class="visual-header">
           <div>
             <h2>Omzetlandschap per model</h2>
-            <p class="muted">Geschatte maandelijkse bruto-omzet (USD, logaritmische schaal) — klik op een balk voor details.</p>
+            <p class="muted">Geschatte maandelijkse bruto-omzet (USD, log-schaal) — groen = geverifieerd. Klik voor details.</p>
           </div>
           <div class="segmented" id="hero-team-filter" role="group" aria-label="Filter teamgrootte">
             <button type="button" class="seg-btn active" data-team="all">Alles</button>
@@ -80,11 +83,46 @@
       <button type="button" id="reset-all-filters" class="btn-link">Alle filters wissen</button>
     </div>
 
+    <section id="niches" class="section">
+      <div class="section-head">
+        <div>
+          <h2>App Store Niches (Live Appfigures Data)</h2>
+          <p class="muted">Concrete app-kansen direct gekoppeld aan jouw bestaande ReflectBuddy-portfolio (Hand Mirror, Mirror Mate, RingSizer).</p>
+        </div>
+        <div class="segmented" id="niche-synergy-filter">
+          <button type="button" class="seg-btn active" data-synergy="all">Alle synergie</button>
+          <button type="button" class="seg-btn" data-synergy="RingSizer">RingSizer</button>
+          <button type="button" class="seg-btn" data-synergy="Hand Mirror">Hand Mirror</button>
+          <button type="button" class="seg-btn" data-synergy="Mirror Mate">Mirror Mate</button>
+        </div>
+      </div>
+      <div id="portfolio-strip" class="portfolio-strip"></div>
+      <div id="niches-list" class="niches-grid"></div>
+    </section>
+
+    <section id="simulator" class="section">
+      <div class="section-head">
+        <div>
+          <h2>Verdienmodel-Simulator</h2>
+          <p class="muted">Reken direct door wat je netto overhoudt na Apple-commissie (15%), API-kosten, creators en wat de geschatte exit-waarde (4× jaarwinst) is.</p>
+        </div>
+        <div class="segmented" id="sim-mode-tabs">
+          <button type="button" class="seg-btn active" data-mode="ios">iOS App (Apple 15%)</button>
+          <button type="button" class="seg-btn" data-mode="agency">Lokale AI-Receptionist</button>
+          <button type="button" class="seg-btn" data-mode="saas">Vertical Micro-SaaS</button>
+        </div>
+      </div>
+      <div class="simulator-box">
+        <div id="sim-controls" class="sim-controls"></div>
+        <div id="sim-results" class="sim-results"></div>
+      </div>
+    </section>
+
     <section id="earners" class="section">
       <div class="section-head">
         <div>
           <h2>Wie echt geld verdient</h2>
-          <p class="muted">Richtwaarden op basis van geverifieerde overnames, TrustMRR/Stripe-koppelingen, publieke zelfrapportages en marktschattingen.</p>
+          <p class="muted">Richtwaarden op basis van officiële overnames, TrustMRR/Stripe-koppelingen, Appfigures-data, publieke rapportages en marktschattingen.</p>
         </div>
         <div class="controls">
           <select id="earner-sort" aria-label="Sorteer verdieners">
@@ -100,8 +138,8 @@
     <section id="emerging" class="section">
       <div class="section-head">
         <div>
-          <h2>Nieuwe dingen & opkomende kansen</h2>
-          <p class="muted">Verschuivingen waar timing, nieuwe modellen of lokale markten (BE/NL) nu voorsprong geven.</p>
+          <h2>Nieuwe dingen & stille B2B-kansen</h2>
+          <p class="muted">Verschuivingen waar timing, lokale BE/NL-taal, EU AI Act / GDPR of nieuwe modellen nu voorsprong geven.</p>
         </div>
         <div class="segmented" id="emerging-filter">
           <button type="button" class="seg-btn active" data-stage="all">Alles</button>
@@ -138,7 +176,7 @@
       <div class="section-head">
         <div>
           <h2>Tips & tricks uit de praktijk</h2>
-          <p class="muted">Kleine ingrepen op betaalmuren, distributie en pricing met groot effect op omzet.</p>
+          <p class="muted">Kleine ingrepen op betaalmuren, Web-to-App, cross-promo en pricing met groot effect op omzet.</p>
         </div>
         <div class="segmented" id="tips-filter"></div>
       </div>
@@ -148,8 +186,8 @@
     <section id="pitfalls" class="section">
       <div class="section-head">
         <div>
-          <h2>Valkuilen & anti-patronen</h2>
-          <p class="muted">Waar geld, tijd en focus verloren gaan — en wat in de praktijk wél werkt.</p>
+          <h2>Valkuilen & harde faalcijfers</h2>
+          <p class="muted">Waar geld, tijd en focus verloren gaan (incl. RevenueCat-data over 115.000+ apps) — en wat wél werkt.</p>
         </div>
       </div>
       <div id="pitfalls-list" class="pitfalls-list"></div>
@@ -169,7 +207,7 @@
       <div class="section-head">
         <div>
           <h2>Dingen die we vaak vergeten</h2>
-          <p class="muted">Juridische, fiscale, technische en platform-risico's die vooral voor Europese (BE/NL) bouwers cruciaal zijn.</p>
+          <p class="muted">Juridische (EU AI Act Art. 50 / AVG), fiscale (BE/NL BTW), technische en platform-risico's.</p>
         </div>
       </div>
       <div id="blindspots-list" class="two-col-grid"></div>
@@ -178,8 +216,8 @@
     <section id="agents" class="section">
       <div class="section-head">
         <div>
-          <h2>Wekelijkse agents & onderhoud</h2>
-          <p class="muted">Acht gespecialiseerde agents breiden elke maandag automatisch de JSON-databestanden uit via een GitHub Pull Request.</p>
+          <h2>9 Gespecialiseerde Wekelijkse Agents</h2>
+          <p class="muted">Dubbele motor: elke maandag 07:00 UTC via GitHub Actions (PR) + elke maandag 08:00 lokaal met live Appfigures-koppeling en websearch.</p>
         </div>
         <a class="btn-primary" href="https://github.com/phlppgdfry/ai-money-playbook/actions/workflows/weekly-agents.yml" target="_blank" rel="noopener">Agents handmatig starten</a>
       </div>

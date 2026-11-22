@@ -1,13 +1,37 @@
 {
   "section": "tips",
   "title": "Tips & tricks uit de praktijk",
-  "updatedAt": "2026-11-21",
+  "updatedAt": "2026-11-22",
   "items": [
+    {
+      "id": "tip-hard-paywall-5x",
+      "category": "Paywall",
+      "title": "Harde paywall converteert 5× beter dan freemium (RevenueCat-data)",
+      "detail": "Over 115.000+ apps converteert een harde paywall mediaan 10,7% tegenover 2,1% bij freemium. Geef 1 indrukwekkende proefscan of onboarding-preview en zet daarna een heldere betaalmuur neer.",
+      "impact": "Hoog",
+      "addedAt": "2026-11-22"
+    },
+    {
+      "id": "tip-portfolio-cross-promo",
+      "category": "Distributie",
+      "title": "Gebruik je bestaande apps als gratis lanceerplatform",
+      "detail": "Hand Mirror (iOS), Mirror Mate (macOS) en RingSizer (iOS) hebben al organische gebruikers met hoge koopintentie. Een subtiele banner 'Scan ook je ringwaarde / kleurtype' geeft elke nieuwe app gratis startverkeer zonder advertentiekosten.",
+      "impact": "Hoog",
+      "addedAt": "2026-11-22"
+    },
+    {
+      "id": "tip-web-to-app-scale",
+      "category": "Pricing",
+      "title": "Web-to-App funnel zodra je boven ~$30k/mnd schaalt",
+      "detail": "Topgroeiers zoals Glam AI sturen betaalde TikTok/Meta-advertenties eerst naar een web-quiz met Stripe/Paddle-checkout en sturen gebruikers daarna naar de iOS-app. Dat bespaart 15–30% App Store-commissie en geeft betere ad-attributie.",
+      "impact": "Hoog",
+      "addedAt": "2026-11-22"
+    },
     {
       "id": "tip-paywall-anchoring",
       "category": "Paywall",
       "title": "Zet een weekprijs naast je jaarabonnement",
-      "detail": "Bij consumentenapps werkt €6,99/week naast €39,99/jaar (€0,77/week) consistent veel beter dan een maandabonnement van €9,99. Gebruikers kiezen massaal het jaarplan, wat direct je cashflow vooruit haalt en churn verlaagt.",
+      "detail": "Bij consumentenapps werkt €6,99/week naast €39,99/jaar (€0,77/week) consistent veel beter dan een maandabonnement van €9,99. Gebruikers kiezen massaal het jaarplan, wat direct je cashflow vooruit haalt.",
       "impact": "Hoog",
       "addedAt": "2026-11-21"
     },
@@ -23,7 +47,7 @@
       "id": "tip-aso-review-mining",
       "category": "ASO/SEO",
       "title": "Mijn 2- en 3-sterren reviews van topapps",
-      "detail": "1-ster reviews zijn vaak boze randgevallen; 2- en 3-sterren reviews beschrijven precies wat betalende gebruikers missen of irritant vinden. Gebruik die exacte woorden in je App Store-subtitel, screenshots en landingspagina.",
+      "detail": "1-ster reviews zijn vaak boze randgevallen; 2- en 3-sterren reviews beschrijven precies wat betalende gebruikers missen of irritant vinden. Gebruik die exacte woorden in je App Store-subtitel en screenshots.",
       "impact": "Hoog",
       "addedAt": "2026-11-21"
     },
@@ -38,26 +62,10 @@
     {
       "id": "tip-b2b-invoice-pricing",
       "category": "Pricing",
-      "title": "Maak B2B-prijzen makkelijk te verantwoorden op factuur",
-      "detail": "Voeg bij SaaS-tools altijd een 'Teams / Factuur op BTW-nummer'-optie toe aan 5× de consumentenprijs met simpele extra's (PDF-factuur met BTW-nummer, 3–5 seats, gedeelde bibliotheek).",
-      "impact": "Middel",
-      "addedAt": "2026-11-21"
-    },
-    {
-      "id": "tip-demo-in-5-seconds",
-      "category": "Distributie",
-      "title": "Laat het resultaat zien in de eerste 3 seconden",
-      "detail": "Voor zowel TikTok-reels als LinkedIn-posts en je landingspagina: geen uitleg over 'AI-technologie'. Start direct met input → resultaat (foto van bord → calorieën; gemiste oproep → ingeplande afspraak).",
+      "title": "Bundel AI-belminuten in vaste B2B-pakketten",
+      "detail": "Vermijd een prijzenoorlog per belminuut bij lokale bedrijven. Verkoop vaste bundels (bv. €299–750/maand voor tot 500 gesprekken + agenda-koppeling + factuur op BTW-nummer) zodat je marge voorspelbaar blijft.",
       "impact": "Hoog",
-      "addedAt": "2026-11-21"
-    },
-    {
-      "id": "tip-byok-margin-hack",
-      "category": "Pricing",
-      "title": "Overweeg BYOK (Bring Your Own Key) voor power-users",
-      "detail": "Laat technische gebruikers hun eigen OpenAI/Anthropic API-sleutel invullen voor een eenmalige licentie of laag maandbedrag. Zo bescherm je jezelf tegen grootverbruikers die je marge opeten.",
-      "impact": "Middel",
-      "addedAt": "2026-11-21"
+      "addedAt": "2026-11-22"
     }
   ]
 }

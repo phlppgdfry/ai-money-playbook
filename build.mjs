@@ -8,6 +8,7 @@ const siteDir = path.join(__dirname, 'site');
 const distDir = path.join(__dirname, 'dist');
 
 const SECTIONS = [
+  'niches',
   'earners',
   'emerging',
   'patterns',

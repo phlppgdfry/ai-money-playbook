@@ -1,8 +1,35 @@
 {
   "section": "pitfalls",
   "title": "Valkuilen & anti-patronen",
-  "updatedAt": "2026-11-21",
+  "updatedAt": "2026-11-22",
   "items": [
+    {
+      "id": "ai-app-retention-paradox",
+      "title": "De AI-app retentieparadox (RevenueCat 2025/2026 data)",
+      "severity": "hoog",
+      "myth": "AI-apps hebben hogere waarde, dus gebruikers blijven automatisch langer abonnee.",
+      "reality": "Uit RevenueCat-data (115.000+ apps, $16B+ omzet) blijkt dat AI-apps +41% meer omzet per klant genereren bij start, maar ~30% sneller churnen. Bijna 72% van alle jaarabonnees zegt binnen jaar 1 op als het product slechts een eenmalige gimmick is.",
+      "instead": "Verbind je AI-scan aan een wekelijkse gewoonte (logboek, voortgang, alerts) óf gebruik een jaarplan/eenmalige bundel zodat je marge in week 1 al binnen is.",
+      "addedAt": "2026-11-22"
+    },
+    {
+      "id": "appstore-supply-shock",
+      "title": "App Store aanbodexplosie zonder distributieplan",
+      "severity": "hoog",
+      "myth": "Met AI-coding bouw ik snel een mooie app en App Store-zoekverkeer doet de rest.",
+      "reality": "Door AI steeg het aantal nieuwe apps van ~2.000 naar ~15.000 per maand. Apps die in 2025+ gelanceerd zijn pakken samen maar ~3% van alle abonnementsomzet; de top 10% groeit >300% terwijl de mediaan nauwelijks beweegt.",
+      "instead": "Lanceer alleen in niches met aantoonbaar lage ASO-concurrentie (Appfigures) óf met een vooraf klaarstaand distributiekanaal (cross-promo vanuit eigen apps + UGC-creators).",
+      "addedAt": "2026-11-22"
+    },
+    {
+      "id": "day-zero-trial-dropoff",
+      "title": "Dag-0 trial-annuleringen door zwakke eerste 60 seconden",
+      "severity": "middel",
+      "myth": "Zodra iemand een 3-dagen proefperiode start, wacht die 3 dagen af voor hij beslist.",
+      "reality": "Ongeveer 55% van alle 3-dagen trial-annuleringen gebeurt al op Dag 0 (direct na aanmelding) door spijt of omdat de app niet direct levert wat beloofd werd.",
+      "instead": "Lever het 'aha-moment' binnen 30 seconden (eerste scan/resultaat direct zichtbaar), toon een transparante trial-tijdlijn en stuur op dag 1 een nuttige vervolgactie.",
+      "addedAt": "2026-11-22"
+    },
     {
       "id": "faceless-youtube-courses",
       "title": "\"Faceless YouTube / AI-dropshipping\"-cursussen",
@@ -37,15 +64,6 @@
       "myth": "Als het product maar uitgebreid genoeg is, komen gebruikers vanzelf.",
       "reality": "Zonder gevalideerd zoekvolume (Appfigures/SEO) of vooraf bereidwillige kopers bouw je vaak iets waar niemand naar zoekt.",
       "instead": "Valideer eerst vraag (zoektermen, slechte reviews van concurrenten, of 3 voorverkochte lokale klanten) en lanceer een eerste versie binnen 14 dagen.",
-      "addedAt": "2026-11-21"
-    },
-    {
-      "id": "unverified-guru-screenshots",
-      "title": "Blind vertrouwen op niet-geverifieerde Stripe-screenshots",
-      "severity": "middel",
-      "myth": "Een hoog bedrag in een socialmedia-post bewijst dat een businessmodel werkt.",
-      "reality": "HTML in de browser aanpassen duurt 5 seconden, en hoge bruto-omzet kan gepaard gaan met verlieslatende Meta/TikTok-advertenties.",
-      "instead": "Controleer cijfers via geverifieerde bronnen (TrustMRR, officiële overnames, Appfigures-schattingen) en kijk altijd naar marge en distributiekosten.",
       "addedAt": "2026-11-21"
     }
   ]

@@ -1,0 +1,97 @@
+{
+  "section": "niches",
+  "title": "App Store Niches (Live Appfigures Data)",
+  "updatedAt": "2026-11-22",
+  "portfolioContext": [
+    {
+      "name": "Hand Mirror: HD, Light & Zoom",
+      "platform": "iOS / iPadOS",
+      "productId": 338063291072,
+      "footprint": "#12 op 'mirror with light' (pop 24), #16 op 'mirror' (pop 30), #21 op 'mirror app' (pop 53)"
+    },
+    {
+      "name": "Mirror Mate - Menubar Mirror",
+      "platform": "macOS",
+      "productId": 338543862211,
+      "footprint": "Menubar webcam-app; lage macOS-concurrentie (28–29)"
+    },
+    {
+      "name": "RingSizer – Ring Size Tool",
+      "platform": "iOS",
+      "productId": 338677961569,
+      "footprint": "#5 op 'ring circumference', #7 op 'ring gauge', #11 op 'ring size chart' (comp 40–43)"
+    }
+  ],
+  "items": [
+    {
+      "id": "niche-jewelry-antique-appraiser",
+      "title": "AI Sieraden-, Goudkeurmerk- & Antiektaxateur",
+      "platform": "iOS",
+      "synergy": "RingSizer",
+      "opportunityScore": 92,
+      "primaryKeywords": "jewelry identifier, gold hallmark scanner, antique appraisal, gem identifier",
+      "appfiguresBenchmark": "AntiqueWorth: 170k downloads & $680k/mnd · Curio: 60k downloads & $230k/mnd · RockIn: <5k downloads maar toch $35k/mnd (extreme ARPU!)",
+      "competitivenessNote": "Middel — brede 'rock/plant' apps zijn druk, maar een gespecialiseerde sieraden/goudstempel/ringwaarde-scanner heeft weinig strakke concurrenten.",
+      "competitorWeakness": "Bestaande identifier-apps zijn generiek, zitten vol agressieve pop-ups en missen specifieke goud-/zilverkeurmerken (14k/18k/750/925) en ringmaat-koppeling.",
+      "mvpConcept": "Maak 1 foto van een ring, ketting of stempel → directe schatting van materiaal, tijdperk, keurmerk en tweedehands marktwaarde + directe link naar RingSizer.",
+      "monetization": "Harde paywall na 1 gratis proefscan: €6,99/week of €39,99/jaar + credit-bundel voor verzamelaars/rommelmarkt-kopers.",
+      "addedAt": "2026-11-22"
+    },
+    {
+      "id": "niche-webcam-posture-coach",
+      "title": "macOS & iOS Webcam Houding- & Meeting-Prep Coach",
+      "platform": "macOS + iOS",
+      "synergy": "Mirror Mate",
+      "opportunityScore": 87,
+      "primaryKeywords": "posture screen (pop 28, comp 43), posture assessment (comp 45), phone posture (comp 43)",
+      "appfiguresBenchmark": "PostureScreen Mobile doet ~$85k/mnd op iOS; op macOS is het aanbod klein en verouderd.",
+      "competitivenessNote": "Laag–middel (43–48 in Appfigures) — veel lagere instapdrempel dan fitness of beauty.",
+      "competitorWeakness": "Huidige apps zijn klinisch/lelijk (gericht op chiropractors) of vragen dure wearables in plaats van simpelweg de ingebouwde MacBook-webcam te gebruiken.",
+      "mvpConcept": "On-device (100% privacy/lokaal, geen beelden naar cloud!) menubar-app die zacht waarschuwt als je inzakt tijdens werk + 1-klik licht/camera-check vóór Zoom/Teams-calls.",
+      "monetization": "Eenmalige macOS-licentie (€19–29) of €29/jaar met 7-dagen trial + B2B-teamlicenties voor ergonomiebudgetten.",
+      "addedAt": "2026-11-22"
+    },
+    {
+      "id": "niche-seasonal-color-mirror",
+      "title": "Live AI Seizoens-Kleurtypespiegel (12-Season Color Analysis)",
+      "platform": "iOS",
+      "synergy": "Hand Mirror",
+      "opportunityScore": 84,
+      "primaryKeywords": "color analysis, 12 season color analysis (comp 85), seasonal color palette (comp 88)",
+      "appfiguresBenchmark": "Color Analysis - Dressika: 55k downloads & $45k/mnd; My Color Palette: <$5k/mnd (hoge vraag op TikTok/Reels).",
+      "competitivenessNote": "Hoog op organische ASO (85–93), maar uitstekend te kraken via cross-promotie vanuit Hand Mirror (#12–#21 op mirror-keywords) + TikTok-creators.",
+      "competitorWeakness": "Gebruikers klagen dat bestaande apps een statische selfie vragen met verkeerd kunstlicht, waardoor het kleuradvies telkens verandert.",
+      "mvpConcept": "Combineer Hand Mirror's lichtring/witbalans-kalibratie met een live camera-drape: zie realtime welke kleding- en lippenstiftkleuren je gezicht laten stralen.",
+      "monetization": "€4,99/week of €29,99/jaar + eenmalig €14,99 'Volledig Kleurpaspoort'-rapport.",
+      "addedAt": "2026-11-22"
+    },
+    {
+      "id": "niche-face-symmetry-grooming",
+      "title": "AI Gezichtsvorm, Bril- & Grooming-Spiegel",
+      "platform": "iOS",
+      "synergy": "Hand Mirror",
+      "opportunityScore": 82,
+      "primaryKeywords": "face symmetry, golden ratio face, face shape glasses, hairstyle ai",
+      "appfiguresBenchmark": "FaceApp doet $17M/mnd en Umax $150k–$500k/mnd, maar directe 'face symmetry' & 'golden ratio' indie-apps zitten onder $5k/mnd door verouderde UI.",
+      "competitivenessNote": "Middel — brede AI-filters zijn druk, maar praktische 'welke bril / baard / kapsel past bij mijn gezichtsvorm?' is onderbediend.",
+      "competitorWeakness": "Umax richt zich op tiener-looksmaxing (toxisch/hoge churn); oudere symmetrie-apps lijken uit 2016 en geven geen bruikbaar advies.",
+      "mvpConcept": "Volwassen, smaakvolle AI-spiegel die gezichtsvorm en verhoudingen analyseert en direct laat zien welke brilmonturen, kapsels en baardstijlen passen.",
+      "monetization": "Harde paywall na 1 gratis gezichtsvorm-scan: €6,99/week of €39,99/jaar.",
+      "addedAt": "2026-11-22"
+    },
+    {
+      "id": "niche-skin-ingredient-mirror",
+      "title": "AI Huidcheck & Cosmetica-Ingrediëntenscanner",
+      "platform": "iOS",
+      "synergy": "Hand Mirror",
+      "opportunityScore": 79,
+      "primaryKeywords": "skin scanner, skincare routine, acne scanner, cosmetic ingredient checker",
+      "appfiguresBenchmark": "Yuka bewijst ~$1M/mnd op ingrediëntenscans, terwijl pure AI skincare-scanners (SkinSAFE, Skincare Routine) in Appfigures nog rond <$5k/mnd hangen.",
+      "competitivenessNote": "Middel — sterke vraag vanuit skincare-TikTok, maar veel bestaande apps zijn traag of vol verwarrende medische termen.",
+      "competitorWeakness": "Gebruikers moeten losse apps gebruiken voor huidanalyse vs. ingrediëntenlabels; nauwelijks één simpele spiegel + barcodescan die zegt 'past dit bij jouw huidtype?'.",
+      "mvpConcept": "1 spiegelscan voor huidtype/droogheid/roodheid (met duidelijke non-medische disclaimer) + barcodescan van verzorgingsproducten met directe match-score.",
+      "monetization": "Freemium scanlimiet (3 gratis scans) → €34,99/jaar voor onbeperkte scans en persoonlijke routine.",
+      "addedAt": "2026-11-22"
+    }
+  ]
+}

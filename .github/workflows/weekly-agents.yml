@@ -7,20 +7,21 @@ on:
   workflow_dispatch:
     inputs:
       agent:
-        description: "Welke agent draaien? ('all' voor alle 8 onderwerpen)"
+        description: "Welke specialistische agent draaien? ('all' voor alle 9 agents)"
         required: true
         default: "all"
         type: choice
         options:
           - all
-          - earners
-          - emerging
-          - patterns
-          - pitfalls
-          - actions
-          - tips
-          - resources
-          - blindspots
+          - consumer-ai-researcher
+          - b2b-vertical-researcher
+          - pitfalls-strategy-analyst
+          - appstore-niche-scout
+          - patterns-synthesizer
+          - playbooks-architect
+          - monetization-paywall-optimizer
+          - tooling-stack-scout
+          - blindspots-compliance-watchdog
 
 permissions:
   contents: write
@@ -66,7 +67,7 @@ jobs:
           body: |
             ## Automatische wekelijkse uitbreiding
 
-            De wekelijkse onderzoeks-agents hebben nieuwe bevindingen toegevoegd aan `data/*.json` en de volledige validatie + site-build is geslaagd.
+            De gespecialiseerde onderzoeks-agents hebben nieuwe bevindingen toegevoegd aan `data/*.json` en de volledige schema-validatie + site-build is geslaagd.
 
             - Controleer de nieuwe items en verificatieniveaus in de diff.
             - Na merge naar `main` wordt de GitHub Pages site automatisch opnieuw gedeployed.
