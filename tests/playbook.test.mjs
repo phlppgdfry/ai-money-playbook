@@ -7,7 +7,7 @@ import { fileURLToPath } from 'node:url';
 
 import { scoreOpportunity, rankOpportunities, normalizeWeights, DEFAULT_WEIGHTS } from '../engines/opportunity-scoring.mjs';
 import { calculateUnitEconomics, runScenarios } from '../engines/financial-model.mjs';
-import { checkWipLimits, rankCapitalAllocation } from '../engines/capital-allocation.mjs';
+import { checkWipLimits, rankCapitalAllocation, validateDistributionFirstGate } from '../engines/capital-allocation.mjs';
 import { sanitizeExternalText, scanForLeaks } from '../engines/security.mjs';
 import { generateWeeklyBrief } from '../engines/weekly-brief.mjs';
 import { validateDataDirectory } from '../schemas/validate.mjs';
@@ -139,4 +139,18 @@ test('Weekly Executive Brief produces all 8 required sections with honest €0 r
   assert.equal(brief.financialReality.realizedRevenueEur, 0);
   assert.ok(brief.recommendedFocusProject);
   assert.ok(brief.experimentResults.every((e) => e.approvalPending === true));
+});
+
+test('Distribution-First Gate requires first-10 and first-100 customer plan for every selected opportunity', () => {
+  const opportunities = JSON.parse(fs.readFileSync(path.join(rootDir, 'data/opportunities.json'), 'utf8')).items;
+  const founder = JSON.parse(fs.readFileSync(path.join(rootDir, 'data/founder-os.json'), 'utf8'));
+
+  const liveGate = validateDistributionFirstGate(opportunities, founder.distributionFirstPlans);
+  assert.equal(liveGate.passed, true);
+  assert.equal(liveGate.checkedCount, 2);
+
+  // Negative test: missing plan fails gate
+  const failedGate = validateDistributionFirstGate(opportunities, []);
+  assert.equal(failedGate.passed, false);
+  assert.equal(failedGate.missingOpportunityIds.length, 2);
 });

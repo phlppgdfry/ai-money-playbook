@@ -16,6 +16,17 @@ export function checkWipLimits(experiments = [], constraints = { maxActiveValida
   };
 }
 
+export function validateDistributionFirstGate(opportunities = [], plans = []) {
+  const planIds = new Set(plans.filter((p) => p.first10 && p.first100).map((p) => p.opportunityId));
+  const selected = opportunities.filter((o) => o.status === 'SELECTED_FOR_VALIDATION');
+  const missing = selected.filter((o) => !planIds.has(o.id)).map((o) => o.id);
+  return {
+    passed: missing.length === 0,
+    checkedCount: selected.length,
+    missingOpportunityIds: missing
+  };
+}
+
 export function rankCapitalAllocation(options = []) {
   return options
     .map((opt) => {

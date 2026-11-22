@@ -24,14 +24,53 @@
       "compoundReuse": "Camera-UX, StoreKit/Superwall-paywalls, ASO-pipeline en promovideo-workflow."
     },
     {
-      "asset": "België / Nederland markt & taal (Vlaams/NL + EU-compliance)",
+      "asset": "België / Nederland markt & taal (Vlaams/NL + EU-compliance + Reviewell-ervaring)",
       "advantage": "Amerikaanse AI-voice en B2B-tools falen op dialecten, lokale agenda/ERP-software (Exact, Teamleader) en GDPR/EU AI Act Art. 50.",
-      "compoundReuse": "Herbruikbare EU-hosting, standaard DPA en lokale sales-aanpak over meerdere sectoren."
+      "compoundReuse": "Herbruikbare EU-hosting, standaard DPA, AEO/SEO-kennis uit Reviewell en lokale B2B-sales."
     },
     {
       "asset": "AI- & automatisatie-stack (App Store Connect, Appfigures, ElevenLabs, workflows)",
       "advantage": "Kan in dagen een werkende demo of smoke-test opzetten waar traditionele bureaus weken over doen.",
       "compoundReuse": "Snelle validatiecyclus zonder grote voorinvestering."
+    }
+  ],
+  "distributionFirstPlans": [
+    {
+      "opportunityId": "opp-b2b-gdpr-voice-benelux",
+      "title": "B2B GDPR AI-Receptionist (BE/NL)",
+      "first10": "30 lokale tandartsen & CV-installateurs op Google Maps met aantoonbare bereikbaarheidsklachten bellen/benaderen met een live Vlaams/NL testnummer (goedkeuring vereist).",
+      "first100": "Partnerships met lokale praktijksoftware-implementeerders, telecom/VoIP-resellers en mond-tot-mond binnen beroepsverenigingen.",
+      "moat": "Lokale dialecten + EU AI Act Art. 50 + EU-hosting + agenda/SMS-workflow (hoge overstapkosten zodra telefoonnummer actief draait).",
+      "continuityFallback": "LLM- en voice-laag abstraheren (Vapi ↔ Retell, ElevenLabs ↔ Azure Neural NL, OpenAI ↔ Anthropic)."
+    },
+    {
+      "opportunityId": "opp-b2c-ringvalue-jewelry-id",
+      "title": "RingValue / GemID (iOS)",
+      "first10": "Gratis in-app cross-promotie kaart binnen RingSizer (#5–#11 op ringmaat-termen) + smoke-test landingspagina.",
+      "first100": "Micro-UGC creators in thrift/rommelmarkt/Vinted-niches op prestatiebasis (kleine basis + CPM/commissie) + Apple Search Ads op 'jewelry identifier'.",
+      "moat": "Portfolio-synergie met RingSizer + eigen database van goud-/zilverkeurmerken (585/750/925) en verzamelhistoriek.",
+      "continuityFallback": "Multimodale vision-laag swappable (OpenAI Vision ↔ Gemini Vision) + zowel jaarplan als eenmalige credit-bundel tegen churn."
+    }
+  ],
+  "customerDiscoveryScripts": [
+    {
+      "opportunityId": "opp-b2b-gdpr-voice-benelux",
+      "title": "Mom-Test Interviewvragen — B2B AI-Receptionist (Onderscheid interesse vs. betalen)",
+      "questions": [
+        "Hoeveel oproepen missen jullie gemiddeld op een drukke dag tijdens behandelingen of op de werf, en wat gebeurt er nu met die bellers?",
+        "Wanneer was de laatste keer dat een nieuwe klant afhaakte omdat niemand opnam — wat was die klus ongeveer waard?",
+        "Welke software gebruiken jullie vandaag voor agenda en telefoon, en wat heb je al geprobeerd om dit op te lossen?",
+        "Betalingstest: Als ik deze week een testnummer opzet dat alleen opneemt wanneer jullie niet kunnen opnemen en binnen 10 sec een SMS stuurt, wil je dat 14 dagen testen voor €250 (verrekend bij doorgaan)?"
+      ]
+    },
+    {
+      "opportunityId": "opp-b2c-ringvalue-jewelry-id",
+      "title": "Validatievragen — RingValue Sieraden- & Goudkeurmerk-scanner",
+      "questions": [
+        "Wanneer heb je voor het laatst geprobeerd de waarde of het goudgehalte van een ring of erfstuk te achterhalen, en hoe deed je dat?",
+        "Wat vond je het vervelendste aan zoeken op Google of bestaande apps?",
+        "Betalingstest: Zou je €9,99 betalen voor 10 directe taxaties + keurmerk-check, of liever €39,99/jaar als je vaker koopt op Vinted/rommelmarkten?"
+      ]
     }
   ],
   "capitalAllocationOptions": [
@@ -56,6 +95,26 @@
       "opportunityCostNote": "Hoge schaalbaarheid via App Store + UGC, maar hogere consumenten-churn en Apple-reviewrisico."
     },
     {
+      "id": "alloc-reviewell",
+      "name": "Bestaand project: Reviewell (groei & conversie-optimalisatie)",
+      "hoursNeeded": 12,
+      "cashNeededEur": 0,
+      "expectedMonthlyNetAt90dEur": 1200,
+      "probabilityPct": 45,
+      "unfairAdvantageMultiplier": 1.2,
+      "opportunityCostNote": "Bestaand asset zonder nieuw bouwrisico; vergelijk direct tegen nieuwe validaties."
+    },
+    {
+      "id": "alloc-existing-apps",
+      "name": "Bestaande apps optimaliseren (ASO/Paywall op Hand Mirror & RingSizer)",
+      "hoursNeeded": 10,
+      "cashNeededEur": 0,
+      "expectedMonthlyNetAt90dEur": 600,
+      "probabilityPct": 55,
+      "unfairAdvantageMultiplier": 1.15,
+      "opportunityCostNote": "Laag risico, direct effect op bestaand verkeer, beperkter plafond dan nieuw schaalbaar spoor."
+    },
+    {
       "id": "alloc-postureguard",
       "name": "Mirror Mate Pro / PostureGuard (macOS)",
       "hoursNeeded": 25,
@@ -64,16 +123,6 @@
       "probabilityPct": 30,
       "unfairAdvantageMultiplier": 1.2,
       "opportunityCostNote": "Gepauzeerd (WIP-limiet van max. 2 validaties bewaken)."
-    },
-    {
-      "id": "alloc-existing-optimization",
-      "name": "Bestaande apps optimaliseren (ASO/Paywall op Hand Mirror & RingSizer)",
-      "hoursNeeded": 10,
-      "cashNeededEur": 0,
-      "expectedMonthlyNetAt90dEur": 600,
-      "probabilityPct": 55,
-      "unfairAdvantageMultiplier": 1.15,
-      "opportunityCostNote": "Laag risico, direct effect op bestaand verkeer, beperkter plafond dan nieuw schaalbaar spoor."
     }
   ],
   "redTeamCommittee": [
@@ -96,6 +145,22 @@
         "Grote spelers (Next Vision / AntiqueWorth met $680k/mnd) hebben enorme ad-budgetten om op brede keywords te bieden."
       ],
       "mitigationBeforeBuild": "Positioneer expliciet als 'indicatieve schatting + keurmerk-gids' (geen officiële verzekeringstaxatie), test eenmalige credit-bundel naast jaarplan, en valideer eerst gratis via RingSizer cross-promo."
+    }
+  ],
+  "predictionLog": [
+    {
+      "id": "pred-01",
+      "date": "2026-11-22",
+      "hypothesis": "Minstens 2 van de 30 benaderde Vlaamse/NL tandartsen of CV-installateurs betalen €250 voor een 14-dagen gemiste-oproep AI-pilot.",
+      "status": "OPEN",
+      "actualOutcome": "Nog niet getest (wacht op goedkeuring outreach)."
+    },
+    {
+      "id": "pred-02",
+      "date": "2026-11-22",
+      "hypothesis": "Minstens 8% van RingSizer-gebruikers klikt op een subtiele 'Check waarde van je ring'-kaart en ≥6% toont betaalintentie.",
+      "status": "OPEN",
+      "actualOutcome": "Nog niet getest (wacht op goedkeuring smoke-test)."
     }
   ],
   "legalReadinessChecklist": [

@@ -349,6 +349,20 @@ function renderFounderOs(founder) {
       <p>${esc(u.advantage)}</p>
       <div class="kv-line"><strong>Herbruikbaar voordeel:</strong> ${esc(u.compoundReuse)}</div>
     </article>
+  `).join('') + (founder.distributionFirstPlans || []).map((d) => `
+    <article class="panel">
+      <span class="badge badge-accent">Distribution-First & Moat</span>
+      <h3 style="margin-top:6px">${esc(d.title)}</h3>
+      <p><strong>Eerste 10 klanten:</strong> ${esc(d.first10)}</p>
+      <p><strong>Eerste 100 klanten:</strong> ${esc(d.first100)}</p>
+      <div class="kv-line"><strong>Moat & Continuïteit:</strong> ${esc(d.moat)} · Fallback: ${esc(d.continuityFallback)}</div>
+    </article>
+  `).join('') + (founder.customerDiscoveryScripts || []).map((s) => `
+    <article class="panel">
+      <span class="badge badge-ok">Customer Discovery (Mom Test)</span>
+      <h3 style="margin-top:6px">${esc(s.title)}</h3>
+      <ul class="brief-list">${s.questions.map((q) => `<li>${esc(q)}</li>`).join('')}</ul>
+    </article>
   `).join('');
 }
 
