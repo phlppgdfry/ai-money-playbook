@@ -1,8 +1,19 @@
 {
   "section": "evidence",
   "title": "Evidence Vault & Source Quality Audit",
-  "updatedAt": "2026-11-22",
+  "updatedAt": "2026-11-24",
   "items": [
+    {
+      "id": "ev-appfigures-coinio",
+      "title": "Appfigures Live Sync (24 nov): Coinio & Verzamel-Identifiers",
+      "status": "VERIFIED",
+      "sourceType": "Appfigures MCP (Live API)",
+      "observedAt": "2026-11-24",
+      "uncertainty": "laag",
+      "summary": "Live Appfigures-sync op 24 nov 2026 bevestigt: Coinio: Coin Identifier haalt 290k downloads/mnd en ~$1,0M/mnd; kleinere concurrenten (Coinoscope 15k dl, Coin Identifier <5k dl) blijven rond <$5k/mnd — sterke bevestiging dat verzamel-/metaal-identifiers enorme schaal hebben bij goede paywall/distributie.",
+      "caveat": "Appfigures-omzetcijfers zijn gemodelleerde wereldwijde maandschattingen.",
+      "url": "https://appfigures.com"
+    },
     {
       "id": "ev-appfigures-antique-rock",
       "title": "Appfigures Live Benchmark: AntiqueWorth, Curio & RockIn",

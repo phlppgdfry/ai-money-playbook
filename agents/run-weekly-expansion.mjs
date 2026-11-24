@@ -52,10 +52,11 @@ export function validateCandidateItem(sectionKey, item) {
 }
 
 export function detectProvider(env = process.env) {
+  // GitHub Models (models.github.ai) was retired on 2026-07-30 and is intentionally excluded.
+  if (env.GEMINI_API_KEY) return 'gemini';
   if (env.OPENAI_API_KEY) return 'openai';
   if (env.ANTHROPIC_API_KEY) return 'anthropic';
-  if (env.GEMINI_API_KEY) return 'gemini';
-  if (env.GITHUB_TOKEN) return 'github-models';
+  if (env.OPENROUTER_API_KEY) return 'openrouter';
   return null;
 }
 
@@ -164,18 +165,18 @@ export async function fetchPoolResearch(poolKey, query, { env = process.env, fet
 export async function callLLM(systemPrompt, userPrompt, { env = process.env, fetchImpl = fetch, timeoutMs = 25000, maxRetries = 2, retryDelayMs = 800 } = {}) {
   const provider = detectProvider(env);
   if (!provider) {
-    throw new Error('Geen LLM-sleutel gevonden (OPENAI_API_KEY, ANTHROPIC_API_KEY, GEMINI_API_KEY of GITHUB_TOKEN).');
+    throw new Error('BLOCKED: Geen actieve LLM API-secret geconfigureerd (GitHub Models is per 30 juli 2026 uitgefaseerd). Stel GEMINI_API_KEY (laagste kost / gratis tier), OPENAI_API_KEY, ANTHROPIC_API_KEY of OPENROUTER_API_KEY in onder Repo Settings -> Secrets -> Actions.');
   }
   const netOpts = { fetchImpl, timeoutMs, maxRetries, retryDelayMs };
 
-  if (provider === 'openai' || provider === 'github-models') {
+  if (provider === 'openai' || provider === 'openrouter') {
     const endpoint = provider === 'openai'
       ? 'https://api.openai.com/v1/chat/completions'
-      : 'https://models.github.ai/inference/chat/completions';
-    const token = provider === 'openai' ? env.OPENAI_API_KEY : env.GITHUB_TOKEN;
+      : 'https://openrouter.ai/api/v1/chat/completions';
+    const token = provider === 'openai' ? env.OPENAI_API_KEY : env.OPENROUTER_API_KEY;
     const model = provider === 'openai'
       ? (env.OPENAI_MODEL || 'gpt-4o-mini')
-      : (env.GH_MODEL || 'openai/gpt-4o-mini');
+      : (env.OPENROUTER_MODEL || 'openai/gpt-4o-mini');
 
     const headers = {
       'Content-Type': 'application/json',
@@ -280,7 +281,13 @@ export async function runExpansion({
       const existing = JSON.parse(fs.readFileSync(path.join(rootDir, agent.file), 'utf8'));
       console.log(`  - ${agent.name} (${agent.id}) [pool: ${agent.pool}] → ${existing.items.length} items in ${agent.file}`);
     }
-    return { totalAdded: 0, failures: [], totalCostUsd: 0, liveResearchPoolsUsed: 0 };
+    return { status: 'DRY_RUN', totalAdded: 0, failures: [], totalCostUsd: 0, liveResearchPoolsUsed: 0 };
+  }
+
+  if (!provider) {
+    const msg = 'BLOCKED: Geen actieve LLM API-secret geconfigureerd (GitHub Models is per 30 juli 2026 uitgefaseerd). Stel GEMINI_API_KEY (aanbevolen, laagste kost), OPENAI_API_KEY, ANTHROPIC_API_KEY of OPENROUTER_API_KEY in onder Repo Settings -> Secrets -> Actions.';
+    console.error(`⛔ ${msg}`);
+    return { status: 'BLOCKED', blockedReason: msg, totalAdded: 0, failures: [{ agent: 'provider', error: msg }], totalCostUsd: 0, liveResearchPoolsUsed: 0 };
   }
 
   const neededPools = [...new Set(selectedAgents.map((a) => a.pool))];

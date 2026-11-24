@@ -18,7 +18,7 @@ function copyWorkspaceToTmp() {
   return tmp;
 }
 
-test('Agent integration: GitHub Models endpoint, live public search, retry on 429, prompt-injection sanitization, schema guard & telemetry', async () => {
+test('Agent integration: OpenAI endpoint, live public search, retry on 429, prompt-injection sanitization, schema guard, idempotency & telemetry', async () => {
   const tmp = copyWorkspaceToTmp();
   const seenUrls = [];
   let llmCalls = 0;
@@ -43,11 +43,11 @@ test('Agent integration: GitHub Models endpoint, live public search, retry on 42
       };
     }
 
-    // Mock GitHub Models endpoint — first attempt returns 429 (tests retry), second succeeds
-    if (String(url) === 'https://models.github.ai/inference/chat/completions') {
+    // Mock OpenAI endpoint — first attempt returns 429 (tests retry), second succeeds
+    if (String(url) === 'https://api.openai.com/v1/chat/completions') {
       assert.equal(opts.headers.Accept, 'application/json');
       const body = JSON.parse(opts.body);
-      assert.equal(body.model, 'openai/gpt-4o-mini');
+      assert.equal(body.model, 'gpt-4o-mini');
       // Verify prompt-injection was redacted before reaching the LLM
       const userMsg = body.messages[1].content;
       assert.ok(userMsg.includes('[REDACTED_INJECTION]'));
@@ -102,7 +102,7 @@ test('Agent integration: GitHub Models endpoint, live public search, retry on 42
       rootDir: tmp,
       agentId: 'competitor-complaint-miner',
       isDryRun: false,
-      env: { GITHUB_TOKEN: 'ghs_mocktoken_12345' },
+      env: { OPENAI_API_KEY: 'mock-openai-token' },
       fetchImpl: mockFetch,
       retryDelayMs: 5
     });
@@ -112,7 +112,7 @@ test('Agent integration: GitHub Models endpoint, live public search, retry on 42
     assert.equal(llmCalls, 2); // 1 retry + 1 success
     assert.equal(res.failures.length, 1); // rejected invalid candidate logged
     assert.match(res.failures[0].error, /afgewezen/i);
-    assert.ok(seenUrls.includes('https://models.github.ai/inference/chat/completions'));
+    assert.ok(seenUrls.includes('https://api.openai.com/v1/chat/completions'));
 
     // Resulting temp data/ must still pass full schema validation!
     const val = validateDataDirectory(path.join(tmp, 'data'));
@@ -120,7 +120,7 @@ test('Agent integration: GitHub Models endpoint, live public search, retry on 42
 
     // Telemetry and changelog must both be updated
     const telemetry = JSON.parse(fs.readFileSync(path.join(tmp, 'data/agent-telemetry.json'), 'utf8'));
-    assert.equal(telemetry.runs[0].provider, 'github-models');
+    assert.equal(telemetry.runs[0].provider, 'openai');
     assert.equal(telemetry.runs[0].itemsAdded, 1);
 
     // Idempotency test: running the exact same engine a second time adds 0 duplicates!
@@ -128,7 +128,7 @@ test('Agent integration: GitHub Models endpoint, live public search, retry on 42
       rootDir: tmp,
       agentId: 'competitor-complaint-miner',
       isDryRun: false,
-      env: { GITHUB_TOKEN: 'ghs_mocktoken_12345' },
+      env: { OPENAI_API_KEY: 'mock-openai-token' },
       fetchImpl: mockFetch,
       retryDelayMs: 5
     });
@@ -187,7 +187,7 @@ test('Agent integration: downgrades geverifieerd to analyse when live research f
       rootDir: tmp,
       runAll: true,
       isDryRun: false,
-      env: { GITHUB_TOKEN: 'ghs_mocktoken_12345', MAX_RUN_COST_USD: '0.20' },
+      env: { OPENAI_API_KEY: 'mock-openai-token', MAX_RUN_COST_USD: '0.20' },
       fetchImpl: mockFetch,
       retryDelayMs: 5
     });
@@ -201,6 +201,23 @@ test('Agent integration: downgrades geverifieerd to analyse when live research f
     if (added) {
       assert.equal(added.verification, 'analyse');
     }
+  } finally {
+    fs.rmSync(tmp, { recursive: true, force: true });
+  }
+});
+
+test('Agent integration: explicitly reports BLOCKED when no active LLM secret is configured', async () => {
+  const tmp = copyWorkspaceToTmp();
+  try {
+    const res = await runExpansion({
+      rootDir: tmp,
+      agentId: 'competitor-complaint-miner',
+      isDryRun: false,
+      env: {}
+    });
+    assert.equal(res.status, 'BLOCKED');
+    assert.equal(res.totalAdded, 0);
+    assert.match(res.blockedReason, /GEMINI_API_KEY/);
   } finally {
     fs.rmSync(tmp, { recursive: true, force: true });
   }

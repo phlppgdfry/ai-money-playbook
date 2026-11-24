@@ -22,8 +22,8 @@ Een betrouwbaar, onderhoudbaar en testgedreven **AI Opportunity-to-Revenue Opera
 | --- | --- | --- | --- |
 | `ci.yml` | Elke PR & push | PR-branch / `main` | Geen |
 | `deploy-pages.yml` | Push op `main` | `main` | Geen (standaard `GITHUB_TOKEN`) |
-| `weekly-agents.yml` | Maandag 07:00 UTC | `weekly/cloud-expansion` (PR) | Standaard `GITHUB_TOKEN` (`models: read`). Optioneel: `OPENAI_API_KEY`, `ANTHROPIC_API_KEY`, `GEMINI_API_KEY`, `TAVILY_API_KEY`, `BRAVE_API_KEY`. |
-| Lokale Appfigures-sync | Dinsdag 08:00 CET | `weekly/appfigures-sync` (PR) | Lokale Appfigures MCP (nooit gecommit) |
+| `weekly-agents.yml` | Maandag 07:00 UTC | `weekly/cloud-expansion` (PR) | **1 actieve LLM-secret vereist** (GitHub Models is per 30 juli 2026 uitgefaseerd): `GEMINI_API_KEY` *(aanbevolen, laagste kost / gratis tier)*, `OPENAI_API_KEY`, `ANTHROPIC_API_KEY` of `OPENROUTER_API_KEY`. Optioneel: `TAVILY_API_KEY`, `BRAVE_API_KEY`. |
+| Lokale Appfigures-sync | Dinsdag 08:00 CET | `weekly/appfigures-sync` (PR) | Lokale Appfigures MCP (activeert tijdelijk met `agent-tools activate appfigures --ttl 30` indien inactief en herstelt met `restore-profile`) |
 
 ## Lokaal testen & bouwen
 

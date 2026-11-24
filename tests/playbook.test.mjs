@@ -107,11 +107,12 @@ test('Security utilities strip prompt injections and detect leaked secrets/PII',
   assert.equal(scanForLeaks('Veilige tekst zonder persoonsgegevens of demo@example.com').length, 0);
 });
 
-test('Provider detection follows strict priority order', () => {
-  assert.equal(detectProvider({ OPENAI_API_KEY: 'x', GITHUB_TOKEN: 'y' }), 'openai');
-  assert.equal(detectProvider({ ANTHROPIC_API_KEY: 'x', GITHUB_TOKEN: 'y' }), 'anthropic');
-  assert.equal(detectProvider({ GEMINI_API_KEY: 'x' }), 'gemini');
-  assert.equal(detectProvider({ GITHUB_TOKEN: 'y' }), 'github-models');
+test('Provider detection follows strict priority order and excludes retired GitHub Models', () => {
+  assert.equal(detectProvider({ GEMINI_API_KEY: 'g', OPENAI_API_KEY: 'o' }), 'gemini');
+  assert.equal(detectProvider({ OPENAI_API_KEY: 'o', ANTHROPIC_API_KEY: 'a' }), 'openai');
+  assert.equal(detectProvider({ ANTHROPIC_API_KEY: 'a', OPENROUTER_API_KEY: 'r' }), 'anthropic');
+  assert.equal(detectProvider({ OPENROUTER_API_KEY: 'r' }), 'openrouter');
+  assert.equal(detectProvider({ GITHUB_TOKEN: 'ghs_retired_models' }), null);
   assert.equal(detectProvider({}), null);
 });
 
