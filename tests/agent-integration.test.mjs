@@ -45,7 +45,7 @@ test('Agent integration: GitHub Models endpoint, live public search, retry on 42
 
     // Mock GitHub Models endpoint — first attempt returns 429 (tests retry), second succeeds
     if (String(url) === 'https://models.github.ai/inference/chat/completions') {
-      assert.equal(opts.headers['X-GitHub-Api-Version'], '2022-11-28');
+      assert.equal(opts.headers.Accept, 'application/json');
       const body = JSON.parse(opts.body);
       assert.equal(body.model, 'openai/gpt-4o-mini');
       // Verify prompt-injection was redacted before reaching the LLM
@@ -60,7 +60,7 @@ test('Agent integration: GitHub Models endpoint, live public search, retry on 42
       return {
         ok: true,
         status: 200,
-        json: async () => ({
+        text: async () => JSON.stringify({
           usage: { total_tokens: 1500 },
           choices: [{
             message: {
@@ -150,7 +150,7 @@ test('Agent integration: downgrades geverifieerd to analyse when live research f
     return {
       ok: true,
       status: 200,
-      json: async () => ({
+      text: async () => JSON.stringify({
         usage: { total_tokens: 1_000_000 }, // ~$0.60 > $0.50 cost cap
         choices: [{
           message: {

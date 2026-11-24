@@ -179,12 +179,9 @@ export async function callLLM(systemPrompt, userPrompt, { env = process.env, fet
 
     const headers = {
       'Content-Type': 'application/json',
+      Accept: 'application/json',
       Authorization: `Bearer ${token}`
     };
-    if (provider === 'github-models') {
-      headers.Accept = 'application/vnd.github+json';
-      headers['X-GitHub-Api-Version'] = '2022-11-28';
-    }
 
     const res = await fetchWithRetry(endpoint, {
       method: 'POST',
@@ -199,10 +196,18 @@ export async function callLLM(systemPrompt, userPrompt, { env = process.env, fet
         ]
       })
     }, netOpts);
-    if (!res.ok) throw new Error(`${provider} API fout (${res.status}): ${(await res.text()).slice(0, 300)}`);
-    const data = await res.json();
+    const rawBody = await res.text();
+    if (!res.ok) throw new Error(`${provider} API fout (${res.status}): ${rawBody.slice(0, 300)}`);
+    let data;
+    try {
+      data = JSON.parse(rawBody);
+    } catch {
+      throw new Error(`${provider} gaf geen geldige JSON terug (HTTP ${res.status}, content-type: ${res.headers?.get?.('content-type') || 'onbekend'}): ${JSON.stringify(rawBody.slice(0, 120))}`);
+    }
+    const content = data.choices?.[0]?.message?.content;
+    if (!content) throw new Error(`${provider} response mist choices[0].message.content`);
     const tokens = data.usage?.total_tokens || 1200;
-    return { parsed: JSON.parse(data.choices[0].message.content), estimatedCostUsd: (tokens / 1_000_000) * 0.6 };
+    return { parsed: JSON.parse(content), estimatedCostUsd: (tokens / 1_000_000) * 0.6 };
   }
 
   if (provider === 'anthropic') {
