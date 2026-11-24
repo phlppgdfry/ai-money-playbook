@@ -6,7 +6,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { scoreOpportunity, rankOpportunities, normalizeWeights, DEFAULT_WEIGHTS } from '../engines/opportunity-scoring.mjs';
-import { calculateUnitEconomics, runScenarios } from '../engines/financial-model.mjs';
+import { calculateUnitEconomics, runScenarios, calculateBelgianAnnualTax } from '../engines/financial-model.mjs';
 import { checkWipLimits, rankCapitalAllocation, validateDistributionFirstGate } from '../engines/capital-allocation.mjs';
 import { sanitizeExternalText, scanForLeaks } from '../engines/security.mjs';
 import { generateWeeklyBrief } from '../engines/weekly-brief.mjs';
@@ -153,4 +153,30 @@ test('Distribution-First Gate requires first-10 and first-100 customer plan for 
   const failedGate = validateDistributionFirstGate(opportunities, []);
   assert.equal(failedGate.passed, false);
   assert.equal(failedGate.missingOpportunityIds.length, 2);
+});
+
+test('Belgian fiscal regimes accurately apply BV kmo 20%/25% bracket and Eenmanszaak social + income tax', () => {
+  // BV kmo: <= €100k is exactly 20%
+  const bvLow = calculateBelgianAnnualTax(80000, 'be-bv-kmo');
+  assert.equal(bvLow.annualTax, 16000);
+  assert.equal(bvLow.effectiveRatePct, 20);
+
+  // BV kmo: €150k is €100k*20% + €50k*25% = €32,500
+  const bvHigh = calculateBelgianAnnualTax(150000, 'be-bv-kmo');
+  assert.equal(bvHigh.annualTax, 32500);
+  assert.ok(bvHigh.effectiveRatePct > 20 && bvHigh.effectiveRatePct < 25);
+
+  // Eenmanszaak carries higher effective rate than BV kmo on €60k profit
+  const eenm = calculateBelgianAnnualTax(60000, 'be-eenmanszaak');
+  assert.ok(eenm.annualTax > calculateBelgianAnnualTax(60000, 'be-bv-kmo').annualTax);
+
+  // iOS steady-state Apple 15% fee applies to MRR (not double-counted with upfront cash)
+  const iosSteady = calculateUnitEconomics('ios', {
+    downloads: 12000, convPct: 10, annualPrice: 48, appleFeePct: 15,
+    monthlyChurnPct: 10, marketingMonthly: 0, apiPerUser: 0, fixedMonthlyCosts: 0
+  });
+  // newPaid = 1200/mnd, active = 12000, arpu = €4, MRR = €48,000, Apple 15% = €7,200
+  assert.equal(iosSteady.mrr, 48000);
+  assert.equal(iosSteady.directCogs, 7200);
+  assert.equal(iosSteady.oneTimeMonthly, 0);
 });

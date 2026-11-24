@@ -1,33 +1,11 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { sanitizeExternalText, normalizeTextKey } from '../engines/security.mjs';
+import { sanitizeExternalText, normalizeTextKey, scanForLeaks } from '../engines/security.mjs';
+import { RULES } from '../schemas/validate.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const rootDir = path.resolve(__dirname, '..');
-const config = JSON.parse(fs.readFileSync(path.join(__dirname, 'config.json'), 'utf8'));
-
-const args = process.argv.slice(2);
-const isDryRun = args.includes('--dry-run');
-const runAll = args.includes('--all');
-const agentFlagIndex = args.indexOf('--agent');
-const requestedAgentId = agentFlagIndex !== -1 ? args[agentFlagIndex + 1] : null;
-
-const selectedAgents = runAll
-  ? config.agents
-  : requestedAgentId
-    ? config.agents.filter((a) => a.id === requestedAgentId)
-    : config.agents;
-
-if (selectedAgents.length === 0) {
-  console.error(`❌ Onbekende engine '${requestedAgentId}'. Beschikbaar: ${config.agents.map((a) => a.id).join(', ')}`);
-  process.exit(1);
-}
-
-const today = new Date().toISOString().slice(0, 10);
-const TIMEOUT_MS = config.guardrails?.requestTimeoutMs || 25000;
-const MAX_RETRIES = config.guardrails?.maxRetries ?? 2;
-const MAX_COST_USD = Number(process.env.MAX_RUN_COST_USD || config.guardrails?.maxRunCostUsd || 0.50);
+const defaultRootDir = path.resolve(__dirname, '..');
 
 function getIsoWeek(date) {
   const d = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
@@ -38,45 +16,85 @@ function getIsoWeek(date) {
   return `${d.getUTCFullYear()}-W${String(weekNo).padStart(2, '0')}`;
 }
 
-async function fetchWithRetry(url, options = {}, retries = MAX_RETRIES) {
+export function formatErrorWithCause(err) {
+  if (!err) return 'Onbekende fout';
+  const cause = err.cause ? ` (cause: ${err.cause.code || err.cause.message || String(err.cause)})` : '';
+  return `${err.message || String(err)}${cause}`;
+}
+
+export function validateCandidateItem(sectionKey, item) {
+  const rule = RULES[sectionKey];
+  if (!rule) return { ok: true };
+  if (!item || typeof item !== 'object') return { ok: false, reason: 'Geen object' };
+
+  const leaks = scanForLeaks(JSON.stringify(item));
+  if (leaks.length > 0) {
+    return { ok: false, reason: `Security/PII-lek gedetecteerd: ${leaks.map((l) => l.name).join(', ')}` };
+  }
+
+  for (const field of rule.required) {
+    const val = item[field];
+    if (val === undefined || val === null || val === '') {
+      return { ok: false, reason: `Ontbrekend verplicht veld '${field}'` };
+    }
+  }
+  if (rule.enums) {
+    for (const [field, allowed] of Object.entries(rule.enums)) {
+      if (item[field] && !allowed.includes(item[field])) {
+        return { ok: false, reason: `Ongeldige enum '${item[field]}' voor '${field}'` };
+      }
+    }
+  }
+  if (sectionKey === 'actions' && (!Array.isArray(item.steps) || item.steps.length === 0)) {
+    return { ok: false, reason: 'Actie mist stappen' };
+  }
+  return { ok: true };
+}
+
+export function detectProvider(env = process.env) {
+  if (env.OPENAI_API_KEY) return 'openai';
+  if (env.ANTHROPIC_API_KEY) return 'anthropic';
+  if (env.GEMINI_API_KEY) return 'gemini';
+  if (env.GITHUB_TOKEN) return 'github-models';
+  return null;
+}
+
+export async function fetchWithRetry(url, options = {}, { fetchImpl = fetch, timeoutMs = 25000, maxRetries = 2, retryDelayMs = 800 } = {}) {
   let lastError;
-  for (let attempt = 0; attempt <= retries; attempt++) {
+  for (let attempt = 0; attempt <= maxRetries; attempt++) {
     const controller = new AbortController();
-    const timer = setTimeout(() => controller.abort(), TIMEOUT_MS);
+    const timer = setTimeout(() => controller.abort(), timeoutMs);
     try {
-      const res = await fetch(url, { ...options, signal: controller.signal });
+      const res = await fetchImpl(url, { ...options, signal: controller.signal });
       clearTimeout(timer);
       if (res.status === 429 || res.status >= 500) {
-        throw new Error(`HTTP ${res.status}: ${await res.text()}`);
+        const body = await res.text();
+        throw new Error(`HTTP ${res.status}: ${body.slice(0, 200)}`);
       }
       return res;
     } catch (err) {
       clearTimeout(timer);
       lastError = err;
-      if (attempt < retries) {
-        await new Promise((r) => setTimeout(r, 800 * (attempt + 1)));
+      if (attempt < maxRetries) {
+        await new Promise((r) => setTimeout(r, retryDelayMs * (attempt + 1)));
       }
     }
   }
-  throw lastError;
+  throw new Error(`Request naar ${url} mislukt na ${maxRetries + 1} pogingen: ${formatErrorWithCause(lastError)}`);
 }
 
-async function fetchPoolResearch(poolKey, query) {
+export async function fetchPoolResearch(poolKey, query, { env = process.env, fetchImpl = fetch, timeoutMs = 15000, maxRetries = 1, retryDelayMs = 300 } = {}) {
   const snippets = [];
   let sourceUsed = 'none';
+  const netOpts = { fetchImpl, timeoutMs, maxRetries, retryDelayMs };
 
-  if (process.env.TAVILY_API_KEY) {
+  if (env.TAVILY_API_KEY) {
     try {
       const res = await fetchWithRetry('https://api.tavily.com/search', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          api_key: process.env.TAVILY_API_KEY,
-          query,
-          search_depth: 'basic',
-          max_results: 5
-        })
-      });
+        body: JSON.stringify({ api_key: env.TAVILY_API_KEY, query, search_depth: 'basic', max_results: 5 })
+      }, netOpts);
       if (res.ok) {
         const json = await res.json();
         for (const r of json.results || []) {
@@ -85,14 +103,14 @@ async function fetchPoolResearch(poolKey, query) {
         if (snippets.length > 0) sourceUsed = 'tavily';
       }
     } catch (err) {
-      console.warn(`⚠️ Tavily fout voor pool '${poolKey}': ${err.message}`);
+      console.warn(`⚠️ Tavily fout voor pool '${poolKey}': ${formatErrorWithCause(err)}`);
     }
-  } else if (process.env.BRAVE_API_KEY) {
+  } else if (env.BRAVE_API_KEY) {
     try {
       const url = `https://api.search.brave.com/res/v1/web/search?q=${encodeURIComponent(query)}&count=5`;
       const res = await fetchWithRetry(url, {
-        headers: { 'X-Subscription-Token': process.env.BRAVE_API_KEY, Accept: 'application/json' }
-      });
+        headers: { 'X-Subscription-Token': env.BRAVE_API_KEY, Accept: 'application/json' }
+      }, netOpts);
       if (res.ok) {
         const json = await res.json();
         for (const r of json.web?.results || []) {
@@ -101,7 +119,35 @@ async function fetchPoolResearch(poolKey, query) {
         if (snippets.length > 0) sourceUsed = 'brave';
       }
     } catch (err) {
-      console.warn(`⚠️ Brave Search fout voor pool '${poolKey}': ${err.message}`);
+      console.warn(`⚠️ Brave Search fout voor pool '${poolKey}': ${formatErrorWithCause(err)}`);
+    }
+  } else {
+    // Free, official, zero-key live public APIs so cloud runs still perform real web/store research without paid keys
+    try {
+      if (poolKey === 'consumer-apps') {
+        const term = encodeURIComponent('ai scanner identifier');
+        const res = await fetchWithRetry(`https://itunes.apple.com/search?term=${term}&entity=software&country=us&limit=5`, {}, netOpts);
+        if (res.ok) {
+          const json = await res.json();
+          for (const app of json.results || []) {
+            snippets.push(`- [App Store] ${sanitizeExternalText(app.trackName, 90)} (${app.trackViewUrl}): rating ${app.averageUserRating?.toFixed(1) ?? 'n/a'} (${app.userRatingCount ?? 0} reviews) — ${sanitizeExternalText(app.description, 180)}`);
+          }
+          if (snippets.length > 0) sourceUsed = 'apple-itunes-public';
+        }
+      } else {
+        const q = encodeURIComponent(query.split(' ').slice(0, 5).join(' '));
+        const res = await fetchWithRetry(`https://hn.algolia.com/api/v1/search_by_date?query=${q}&tags=story&hitsPerPage=5`, {}, netOpts);
+        if (res.ok) {
+          const json = await res.json();
+          for (const hit of json.hits || []) {
+            const url = hit.url || `https://news.ycombinator.com/item?id=${hit.objectID}`;
+            snippets.push(`- [HN] ${sanitizeExternalText(hit.title, 120)} (${url}): ${hit.points ?? 0} pts, ${hit.num_comments ?? 0} comments`);
+          }
+          if (snippets.length > 0) sourceUsed = 'hn-algolia-public';
+        }
+      }
+    } catch (err) {
+      console.warn(`⚠️ Publieke fallback-search fout voor pool '${poolKey}': ${formatErrorWithCause(err)}`);
     }
   }
 
@@ -115,32 +161,34 @@ async function fetchPoolResearch(poolKey, query) {
   };
 }
 
-export function detectProvider(env = process.env) {
-  if (env.OPENAI_API_KEY) return 'openai';
-  if (env.ANTHROPIC_API_KEY) return 'anthropic';
-  if (env.GEMINI_API_KEY) return 'gemini';
-  if (env.GITHUB_TOKEN) return 'github-models';
-  return null;
-}
-
-async function callLLM(systemPrompt, userPrompt) {
-  const provider = detectProvider();
+export async function callLLM(systemPrompt, userPrompt, { env = process.env, fetchImpl = fetch, timeoutMs = 25000, maxRetries = 2, retryDelayMs = 800 } = {}) {
+  const provider = detectProvider(env);
   if (!provider) {
     throw new Error('Geen LLM-sleutel gevonden (OPENAI_API_KEY, ANTHROPIC_API_KEY, GEMINI_API_KEY of GITHUB_TOKEN).');
   }
+  const netOpts = { fetchImpl, timeoutMs, maxRetries, retryDelayMs };
 
   if (provider === 'openai' || provider === 'github-models') {
     const endpoint = provider === 'openai'
       ? 'https://api.openai.com/v1/chat/completions'
       : 'https://models.github.ai/inference/chat/completions';
-    const token = provider === 'openai' ? process.env.OPENAI_API_KEY : process.env.GITHUB_TOKEN;
+    const token = provider === 'openai' ? env.OPENAI_API_KEY : env.GITHUB_TOKEN;
     const model = provider === 'openai'
-      ? (process.env.OPENAI_MODEL || 'gpt-4o-mini')
-      : (process.env.GH_MODEL || 'openai/gpt-4o-mini');
+      ? (env.OPENAI_MODEL || 'gpt-4o-mini')
+      : (env.GH_MODEL || 'openai/gpt-4o-mini');
+
+    const headers = {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`
+    };
+    if (provider === 'github-models') {
+      headers.Accept = 'application/vnd.github+json';
+      headers['X-GitHub-Api-Version'] = '2022-11-28';
+    }
 
     const res = await fetchWithRetry(endpoint, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
+      headers,
       body: JSON.stringify({
         model,
         temperature: 0.3,
@@ -150,8 +198,8 @@ async function callLLM(systemPrompt, userPrompt) {
           { role: 'user', content: userPrompt }
         ]
       })
-    });
-    if (!res.ok) throw new Error(`${provider} API fout (${res.status}): ${await res.text()}`);
+    }, netOpts);
+    if (!res.ok) throw new Error(`${provider} API fout (${res.status}): ${(await res.text()).slice(0, 300)}`);
     const data = await res.json();
     const tokens = data.usage?.total_tokens || 1200;
     return { parsed: JSON.parse(data.choices[0].message.content), estimatedCostUsd: (tokens / 1_000_000) * 0.6 };
@@ -162,25 +210,25 @@ async function callLLM(systemPrompt, userPrompt) {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'x-api-key': process.env.ANTHROPIC_API_KEY,
+        'x-api-key': env.ANTHROPIC_API_KEY,
         'anthropic-version': '2023-06-01'
       },
       body: JSON.stringify({
-        model: process.env.ANTHROPIC_MODEL || 'claude-3-5-sonnet-latest',
+        model: env.ANTHROPIC_MODEL || 'claude-3-5-sonnet-latest',
         max_tokens: 2048,
         temperature: 0.3,
         system: systemPrompt,
         messages: [{ role: 'user', content: `${userPrompt}\n\nAntwoord uitsluitend met geldige JSON.` }]
       })
-    });
-    if (!res.ok) throw new Error(`Anthropic API fout (${res.status}): ${await res.text()}`);
+    }, netOpts);
+    if (!res.ok) throw new Error(`Anthropic API fout (${res.status}): ${(await res.text()).slice(0, 300)}`);
     const data = await res.json();
     const text = data.content[0].text.replace(/^```json\s*/i, '').replace(/```\s*$/, '').trim();
     return { parsed: JSON.parse(text), estimatedCostUsd: 0.02 };
   }
 
-  const model = process.env.GEMINI_MODEL || 'gemini-2.5-flash';
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${process.env.GEMINI_API_KEY}`;
+  const model = env.GEMINI_MODEL || 'gemini-2.5-flash';
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${env.GEMINI_API_KEY}`;
   const res = await fetchWithRetry(url, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -188,15 +236,37 @@ async function callLLM(systemPrompt, userPrompt) {
       contents: [{ role: 'user', parts: [{ text: `${systemPrompt}\n\n${userPrompt}` }] }],
       generationConfig: { responseMimeType: 'application/json', temperature: 0.3 }
     })
-  });
-  if (!res.ok) throw new Error(`Gemini API fout (${res.status}): ${await res.text()}`);
+  }, netOpts);
+  if (!res.ok) throw new Error(`Gemini API fout (${res.status}): ${(await res.text()).slice(0, 300)}`);
   const data = await res.json();
   return { parsed: JSON.parse(data.candidates[0].content.parts[0].text), estimatedCostUsd: 0.005 };
 }
 
-async function run() {
+export async function runExpansion({
+  rootDir = defaultRootDir,
+  agentId = null,
+  runAll = true,
+  isDryRun = false,
+  env = process.env,
+  fetchImpl = fetch,
+  retryDelayMs = 800
+} = {}) {
   const startedAt = Date.now();
-  const provider = detectProvider();
+  const config = JSON.parse(fs.readFileSync(path.join(rootDir, 'agents/config.json'), 'utf8'));
+  const selectedAgents = agentId
+    ? config.agents.filter((a) => a.id === agentId)
+    : runAll ? config.agents : config.agents;
+
+  if (selectedAgents.length === 0) {
+    throw new Error(`Onbekende engine '${agentId}'. Beschikbaar: ${config.agents.map((a) => a.id).join(', ')}`);
+  }
+
+  const today = new Date().toISOString().slice(0, 10);
+  const timeoutMs = config.guardrails?.requestTimeoutMs || 25000;
+  const maxRetries = config.guardrails?.maxRetries ?? 2;
+  const maxCostUsd = Number(env.MAX_RUN_COST_USD || config.guardrails?.maxRunCostUsd || 0.50);
+  const provider = detectProvider(env);
+
   console.log(`🤖 Playbook 2.0 Expansion (${today}) | Engines: ${selectedAgents.length} | Dry-run: ${isDryRun} | Provider: ${provider || 'geen'}`);
 
   if (isDryRun && !provider) {
@@ -205,31 +275,33 @@ async function run() {
       const existing = JSON.parse(fs.readFileSync(path.join(rootDir, agent.file), 'utf8'));
       console.log(`  - ${agent.name} (${agent.id}) [pool: ${agent.pool}] → ${existing.items.length} items in ${agent.file}`);
     }
-    return;
+    return { totalAdded: 0, failures: [], totalCostUsd: 0, liveResearchPoolsUsed: 0 };
   }
 
-  // 1. Build shared ResearchContext ONCE per required pool (eliminates 12× duplicate fetches)
   const neededPools = [...new Set(selectedAgents.map((a) => a.pool))];
   const researchCache = {};
   for (const poolKey of neededPools) {
     const query = config.sharedResearchPools[poolKey];
-    researchCache[poolKey] = await fetchPoolResearch(poolKey, query);
+    researchCache[poolKey] = await fetchPoolResearch(poolKey, query, { env, fetchImpl, timeoutMs, maxRetries, retryDelayMs });
     console.log(`📚 Gedeelde pool '${poolKey}': liveResearchUsed=${researchCache[poolKey].liveResearchUsed} (${researchCache[poolKey].sourceUsed})`);
   }
 
   const touchedSections = new Set();
   let totalAdded = 0;
   let totalCostUsd = 0;
+  let costCapReached = false;
   const summaries = [];
   const failures = [];
 
   for (const agent of selectedAgents) {
-    if (totalCostUsd >= MAX_COST_USD) {
-      console.warn(`🛑 Kostenplafond ($${MAX_COST_USD}) bereikt — resterende engines overgeslagen.`);
+    if (totalCostUsd >= maxCostUsd) {
+      costCapReached = true;
+      console.warn(`🛑 Kostenplafond ($${maxCostUsd}) bereikt — resterende engines overgeslagen.`);
       break;
     }
 
     const targetPath = path.join(rootDir, agent.file);
+    const sectionKey = path.basename(agent.file, '.json');
     const currentData = JSON.parse(fs.readFileSync(targetPath, 'utf8'));
     const existingIds = new Set(currentData.items.map((i) => i.id));
     const existingTitleKeys = new Set(currentData.items.map((i) => normalizeTextKey(i.title || i.name)));
@@ -252,29 +324,36 @@ async function run() {
       `Maximaal ${config.guardrails.maxNewItemsPerAgent} hoogwaardige nieuwe items.`,
       `Schema: ${agent.schemaHint}`,
       `Bestaande items (NIET herhalen): ${currentData.items.map((i) => i.title || i.name).join(' | ')}`,
-      `Gedeelde research-context (live=${pool.liveResearchUsed}):\n${pool.contextText}`
+      `Gedeelde research-context (live=${pool.liveResearchUsed}, source=${pool.sourceUsed}):\n${pool.contextText}`
     ].join('\n\n');
 
     try {
-      const { parsed, estimatedCostUsd } = await callLLM(systemPrompt, userPrompt);
+      const { parsed, estimatedCostUsd } = await callLLM(systemPrompt, userPrompt, { env, fetchImpl, timeoutMs, maxRetries, retryDelayMs });
       totalCostUsd += estimatedCostUsd;
       const candidates = Array.isArray(parsed.newItems) ? parsed.newItems : [];
 
-      const freshItems = candidates
-        .filter((item) => {
-          if (!item || !item.id || existingIds.has(item.id)) return false;
-          const titleKey = normalizeTextKey(item.title || item.name);
-          if (titleKey && existingTitleKeys.has(titleKey)) return false;
-          return true;
-        })
-        .map((item) => {
-          // Enforce anti-hallucination guardrail: never mark unsearched LLM output as verified
-          if (!pool.liveResearchUsed) {
-            if (item.verification === 'geverifieerd') item.verification = 'analyse';
-            if (item.status === 'VERIFIED') item.status = 'UNVERIFIED';
-          }
-          return item;
-        });
+      const freshItems = [];
+      for (const rawItem of candidates) {
+        if (!rawItem || !rawItem.id || existingIds.has(rawItem.id)) continue;
+        const titleKey = normalizeTextKey(rawItem.title || rawItem.name);
+        if (titleKey && existingTitleKeys.has(titleKey)) continue;
+
+        const item = { ...rawItem };
+        if (!pool.liveResearchUsed) {
+          if (item.verification === 'geverifieerd') item.verification = 'analyse';
+          if (item.status === 'VERIFIED') item.status = 'UNVERIFIED';
+        }
+
+        const check = validateCandidateItem(sectionKey, item);
+        if (!check.ok) {
+          failures.push({ agent: agent.id, error: `Kandidaat '${item.id}' afgewezen: ${check.reason}` });
+          continue;
+        }
+
+        existingIds.add(item.id);
+        if (titleKey) existingTitleKeys.add(titleKey);
+        freshItems.push(item);
+      }
 
       if (freshItems.length === 0) continue;
       if (isDryRun) {
@@ -289,10 +368,12 @@ async function run() {
       totalAdded += freshItems.length;
       summaries.push(`${agent.name}: +${freshItems.length}`);
     } catch (err) {
-      failures.push({ agent: agent.id, error: err.message });
-      console.error(`  ❌ ${agent.name} mislukt: ${err.message}`);
+      failures.push({ agent: agent.id, error: formatErrorWithCause(err) });
+      console.error(`  ❌ ${agent.name} mislukt: ${formatErrorWithCause(err)}`);
     }
   }
+
+  const liveResearchPoolsUsed = Object.values(researchCache).filter((p) => p.liveResearchUsed).length;
 
   if (!isDryRun) {
     const telemetryPath = path.join(rootDir, 'data/agent-telemetry.json');
@@ -303,10 +384,11 @@ async function run() {
       date: today,
       week: getIsoWeek(new Date()),
       provider: provider || 'none',
-      liveResearchPoolsUsed: Object.values(researchCache).filter((p) => p.liveResearchUsed).length,
+      liveResearchPoolsUsed,
       totalPools: neededPools.length,
       enginesExecuted: selectedAgents.length,
       itemsAdded: totalAdded,
+      costCapReached,
       failures,
       estimatedCostUsd: Math.round(totalCostUsd * 10000) / 10000,
       durationMs: Date.now() - startedAt
@@ -331,15 +413,23 @@ async function run() {
     }
   }
 
-  if (failures.length > 0 && totalAdded === 0) {
-    process.exit(1);
-  }
+  return { totalAdded, failures, totalCostUsd, costCapReached, liveResearchPoolsUsed };
 }
 
 const isMain = process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url);
 if (isMain) {
-  run().catch((err) => {
-    console.error(`❌ Fatale fout: ${err.message}`);
-    process.exit(1);
-  });
+  const args = process.argv.slice(2);
+  const isDryRun = args.includes('--dry-run');
+  const runAll = args.includes('--all');
+  const idx = args.indexOf('--agent');
+  const agentId = idx !== -1 ? args[idx + 1] : null;
+
+  runExpansion({ agentId, runAll, isDryRun })
+    .then((res) => {
+      if (res.failures.length > 0 && res.totalAdded === 0) process.exit(1);
+    })
+    .catch((err) => {
+      console.error(`❌ Fatale fout: ${formatErrorWithCause(err)}`);
+      process.exit(1);
+    });
 }

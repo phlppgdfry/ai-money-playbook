@@ -17,3 +17,14 @@
 | Omzet-, gebruikers- & marktclaims (`earners.json`, `pitfalls.json`) | **PARTIALLY VERIFIED** | Officiële overnames (Base44/Wix) en gepubliceerde jaarcijfers (Yuka) zijn controleerbaar; veel indie-cijfers (HeadshotPro, Photo AI, TypingMind) zijn zelf-gerapporteerd; Cal AI en Umax zijn schattingen. | Alle claims voorzien van transparante verificatiegraad, `observedAt`, onzekerheidsniveau en gekoppeld aan de centrale `Evidence Vault` (`data/evidence.json`). |
 | Financiële simulator (`site/app.js`) | **BROKEN** | Mengde maand-1 cash uit jaarabonnementen met MRR, miste churn, CAC, LTV, terugverdientijd, BE/NL vennootschapsbelasting, Best/Base/Worst-scenario's en gebruikte één vaste `4×` exit-multiple. | Volledig vervangen door unit-geteste `engines/financial-model.mjs` met realistische SaaS/iOS/B2B-formules, gevoeligheidsanalyse en onderbouwde multiple-bandbreedtes. |
 | Tests, security & failure-zichtbaarheid | **BROKEN** | 0 unit-, integratie- of negatieve tests; geen secret/PII-scanner in build/CI; geen prompt-injectionbescherming. | Volledige `node:test`-suite in `tests/`, `engines/security.mjs` secret/PII-scanner + prompt-injection sanitizer, en `.github/workflows/ci.yml`. |
+
+## Root Cause Analyse — Mislukte GitHub Actions Run `45244009112` (23 nov 2026)
+
+- **Branch:** `main` (pre-PR #1 code).
+- **Foutmelding:** `❌ Wekelijkse agent mislukt: fetch failed` na **83ms** bij de eerste call (`Provider: github-models`, alle 4 optionele secrets `OPENAI_API_KEY`, `ANTHROPIC_API_KEY`, `GEMINI_API_KEY`, `TAVILY_API_KEY` waren leeg).
+- **Exacte Root Cause:** `main` riep het verouderde/uitgefaseerde endpoint `https://models.inference.ai.azure.com/chat/completions` aan met modelnaam `gpt-4o-mini` én logde `err.cause` niet.
+- **Opgelost in PR #1:** Endpoint gemigreerd naar `https://models.github.ai/inference/chat/completions` met `openai/gpt-4o-mini` en GitHub Models headers (`Accept: application/vnd.github+json`, `X-GitHub-Api-Version: 2022-11-28`), `formatErrorWithCause()` toegevoegd, plus gratis publieke live-search fallbacks (Apple iTunes Search API & HN Algolia API) zodat live webresearch ook zonder betaalde Tavily/Brave-sleutel werkt.
+- **Pre-merge P0-fixes op PR #1 (24 nov 2026):**
+  1. iOS steady-state Apple 15% fee & cashflow bug hersteld in `engines/financial-model.mjs` + realistische Belgische fiscale regimes (`be-bv-kmo` 20%/25% schijf vs. `be-eenmanszaak` 20,5% sociale bijdragen + marginale personenbelasting).
+  2. Pre-write schema- en PII-validatie per LLM-kandidaat in `agents/run-weekly-expansion.mjs` zodat ongeldige LLM-output nooit `data/*.json` corrumpeert.
+  3. 14/14 unit-, agent-integratie-, security- en build-tests + Playwright browser E2E-verificatie (0 JS-fouten, inline SVG favicon toegevoegd).

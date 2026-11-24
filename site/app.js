@@ -13,6 +13,7 @@ const state = {
   nicheSynergy: 'all',
   earnerSort: 'revenue',
   simMode: 'agency',
+  fiscalRegime: 'be-bv-kmo',
   simValues: {
     agency: { clients: 8, monthlyFee: 690, newClientsPerMonth: 1, setupFee: 1250, apiPerClient: 85, monthlyChurnPct: 4, marketingMonthly: 300, taxRatePct: 20 },
     ios: { downloads: 12000, convPct: 8, annualPrice: 40, appleFeePct: 15, monthlyChurnPct: 12, marketingMonthly: 1800, apiPerUser: 0.35, taxRatePct: 20 },
@@ -295,13 +296,13 @@ function renderSimulator() {
     });
   });
 
-  const sc = runScenarios(m, v);
+  const sc = runScenarios(m, { ...v, fiscalRegime: state.fiscalRegime });
   const b = sc.base;
   document.getElementById('sim-results').innerHTML = `
     <div class="sim-kpis">
       <div class="sim-kpi"><span>MRR / ARR</span><strong>${fmtEur(b.mrr)} / ${fmtEur(b.arr)}</strong></div>
       <div class="sim-kpi"><span>Bruto / Contributiemarge</span><strong>${b.grossMarginPct}% / ${b.contributionMarginPct}%</strong></div>
-      <div class="sim-kpi ok"><span>Netto maandwinst (na 20% tax)</span><strong>${fmtEur(b.netProfitMonthly)}</strong></div>
+      <div class="sim-kpi ok"><span>Netto maandwinst (eff. ${b.fiscalEffectiveRatePct}% tax)</span><strong>${fmtEur(b.netProfitMonthly)}</strong></div>
       <div class="sim-kpi"><span>CAC / LTV</span><strong>${fmtEur(b.cac)} / ${fmtEur(b.ltv)}</strong></div>
       <div class="sim-kpi"><span>LTV:CAC / Payback</span><strong>${b.ltvCacRatio ?? '∞'}× / ${b.paybackMonths} mnd</strong></div>
       <div class="sim-kpi ok"><span>Exit-bandbreedte (${b.valuation.minMult}×–${b.valuation.maxMult}×)</span><strong>${fmtEur(b.valuation.minEur)} – ${fmtEur(b.valuation.maxEur)}</strong></div>
@@ -314,7 +315,8 @@ function renderSimulator() {
         <tr><td>Best-case</td><td class="mono">${fmtEur(sc.best.mrr)}</td><td class="mono">${fmtEur(sc.best.netProfitMonthly)}</td><td class="mono">${fmtEur(sc.best.netProfitAnnual)}</td><td class="mono">${fmtEur(sc.best.valuation.maxEur)}</td></tr>
       </tbody>
     </table>
-    <p class="muted" style="margin:0;font-size:12.5px">${esc(b.valuation.rationale)}</p>
+    <p class="muted" style="margin:0;font-size:12.5px"><strong>Fiscaal:</strong> ${esc(b.fiscalNote)}</p>
+    <p class="muted" style="margin:0;font-size:12.5px"><strong>Waardering:</strong> ${esc(b.valuation.rationale)}</p>
   `;
 }
 
@@ -578,6 +580,11 @@ async function boot() {
       e.preventDefault();
       searchInput.focus();
     }
+  });
+
+  document.getElementById('sim-fiscal-regime').addEventListener('change', (e) => {
+    state.fiscalRegime = e.target.value;
+    renderSimulator();
   });
 
   document.getElementById('sim-mode-tabs').querySelectorAll('.seg-btn').forEach((btn) => {
