@@ -122,6 +122,17 @@ test('Agent integration: GitHub Models endpoint, live public search, retry on 42
     const telemetry = JSON.parse(fs.readFileSync(path.join(tmp, 'data/agent-telemetry.json'), 'utf8'));
     assert.equal(telemetry.runs[0].provider, 'github-models');
     assert.equal(telemetry.runs[0].itemsAdded, 1);
+
+    // Idempotency test: running the exact same engine a second time adds 0 duplicates!
+    const secondRun = await runExpansion({
+      rootDir: tmp,
+      agentId: 'competitor-complaint-miner',
+      isDryRun: false,
+      env: { GITHUB_TOKEN: 'ghs_mocktoken_12345' },
+      fetchImpl: mockFetch,
+      retryDelayMs: 5
+    });
+    assert.equal(secondRun.totalAdded, 0);
   } finally {
     fs.rmSync(tmp, { recursive: true, force: true });
   }

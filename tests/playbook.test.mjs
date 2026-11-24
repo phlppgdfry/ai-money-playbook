@@ -8,7 +8,7 @@ import { fileURLToPath } from 'node:url';
 import { scoreOpportunity, rankOpportunities, normalizeWeights, DEFAULT_WEIGHTS } from '../engines/opportunity-scoring.mjs';
 import { calculateUnitEconomics, runScenarios, calculateBelgianAnnualTax } from '../engines/financial-model.mjs';
 import { checkWipLimits, rankCapitalAllocation, validateDistributionFirstGate } from '../engines/capital-allocation.mjs';
-import { sanitizeExternalText, scanForLeaks } from '../engines/security.mjs';
+import { sanitizeExternalText, scanForLeaks, safeHttpUrl } from '../engines/security.mjs';
 import { generateWeeklyBrief } from '../engines/weekly-brief.mjs';
 import { validateDataDirectory } from '../schemas/validate.mjs';
 import { detectProvider } from '../agents/run-weekly-expansion.mjs';
@@ -170,13 +170,29 @@ test('Belgian fiscal regimes accurately apply BV kmo 20%/25% bracket and Eenmans
   const eenm = calculateBelgianAnnualTax(60000, 'be-eenmanszaak');
   assert.ok(eenm.annualTax > calculateBelgianAnnualTax(60000, 'be-bv-kmo').annualTax);
 
-  // iOS steady-state Apple 15% fee applies to MRR (not double-counted with upfront cash)
+  // iOS steady-state Apple 15% fee + 3% default refunds/chargebacks apply to MRR
   const iosSteady = calculateUnitEconomics('ios', {
-    downloads: 12000, convPct: 10, annualPrice: 48, appleFeePct: 15,
+    downloads: 12000, convPct: 10, annualPrice: 48, appleFeePct: 15, refundRatePct: 3,
     monthlyChurnPct: 10, marketingMonthly: 0, apiPerUser: 0, fixedMonthlyCosts: 0
   });
-  // newPaid = 1200/mnd, active = 12000, arpu = €4, MRR = €48,000, Apple 15% = €7,200
+  // newPaid = 1200/mnd, active = 12000, arpu = €4, MRR = €48,000, Apple 15% = €7,200, Refunds 3% = €1,440 → COGS = €8,640
   assert.equal(iosSteady.mrr, 48000);
-  assert.equal(iosSteady.directCogs, 7200);
+  assert.equal(iosSteady.refundsAndChargebacks, 1440);
+  assert.equal(iosSteady.directCogs, 8640);
   assert.equal(iosSteady.oneTimeMonthly, 0);
+  assert.match(iosSteady.fiscalNote, /geen formeel fiscaal advies/i);
+});
+
+test('Security: safeHttpUrl blocks javascript:/data: URLs and validator catches corrupt JSON', () => {
+  assert.equal(safeHttpUrl('javascript:alert(1)'), null);
+  assert.equal(safeHttpUrl('data:text/html,<script>alert(1)</script>'), null);
+  assert.equal(safeHttpUrl('not-a-url'), null);
+  assert.equal(safeHttpUrl('https://trustmrr.com/app'), 'https://trustmrr.com/app');
+
+  const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'playbook-corrupt-'));
+  fs.writeFileSync(path.join(tmpDir, 'earners.json'), '{ invalid json !!!', 'utf8');
+  const res = validateDataDirectory(tmpDir);
+  assert.equal(res.ok, false);
+  assert.ok(res.errors.some((e) => /Ongeldige JSON/.test(e)));
+  fs.rmSync(tmpDir, { recursive: true, force: true });
 });

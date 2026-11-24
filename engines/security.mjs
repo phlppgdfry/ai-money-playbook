@@ -68,3 +68,16 @@ export function normalizeTextKey(str) {
     .replace(/[^a-z0-9]+/g, ' ')
     .trim();
 }
+
+export function safeHttpUrl(rawUrl) {
+  if (typeof rawUrl !== 'string' || !rawUrl.trim()) return null;
+  try {
+    const parsed = new URL(rawUrl.trim());
+    if (parsed.protocol === 'https:' || parsed.protocol === 'http:') {
+      return parsed.href;
+    }
+    return null;
+  } catch {
+    return null;
+  }
+}

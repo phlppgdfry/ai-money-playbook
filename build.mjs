@@ -74,6 +74,11 @@ fs.copyFileSync(path.join(siteDir, 'app.js'), path.join(distDir, 'app.js'));
 fs.copyFileSync(path.join(enginesDir, 'financial-model.mjs'), path.join(distDir, 'engines/financial-model.mjs'));
 fs.copyFileSync(path.join(enginesDir, 'opportunity-scoring.mjs'), path.join(distDir, 'engines/opportunity-scoring.mjs'));
 fs.copyFileSync(path.join(enginesDir, 'capital-allocation.mjs'), path.join(distDir, 'engines/capital-allocation.mjs'));
+fs.copyFileSync(path.join(enginesDir, 'security.mjs'), path.join(distDir, 'engines/security.mjs'));
+const expSrc = path.join(__dirname, 'experiments');
+if (fs.existsSync(expSrc)) {
+  fs.cpSync(expSrc, path.join(distDir, 'experiments'), { recursive: true });
+}
 fs.writeFileSync(path.join(distDir, '.nojekyll'), '', 'utf8');
 
 console.log(`✅ Playbook 2.0 gebouwd in dist/ (${bundle.sections.opportunities.items.length} opportunities, ${bundle.sections.experiments.items.length} validatie-experimenten, ${bundle.agentsConfig.agents.length} engines).`);

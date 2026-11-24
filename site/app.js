@@ -1,6 +1,7 @@
 import { DEFAULT_WEIGHTS, DIMENSION_LABELS, rankOpportunities } from './engines/opportunity-scoring.mjs';
 import { runScenarios } from './engines/financial-model.mjs';
 import { checkWipLimits, rankCapitalAllocation } from './engines/capital-allocation.mjs';
+import { safeHttpUrl } from './engines/security.mjs';
 
 const THEME_KEY = 'ai-playbook-theme-v2';
 const GATE_KEY = 'ai-playbook-gates-v2';
@@ -76,10 +77,10 @@ function renderHeroAndBrief(data) {
   wipEl.className = `badge ${wip.withinLimit ? 'badge-ok' : 'badge-danger'}`;
 
   document.getElementById('hero-stats').innerHTML = `
-    <div class="stat-item"><span class="stat-value">${founder.constraints.weeklyHoursAvailable}u/wk</span><span class="stat-label">Beschikbare founder-uren</span></div>
-    <div class="stat-item"><span class="stat-value">${fmtEur(founder.constraints.validationBudgetEur)}</span><span class="stat-label">Max. validatiebudget (2 tests)</span></div>
-    <div class="stat-item"><span class="stat-value">${fmtEur(brief.financialReality.realizedRevenueEur)}</span><span class="stat-label">Gerealiseerde pilot-omzet (eerlijk)</span></div>
-    <div class="stat-item"><span class="stat-value">${data.sections.evidence.items.length}</span><span class="stat-label">Geauditeerde bewijsstukken</span></div>
+    <div class="stat-item"><span class="stat-value">${founder.constraints.weeklyHoursAvailable}u/wk</span><span class="stat-label">Beschikbare uren · <span class="badge badge-ok">REAL DATA</span></span></div>
+    <div class="stat-item"><span class="stat-value">${fmtEur(founder.constraints.validationBudgetEur)}</span><span class="stat-label">Max. validatiebudget · <span class="badge badge-accent">HYPOTHESIS</span></span></div>
+    <div class="stat-item"><span class="stat-value">${fmtEur(brief.financialReality.realizedRevenueEur)}</span><span class="stat-label">Werkelijke omzet · <span class="badge badge-ok">REAL DATA</span></span></div>
+    <div class="stat-item"><span class="stat-value">${fmtEur(brief.financialReality.actualSpentEur)}</span><span class="stat-label">Werkelijk uitgegeven · <span class="badge badge-ok">REAL DATA</span></span></div>
   `;
 
   document.getElementById('brief-date').textContent = `Briefing ${brief.generatedAt} · Focus: ${brief.recommendedFocusProject?.title || 'n.v.t.'}`;
@@ -172,16 +173,24 @@ function renderExperimentsAndRedTeam(experiments, redTeam) {
   const filtered = experiments.filter(matchesQuery);
   expEl.innerHTML = filtered.map((exp) => {
     const g = state.gates[exp.id] || exp.approvalGate;
+    const demoHref = exp.id === 'exp-01-b2b-voice-pilot'
+      ? './experiments/exp-a-b2b-receptionist/index.html'
+      : exp.id === 'exp-02-b2c-ringvalue-smoke'
+        ? './experiments/exp-b-ringvalue/index.html'
+        : null;
     return `
       <article class="panel">
         <div class="panel-head">
           <h3>${esc(exp.title)}</h3>
-          <span class="badge badge-warn">Max budget: ${fmtEur(exp.maxBudgetEur)} · ${exp.durationDays}d</span>
+          <div style="display:flex;gap:6px;flex-wrap:wrap">
+            <span class="badge badge-accent">HYPOTHESIS</span>
+            <span class="badge badge-warn">Max budget: ${fmtEur(exp.maxBudgetEur)} · ${exp.durationDays}d</span>
+          </div>
         </div>
         <p><strong>Doelgroep:</strong> ${esc(exp.targetAudience)}</p>
         <p><strong>Probleem:</strong> ${esc(exp.customerProblem)}</p>
         <p><strong>Prijsvoorstel:</strong> ${esc(exp.pricingOffer)}</p>
-        <p><strong>Demo / LP:</strong> ${esc(exp.demoSpec)}</p>
+        <p><strong>Demo / LP:</strong> ${esc(exp.demoSpec)} ${demoHref ? `· <a href="${demoHref}" target="_blank" rel="noopener">Open synthetische demo (DEMO DATA)</a>` : ''}</p>
         <div class="gate-box">
           <strong>Menselijke goedkeuringspoort (standaard geblokkeerd)</strong>
           <div class="gate-checks">
@@ -315,6 +324,7 @@ function renderSimulator() {
         <tr><td>Best-case</td><td class="mono">${fmtEur(sc.best.mrr)}</td><td class="mono">${fmtEur(sc.best.netProfitMonthly)}</td><td class="mono">${fmtEur(sc.best.netProfitAnnual)}</td><td class="mono">${fmtEur(sc.best.valuation.maxEur)}</td></tr>
       </tbody>
     </table>
+    <p class="muted" style="margin:0;font-size:12.5px"><span class="badge badge-warn">ESTIMATE</span> Inclusief ${b.refundRatePct}% refunds/chargebacks (${fmtEur(b.refundsAndChargebacks)}/mnd).</p>
     <p class="muted" style="margin:0;font-size:12.5px"><strong>Fiscaal:</strong> ${esc(b.fiscalNote)}</p>
     <p class="muted" style="margin:0;font-size:12.5px"><strong>Waardering:</strong> ${esc(b.valuation.rationale)}</p>
   `;
@@ -453,9 +463,13 @@ function renderEarnersTipsResources(earners, tips, resources) {
     <article class="panel"><div class="panel-head"><strong>${esc(t.title)}</strong><span class="badge badge-accent">${esc(t.category)}</span></div><p>${esc(t.detail)}</p></article>
   `).join('');
 
-  document.getElementById('resources-list').innerHTML = resources.filter(matchesQuery).map((r) => `
-    <article class="panel"><div class="panel-head"><a href="${esc(r.url)}" target="_blank" rel="noopener"><strong>${esc(r.name)}</strong></a><span class="badge badge-neutral">${esc(r.pricing)}</span></div><p>${esc(r.whyUseful)}</p></article>
-  `).join('');
+  document.getElementById('resources-list').innerHTML = resources.filter(matchesQuery).map((r) => {
+    const href = safeHttpUrl(r.url);
+    const titleHtml = href
+      ? `<a href="${esc(href)}" target="_blank" rel="noopener"><strong>${esc(r.name)}</strong></a>`
+      : `<strong>${esc(r.name)}</strong>`;
+    return `<article class="panel"><div class="panel-head">${titleHtml}<span class="badge badge-neutral">${esc(r.pricing)}</span></div><p>${esc(r.whyUseful)}</p></article>`;
+  }).join('');
   return filteredEarners.length;
 }
 

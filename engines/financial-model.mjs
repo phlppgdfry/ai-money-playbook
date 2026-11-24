@@ -163,7 +163,12 @@ export function calculateUnitEconomics(mode, input) {
   }
 
   const totalMonthlyRevenue = mrr + oneTimeMonthly;
-  const directCogs = platformFees + variableApiSupport;
+  const defaultRefundPct = mode === 'ios' ? 3 : mode === 'saas' ? 1 : 0.5;
+  const refundRatePct = clamp(Number(input.refundRatePct ?? defaultRefundPct), 0, 25);
+  const refundsAndChargebacks = totalMonthlyRevenue * (refundRatePct / 100);
+  const netRecognizedRevenue = Math.max(0, totalMonthlyRevenue - refundsAndChargebacks);
+
+  const directCogs = platformFees + variableApiSupport + refundsAndChargebacks;
   const grossProfit = totalMonthlyRevenue - directCogs;
   const grossMarginPct = totalMonthlyRevenue > 0 ? (grossProfit / totalMonthlyRevenue) * 100 : 0;
 
@@ -198,7 +203,10 @@ export function calculateUnitEconomics(mode, input) {
     mode,
     fiscalRegime,
     fiscalEffectiveRatePct: fiscal.effectiveRatePct,
-    fiscalNote: fiscal.note,
+    fiscalNote: `${fiscal.note} Indicatieve simulatie — geen formeel fiscaal advies.`,
+    refundRatePct,
+    refundsAndChargebacks: Math.round(refundsAndChargebacks),
+    netRecognizedRevenue: Math.round(netRecognizedRevenue),
     activeCustomers: Math.round(activeCustomers),
     mrr: Math.round(mrr),
     arr: Math.round(mrr * 12),

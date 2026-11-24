@@ -21,7 +21,10 @@ test('Build artifacts compile cleanly and contain zero leaked secrets or persona
     '.nojekyll',
     'engines/financial-model.mjs',
     'engines/opportunity-scoring.mjs',
-    'engines/capital-allocation.mjs'
+    'engines/capital-allocation.mjs',
+    'engines/security.mjs',
+    'experiments/exp-a-b2b-receptionist/index.html',
+    'experiments/exp-b-ringvalue/index.html'
   ];
 
   for (const rel of requiredFiles) {

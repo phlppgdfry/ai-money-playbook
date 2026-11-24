@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { scanForLeaks } from '../engines/security.mjs';
+import { scanForLeaks, safeHttpUrl } from '../engines/security.mjs';
 import { scoreOpportunity } from '../engines/opportunity-scoring.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -164,6 +164,12 @@ export function validateDataDirectory(dir = dataDir) {
 
       if (section === 'actions' && (!Array.isArray(entry.steps) || entry.steps.length === 0)) {
         errors.push(`Actie '${entry.id}' moet minstens 1 stap bevatten`);
+      }
+
+      for (const urlField of ['url', 'sourceUrl']) {
+        if (entry[urlField] && !safeHttpUrl(entry[urlField])) {
+          errors.push(`Onveilige of ongeldige URL in '${urlField}' van data/${section}.json (${entry.id})`);
+        }
       }
     }
   }
