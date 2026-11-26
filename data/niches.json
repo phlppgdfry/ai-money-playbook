@@ -7,7 +7,7 @@
       "name": "Hand Mirror: HD, Light & Zoom",
       "platform": "iOS / iPadOS",
       "productId": 338063291072,
-      "footprint": "#14 op 'mirror with light' (pop 24), #20 op 'mirror app' (pop 53), #20 op 'mirror' (pop 30)"
+      "footprint": "#14 op 'mirror with light' (pop 24), #19 op 'mirror' (pop 30), #20 op 'mirror app' (pop 53)"
     },
     {
       "name": "Mirror Mate - Menubar Mirror",
