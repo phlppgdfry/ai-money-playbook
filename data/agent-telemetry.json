@@ -1,8 +1,31 @@
 {
   "section": "agent-telemetry",
   "title": "Agent Activity, Costs & Reliability",
-  "updatedAt": "2026-11-22",
+  "updatedAt": "2026-11-26",
   "runs": [
+    {
+      "id": "run-mwx3xqpt",
+      "date": "2026-11-26",
+      "week": "2026-W48",
+      "provider": "gemini",
+      "liveResearchPoolsUsed": 1,
+      "totalPools": 1,
+      "pools": [
+        {
+          "pool": "consumer-apps",
+          "live": true,
+          "source": "apple-itunes-public"
+        }
+      ],
+      "quarantined": [],
+      "quotaExhausted": false,
+      "enginesExecuted": 1,
+      "itemsAdded": 2,
+      "costCapReached": false,
+      "failures": [],
+      "estimatedCostUsd": 0.0022,
+      "durationMs": 6178
+    },
     {
       "id": "audit-2026-w47",
       "date": "2026-11-22",

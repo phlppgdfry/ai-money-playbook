@@ -1,7 +1,7 @@
 {
   "section": "niches",
   "title": "App Store Niches (Live Appfigures Data)",
-  "updatedAt": "2026-11-22",
+  "updatedAt": "2026-11-26",
   "portfolioContext": [
     {
       "name": "Hand Mirror: HD, Light & Zoom",
@@ -92,6 +92,46 @@
       "mvpConcept": "1 spiegelscan voor huidtype/droogheid/roodheid (met duidelijke non-medische disclaimer) + barcodescan van verzorgingsproducten met directe match-score.",
       "monetization": "Freemium scanlimiet (3 gratis scans) → €34,99/jaar voor onbeperkte scans en persoonlijke routine.",
       "addedAt": "2026-11-22"
+    },
+    {
+      "id": "item-ccm-001",
+      "title": "AI Munten- en Waardetaxatie Scanner met Echte Marktdata",
+      "platform": "iOS & Android",
+      "synergy": "Speelt in op de frustratie bij algemene identificatie-apps die wel objecten herkennen (zoals Coin Identifier & AI Scanner en Lens Scan), maar geen betrouwbare, real-time waarde of marktinformatie bieden aan verzamelaars.",
+      "opportunityScore": 74,
+      "primaryKeywords": [
+        "coin identifier",
+        "munten scanner",
+        "waarde taxatie",
+        "AI object herkenning"
+      ],
+      "appfiguresBenchmark": "Geen Appfigures-data: deze cloud-engine heeft geen toegang tot Appfigures. Eventuele reviewklachten zijn niet geteld of geverifieerd (HYPOTHESIS).",
+      "competitivenessNote": "Bestaande apps schieten tekort in specifieke waardebepaling en marktupdates; gebruikers klagen over generieke resultaten.",
+      "competitorWeakness": "Biedt enkel visuele herkenning (zoals te zien bij Coin Identifier & AI Scanner en Lens Scan) zonder context over actuele marktwaarde of veilingprijzen.",
+      "mvpConcept": "Een gerichte scanner-app die munten en verzamelobjecten niet alleen herkent via AI, maar direct koppelt aan actuele referentiewaardes en staat-beoordeling.",
+      "monetization": "Freemium met beperkte gratis scans en een abonnementsmodel voor onbeperkte waardetaxaties.",
+      "addedAt": "2026-11-26",
+      "evidenceLevel": "HYPOTHESIS"
+    },
+    {
+      "id": "item-ccm-002",
+      "title": "AI Plant- en Plaaginsecten Diagnose-App",
+      "platform": "iOS & Android",
+      "synergy": "Benut de leemte in brede scanner-apps (zoals Lens Scan en LensAI) die wel objecten of planten noemen, maar geen praktische oplossingen of behandelplannen bieden bij ziektes.",
+      "opportunityScore": 71,
+      "primaryKeywords": [
+        "plant identifier",
+        "planten ziekte scanner",
+        "insecten determinatie",
+        "tuinbouw AI"
+      ],
+      "appfiguresBenchmark": "Geen Appfigures-data: deze cloud-engine heeft geen toegang tot Appfigures. Eventuele reviewklachten zijn niet geteld of geverifieerd (HYPOTHESIS).",
+      "competitivenessNote": "Veel algemene 'Identify Anything'-apps blijven te oppervlakkig en geven geen actiegericht advies bij zieke planten.",
+      "competitorWeakness": "Generieke apps zoals Lens Scan identificeren wel de plant of een insect, maar vertellen niet hoe je ziektes of plagen concreet moet bestrijden.",
+      "mvpConcept": "Een gerichte tool die bladsymptomen scant, de specifieke plaag of schimmel identificeert en direct een ecologisch behandelplan genereert.",
+      "monetization": "In-app aankopen per diagnose of een seizoensgebonden pro-abonnement voor tuiniers.",
+      "addedAt": "2026-11-26",
+      "evidenceLevel": "HYPOTHESIS"
     }
   ]
 }

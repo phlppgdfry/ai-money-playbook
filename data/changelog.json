@@ -1,8 +1,19 @@
 {
   "section": "changelog",
   "title": "Wekelijkse agent-updates",
-  "updatedAt": "2026-11-22",
+  "updatedAt": "2026-11-26",
   "runs": [
+    {
+      "id": "weekly-2026-w48-xqpt",
+      "date": "2026-11-26",
+      "week": "2026-W48",
+      "agent": "Playbook 2.0 Cloud Engines (1)",
+      "summary": "2. Competitor Complaint Miner: +2",
+      "itemsAdded": 2,
+      "sectionsTouched": [
+        "data/niches.json"
+      ]
+    },
     {
       "id": "live-research-2026-w47",
       "date": "2026-11-22",
