@@ -1,4 +1,4 @@
-import test from 'node:test';
+import test, { mock } from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import os from 'node:os';
@@ -11,6 +11,9 @@ import { runExpansion, callLLM, renderRunSummary } from '../agents/run-weekly-ex
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const rootDir = path.resolve(__dirname, '..');
 const today = '2026-11-26';
+// The runner logs a lot (emoji, multi-line summaries). Node 22's test runner occasionally fails with
+// "Unable to deserialize cloned data" when a child's stdout is busy, so keep this file's output quiet.
+for (const method of ['log', 'warn', 'error']) mock.method(console, method, () => {});
 const ctx = (extra = {}) => ({ today, liveUrls: new Set(), existingItems: [], ...extra });
 const okLink = async () => true;
 
