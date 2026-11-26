@@ -7,7 +7,7 @@
   },
   "guardrails": {
     "maxNewItemsPerAgent": 2,
-    "maxRunCostUsd": 0.50,
+    "maxRunCostUsd": 0.5,
     "requestTimeoutMs": 25000,
     "maxRetries": 2,
     "requireHumanApprovalForOutreach": true
@@ -37,7 +37,7 @@
       "file": "data/niches.json",
       "role": "Analyseert 2–3 sterren reviews en klachten bij grote apps en SaaS-tools (ook rond Hand Mirror, Mirror Mate & RingSizer) om directe productgaten te vinden.",
       "focus": "Focus op herhalende klachten die met één scherpere workflow of AI-stap zijn op te lossen.",
-      "schemaHint": "{ id, title, platform, synergy, opportunityScore (number), primaryKeywords, appfiguresBenchmark, competitivenessNote, competitorWeakness, mvpConcept, monetization, addedAt }"
+      "schemaHint": "{ id, title, platform, synergy (exact één van: 'Hand Mirror' | 'Mirror Mate' | 'RingSizer' | 'Geen directe synergie'), opportunityScore (geheel getal 0-100, ongevalideerde inschatting), primaryKeywords, appfiguresBenchmark (laat leeg: de cloud heeft geen Appfigures-toegang), competitivenessNote, competitorWeakness, mvpConcept, monetization, addedAt }"
     },
     {
       "id": "demand-wtp-validator",
@@ -47,7 +47,7 @@
       "file": "data/earners.json",
       "role": "Verifieert echte betalingsbereidheid via aantoonbare omzet, TrustMRR, Appfigures en gepubliceerde cijfers — minder bekende consumenten- en B2B-winnaars.",
       "focus": "Nooit onbewezen screenshots als 'geverifieerd' labelen. Markeer onzekerheid eerlijk.",
-      "schemaHint": "{ id, name, teamSize, teamType ('solo'|'small-team'|'agency'), product, category, reportedRevenue, monthlyUsdEstimate (number), revenueModel, marginNote, distributionChannel, verification ('geverifieerd'|'zelf-gerapporteerd'|'schatting'|'analyse'), verificationNote, howItWorks, keyLesson, sourceUrl, addedAt }"
+      "schemaHint": "{ id, name, teamSize, teamType ('solo'|'small-team'|'agency'), product, category, reportedRevenue, monthlyUsdEstimate (number), revenueModel, marginNote, distributionChannel, verification ('geverifieerd'|'zelf-gerapporteerd'|'schatting'|'analyse'), verificationNote, howItWorks, keyLesson, sourceUrl (alleen uit research-context), evidenceLevel, addedAt }"
     },
     {
       "id": "regulation-deadline-scout",
@@ -57,7 +57,7 @@
       "file": "data/blindspots.json",
       "role": "Volgt EU AI Act (o.a. Art. 50), AVG/GDPR, e-facturatie (Peppol BE/NL) en App Store-regels die zowel risico's als lokale concurrentievoordelen creëren.",
       "focus": "Vertaal wetgeving naar concreet risico én commerciële voorzorg voor BE/NL bouwers.",
-      "schemaHint": "{ id, area, title, risk, action, addedAt }"
+      "schemaHint": "{ id, area, title, risk, action, sourceUrl (verplicht: officiële bron, bv. eur-lex.europa.eu of een overheidssite), evidenceLevel, addedAt }"
     },
     {
       "id": "distribution-arbitrage-analyst",

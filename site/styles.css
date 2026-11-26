@@ -270,3 +270,6 @@ a:hover { text-decoration: underline; }
   .search-wrap { order: 3; max-width: none; flex-basis: 100%; }
   .agents-roster, .crm-form, .stop-grid { grid-template-columns: 1fr; }
 }
+
+/* Long badge text (e.g. pricing, synergy) must wrap inside card headers on small screens. */
+.panel-head .badge { max-width: 100%; white-space: normal; }

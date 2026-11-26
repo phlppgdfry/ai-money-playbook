@@ -25,6 +25,20 @@ on:
           - experiment-kill-criteria-analyst
           - evidence-quality-auditor
           - portfolio-capital-allocator
+      dry_run:
+        description: "Dry-run: geen LLM-aanroepen, geen schrijfacties, geen PR (test van het 'geen bevindingen'-pad)"
+        required: false
+        default: false
+        type: boolean
+      pr_branch:
+        description: "Optioneel: afwijkende PR-branch (alleen voor geïsoleerde tests). Standaard weekly/cloud-YYYY-WW"
+        required: false
+        default: ""
+        type: string
+
+concurrency:
+  group: weekly-agents-${{ github.ref }}
+  cancel-in-progress: false
 
 permissions:
   contents: write
@@ -42,37 +56,57 @@ jobs:
         with:
           node-version: "22"
 
+      - name: Determine research branch (one per ISO week)
+        id: branch
+        run: |
+          if [ -n "${{ github.event.inputs.pr_branch }}" ]; then
+            echo "name=${{ github.event.inputs.pr_branch }}" >> "$GITHUB_OUTPUT"
+          else
+            echo "name=weekly/cloud-$(date -u +%G-W%V)" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Run cooperating weekly expansion engines
+        id: run
         env:
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+          # Dry-run gets no provider keys, so it cannot make billable calls.
+          GEMINI_API_KEY: ${{ github.event.inputs.dry_run != 'true' && secrets.GEMINI_API_KEY || '' }}
+          OPENAI_API_KEY: ${{ github.event.inputs.dry_run != 'true' && secrets.OPENAI_API_KEY || '' }}
+          ANTHROPIC_API_KEY: ${{ github.event.inputs.dry_run != 'true' && secrets.ANTHROPIC_API_KEY || '' }}
+          OPENROUTER_API_KEY: ${{ github.event.inputs.dry_run != 'true' && secrets.OPENROUTER_API_KEY || '' }}
           TAVILY_API_KEY: ${{ secrets.TAVILY_API_KEY }}
           BRAVE_API_KEY: ${{ secrets.BRAVE_API_KEY }}
           MAX_RUN_COST_USD: "0.50"
+          RUN_SUMMARY_PATH: ${{ runner.temp }}/run-summary.md
         run: |
           TARGET="${{ github.event.inputs.agent || 'all' }}"
-          if [ "$TARGET" = "all" ]; then
-            node agents/run-weekly-expansion.mjs --all
-          else
-            node agents/run-weekly-expansion.mjs --agent "$TARGET"
-          fi
+          ARGS="--all"
+          if [ "$TARGET" != "all" ]; then ARGS="--agent $TARGET"; fi
+          if [ "${{ github.event.inputs.dry_run }}" = "true" ]; then ARGS="$ARGS --dry-run"; fi
+          node agents/run-weekly-expansion.mjs $ARGS
+          if [ -f "$RUN_SUMMARY_PATH" ]; then cat "$RUN_SUMMARY_PATH" >> "$GITHUB_STEP_SUMMARY"; fi
 
       - name: Run full test suite, leak scan & build
         run: npm test && npm run build
 
-      - name: Create Pull Request with weekly findings
+      - name: No new findings
+        if: steps.run.outputs.has_findings != 'true'
+        run: echo "Geen nieuwe bevindingen die de quality gate passeren — geen PR aangemaakt."
+
+      - name: Create or update research Pull Request
+        id: cpr
+        if: steps.run.outputs.has_findings == 'true'
         uses: peter-evans/create-pull-request@v7
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          commit-message: "chore(agents): wekelijkse Playbook 2.0/3.0 uitbreiding"
-          title: "Wekelijkse AI Playbook-uitbreiding (Cloud Engines)"
-          body: |
-            ## Automatische wekelijkse uitbreiding (Cloud Engines)
-
-            - Alle 12 samenwerkende engines gebruikten gedeelde research-pools met prompt-injectionbescherming en kostenplafond.
-            - Volledige testsuite (`npm test`), PII/secret-scan en site-build (`npm run build`) zijn geslaagd.
-            - Controleer `data/agent-telemetry.json` voor live websearch-status en kosten vóór merge naar `main`.
-          branch: "weekly/cloud-expansion"
+          base: ${{ github.ref_name }}
+          branch: ${{ steps.branch.outputs.name }}
+          commit-message: "chore(agents): wekelijkse onderzoeksrun ${{ steps.branch.outputs.name }}"
+          title: "Wekelijkse AI Playbook-uitbreiding (${{ steps.branch.outputs.name }})"
+          body-path: ${{ runner.temp }}/run-summary.md
           delete-branch: true
+
+      - name: Report PR
+        if: steps.cpr.outputs.pull-request-number
+        # Block scalar: in a plain YAML scalar " #" would start a comment and truncate the command.
+        run: |
+          echo "PR #${{ steps.cpr.outputs.pull-request-number }} (${{ steps.cpr.outputs.pull-request-operation }}): ${{ steps.cpr.outputs.pull-request-url }}"

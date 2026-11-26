@@ -110,8 +110,10 @@ test('Agent integration: OpenAI endpoint, live public search, retry on 429, prom
     assert.equal(res.totalAdded, 1);
     assert.equal(res.liveResearchPoolsUsed, 1);
     assert.equal(llmCalls, 2); // 1 retry + 1 success
-    assert.equal(res.failures.length, 1); // rejected invalid candidate logged
-    assert.match(res.failures[0].error, /afgewezen/i);
+    // The invalid candidate is rejected before any write: by the quality gate (quarantine) or the schema guard.
+    const rejected = [...res.failures.map((f) => f.error), ...res.quarantined.map((q) => `${q.id}: ${q.reasons.join('; ')}`)];
+    assert.equal(rejected.length, 1);
+    assert.match(rejected[0], /niche-test-invalid-missing-fields|afgewezen/i);
     assert.ok(seenUrls.includes('https://api.openai.com/v1/chat/completions'));
 
     // Resulting temp data/ must still pass full schema validation!
