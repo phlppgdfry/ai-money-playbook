@@ -105,18 +105,20 @@
         "numismatiek ai",
         "collectie beheer"
       ],
-      "appfiguresBenchmark": "Veel 2- tot 3-sterren reviews bij 'Coin Identifier'-apps klagen over foute jaartallen en het ontbreken van een totaalwaarde van hun verzameling.",
-      "competitivenessNote": "Bestaande apps zijn te generiek; een niche-oplossing specifiek voor munten met live marktplaatskoppelingen ontbreekt.",
+      "appfiguresBenchmark": "Geen Appfigures-data opgehaald voor deze niche (engine-output op basis van App Store-zoekresultaten). De review-klachten zijn niet geteld of geverifieerd: HYPOTHESIS.",
+      "competitivenessNote": "Hypothese: bestaande scanners zijn generiek. Niet onderzocht of er al munt-specifieke apps met marktplaatskoppeling bestaan. Score is een ongevalideerde engine-inschatting, geen kans op succes.",
       "competitorWeakness": "Geen historisch prijzenoverzicht, onbetrouwbare jaartal-herkenning bij slechte belichting en geforceerde jaarabonnementen.",
       "mvpConcept": "Een gerichte AI-scanner die munten direct koppelt aan actuele veilingprijzen en automatisch een digitale inventarislijst bijhoudt.",
       "monetization": "Freemium met een pro-abonnement voor onbeperkt taxeren en export naar Excel/PDF.",
-      "addedAt": "2026-11-26"
+      "addedAt": "2026-11-26",
+      "evidenceLevel": "HYPOTHESIS",
+      "auditedAt": "2026-11-26"
     },
     {
       "id": "ai-universal-object-dispute-checker",
       "title": "AI Object- & Plant-Identificatie met Foutcorrectie",
       "platform": "iOS / Android",
-      "synergy": "Lost de ergernis op van blinde AI-herkenning in apps zoals LensAI en Lens Scan die zelden uitleggen *waarom* een object zo is geclassificeerd.",
+      "synergy": "Hypothese: gebruikers van algemene identificatie-apps willen weten hoe zeker een herkenning is. Niet getoetst aan echte reviews.",
       "opportunityScore": 8.1,
       "primaryKeywords": [
         "object identifier",
@@ -124,12 +126,14 @@
         "foutcorrectie",
         "visuele zoekmachine"
       ],
-      "appfiguresBenchmark": "Gebruikers geven massaal 3 sterren omdat de app bij twijfel een fout antwoord geeft in plaats van toe te geven dat de foto onvoldoende kwaliteit heeft.",
-      "competitivenessNote": "Apps claimen 'identificeer alles', maar missen transparantie in betrouwbaarheidsscores per foto.",
+      "appfiguresBenchmark": "Geen Appfigures-data opgehaald voor deze niche (engine-output op basis van App Store-zoekresultaten). De review-klachten zijn niet geteld of geverifieerd: HYPOTHESIS.",
+      "competitivenessNote": "Hypothese, niet onderzocht. Score is een ongevalideerde engine-inschatting, geen kans op succes.",
       "competitorWeakness": "Geen feedbackloop voor foutieve scans en agressieve paywalls direct na de eerste gratis scan.",
       "mvpConcept": "Een scanner die per identificatie een betrouwbaarheidspercentage toont en direct alternatieven aandraagt bij twijfel.",
       "monetization": "Pay-per-scan credits of een maandelijks onbeperkt premium model.",
-      "addedAt": "2026-11-26"
+      "addedAt": "2026-11-26",
+      "evidenceLevel": "HYPOTHESIS",
+      "auditedAt": "2026-11-26"
     }
   ]
 }

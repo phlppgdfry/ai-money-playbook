@@ -71,9 +71,11 @@
       "title": "Het blind staren op vroege API-downloads als validatie",
       "severity": "hoog",
       "myth": "Een stijgende lijn in vroege app-downloads of API-aanmeldingen bewijst product-market fit.",
-      "reality": "Analyse van vroege tech-projecten toont dat meer dan 80 procent binnen dertig dagen volledig inactief raakt door het ontbreken van echte retentie-pijnpunten (schatting gebaseerd op algemene SaaS-faalstatistieken).",
-      "instead": "Stel keiharde kill-criteria in: als de dag-7 retentie onder de vijftien procent duikt, direct de stekker uit de doorontwikkeling trekken en heroriënteren.",
-      "addedAt": "2026-11-26"
+      "reality": "Downloads of aanmeldingen zeggen weinig over blijvend gebruik. Pas retentie en betalend gebruik tonen of het probleem echt is. (Het eerdere \"meer dan 80% inactief binnen 30 dagen\" had geen bron en is verwijderd.)",
+      "instead": "Leg vooraf een kill-criterium op dag-7 en dag-30 retentie vast. De drempel (bv. 15%) is een zelf gekozen startwaarde, geen benchmark.",
+      "addedAt": "2026-11-26",
+      "evidenceLevel": "HYPOTHESIS",
+      "auditedAt": "2026-11-26"
     },
     {
       "id": "item-ed-02",
@@ -82,7 +84,9 @@
       "myth": "Nog even een extra AI-feature toevoegen lost het onderliggende tractieprobleem vanzelf op.",
       "reality": "Elke extra maand doorontwikkelen zonder betalende gebruikers verbrandt onnodig kapitaal, waarbij projecten vaak sterven in schoonheid door feature-bloat in plaats van een gebrek aan techniek.",
       "instead": "Fixeer vooraf een maximaal budget en een harde deadline van maximaal zes weken; geen betalende gebruiker binnen die periode betekent onherroepelijk een KILL van het concept.",
-      "addedAt": "2026-11-26"
+      "addedAt": "2026-11-26",
+      "evidenceLevel": "HYPOTHESIS",
+      "auditedAt": "2026-11-26"
     }
   ]
 }

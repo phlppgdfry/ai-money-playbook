@@ -73,7 +73,9 @@
       "title": "Vervang koude outreach door 'Build-in-Public' leadgeneratie",
       "detail": "Deel concrete conversiedata en falende AI-experimenten op LinkedIn of X om intrinsiek geïnteresseerde B2B-kopers aan te trekken in plaats van te spammen.",
       "impact": "Hoog",
-      "addedAt": "2026-11-26"
+      "addedAt": "2026-11-26",
+      "evidenceLevel": "HYPOTHESIS",
+      "auditedAt": "2026-11-26"
     },
     {
       "id": "ca-strat-02",
@@ -81,23 +83,19 @@
       "title": "Integreer interactieve product-tours in plaats van statische demo's",
       "detail": "Laat potentiële zakelijke klanten direct zelf binnen 60 seconden door een gesimuleerde AI-workflow klikken voordat ze een menselijke salesmedewerker spreken.",
       "impact": "Middel",
-      "addedAt": "2026-11-26"
+      "addedAt": "2026-11-26",
+      "evidenceLevel": "HYPOTHESIS",
+      "auditedAt": "2026-11-26"
     },
     {
       "id": "pricing-unit-econ-01",
       "category": "Pricing & Unit Economics",
       "title": "API-kostenbescherming via dynamische tokenlimieten per abonnementslaag",
-      "detail": "Op basis van interne analyse lopen AI-apps risico op marge-erosie door zware gebruikers. Implementeer strikte dagelijkse token-limieten per tier om de unit economics te beschermen.",
+      "detail": "Zware gebruikers kunnen bij vaste abonnementsprijzen de API-kosten boven de marge duwen. Stel per tier een dagelijkse token- of gebruikslimiet in en meet de kosten per actieve gebruiker.",
       "impact": "Hoog",
-      "addedAt": "2026-11-26"
-    },
-    {
-      "id": "pricing-unit-econ-02",
-      "category": "Pricing & Unit Economics",
-      "title": "Web-to-App marges optimaliseren door Stripe te koppelen aan Apple/Google pay",
-      "detail": "Analyse van betalingsstromen toont aan dat het omzeilen van de standaard appstore-commissies via web-funnels de operationele marge aanzienlijk verbetert, mits de frictie bij onboarding laag blijft.",
-      "impact": "Middel",
-      "addedAt": "2026-11-26"
+      "addedAt": "2026-11-26",
+      "evidenceLevel": "HYPOTHESIS",
+      "auditedAt": "2026-11-26"
     }
   ]
 }

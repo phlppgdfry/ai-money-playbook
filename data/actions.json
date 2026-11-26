@@ -121,7 +121,7 @@
       "track": "Agency-to-SaaS",
       "timeToFirstEuro": "4-6 weken",
       "riskLevel": "Gemiddeld",
-      "fitReason": "Lokale aannemers in BE en NL verkwisten wekelijks uren aan handmatige calculaties op basis van PDF-bouwtekeningen; een gerichte AI-tool lost dit direct op met hoge betalingsbereidheid.",
+      "fitReason": "Hypothese: lokale aannemers besteden veel tijd aan handmatige calculaties vanuit PDF-plannen. Tijdverlies en betalingsbereidheid zijn niet gemeten; stap 1 valideert dit.",
       "steps": [
         {
           "id": "step-1",
@@ -136,7 +136,9 @@
           "text": "Introduceer een vast maandabonnement zodra de eerste 3 pilotklanten structureel tijd besparen op offertes."
         }
       ],
-      "addedAt": "2026-11-26"
+      "addedAt": "2026-11-26",
+      "evidenceLevel": "HYPOTHESIS",
+      "auditedAt": "2026-11-26"
     },
     {
       "id": "item-2026-06",
@@ -144,7 +146,7 @@
       "track": "Agency-to-SaaS",
       "timeToFirstEuro": "8-10 weken",
       "riskLevel": "Hoog",
-      "fitReason": "Complexe lokale bestemmingsplannen en vergunningseisen in Nederlandse gemeenten vormen een juridisch mijnenveld waar beleggers fors voor willen betalen om risico's te mitigeren.",
+      "fitReason": "Hypothese: vergunnings- en bestemmingsplanregels zijn complex genoeg dat beleggers voor een check willen betalen. Niet gevalideerd. Juridisch risico: foutieve RAG-output kan aansprakelijkheid geven, dus menselijke controle is verplicht.",
       "steps": [
         {
           "id": "step-1",
@@ -159,7 +161,9 @@
           "text": "Migreer de validatiedienst naar een self-service SaaS-portaal met een freemium model voor snelle leadgeneratie."
         }
       ],
-      "addedAt": "2026-11-26"
+      "addedAt": "2026-11-26",
+      "evidenceLevel": "HYPOTHESIS",
+      "auditedAt": "2026-11-26"
     }
   ]
 }

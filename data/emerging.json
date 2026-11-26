@@ -58,10 +58,12 @@
       "title": "Trage offerte-doorlooptijd bij installateurs en bouwbedrijven",
       "stage": "Vroeg",
       "horizon": "1-2 jaar",
-      "summary": "Mkb-installateurs verliezen opdrachten omdat offertes pas na 3 tot 5 werkdagen worden verstuurd, terwijl de consument binnen 24 uur kiest.",
-      "whyNow": "Generatieve AI kan inkomende e-mails of telefoongesprekken direct omzetten in een technisch kloppende concept-offerte, wat de conversie direct verdubbelt.",
-      "example": "Een loodgietersbedrijf met 10 monteurs mist maandelijks circa 12.000 euro aan omzet door trage offertevorming, omdat traditioneel ERP-software geen ongenstructured aanvraagtekst automatisch omzet naar prijzen.",
-      "addedAt": "2026-11-26"
+      "summary": "Hypothese: installateurs en bouwbedrijven verliezen opdrachten doordat offertes traag worden opgemaakt. Er is geen meting van doorlooptijden of beslissnelheid van klanten.",
+      "whyNow": "Generatieve AI kan ongestructureerde aanvragen (e-mail, telefoonnotities) omzetten in een concept-offerte. Het effect op de conversie is niet gemeten.",
+      "example": "Te valideren bij 5 installateurs: huidige doorlooptijd van aanvraag tot offerte, en hoeveel aanvragen verloren gaan. De eerdere bedragen (EUR 12.000/maand) waren verzonnen en zijn verwijderd.",
+      "addedAt": "2026-11-26",
+      "evidenceLevel": "HYPOTHESIS",
+      "auditedAt": "2026-11-26"
     },
     {
       "id": "item-money-leak-2",
@@ -70,8 +72,10 @@
       "horizon": "0-1 jaar",
       "summary": "Urenregistraties en ingekochte materialen worden nog te vaak handmatig vergeleken met contractafspraken, wat leidt tot vergeten nacalculatie.",
       "whyNow": "Slimme AI-agenten scannen dagelijks achter de schermen afwijkingen tussen urenstaten en projectbudgetten voordat de factuur de deur uitgaat.",
-      "example": "Een adviesbureau van 25 FTE lekt maandelijks zo'n 4.500 euro aan niet-gefactureerde meerwerkuren en kleine kostenposten die door de administratieve mand vallen.",
-      "addedAt": "2026-11-26"
+      "example": "Te valideren: het aandeel niet-gefactureerd meerwerk bij 3–5 dienstverleners via een steekproef van urenstaten. Het eerdere bedrag (EUR 4.500/maand) was verzonnen en is verwijderd.",
+      "addedAt": "2026-11-26",
+      "evidenceLevel": "HYPOTHESIS",
+      "auditedAt": "2026-11-26"
     }
   ]
 }

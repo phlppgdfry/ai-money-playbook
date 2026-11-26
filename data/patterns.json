@@ -72,8 +72,10 @@
       "category": "Programmatic SEO",
       "summary": "Het automatische genereren van duizenden landingspagina's gericht op long-tail zoekwoorden om gratis organisch verkeer te vangen.",
       "mechanism": "Je koppelt een dataset (bijv. openbare data of API's) aan een template in WordPress of Next.js om systematisch pagina's te publiceren voor elke mogelijke zoekvraag in een niche, zoals 'beste AI tool voor [specifieke taak] in [stad]'.",
-      "evidence": "Verschillende kleine SaaS-oprichters op Hacker News en Indie Hackers rapporteren stabiele maandelijks terugkerende bezoekersstromen door duizenden geautomatiseerde vergelijkingspagina's op te zetten zonder advertentiebudget.",
-      "addedAt": "2026-11-26"
+      "evidence": "Anekdotisch: individuele indie-oprichters beschrijven dit op Indie Hackers/Hacker News. Geen specifieke bron gecontroleerd en geen cijfers. Risico: Google beoordeelt grootschalige, dunne pagina's als spam.",
+      "addedAt": "2026-11-26",
+      "evidenceLevel": "UNVERIFIED",
+      "auditedAt": "2026-11-26"
     },
     {
       "id": "da-02",
@@ -81,8 +83,10 @@
       "category": "In-app cross-promo",
       "summary": "Gebruikers doorsturen vanuit je eerste gratis of goedkope tool naar je duurdere product via subtiele, niet-irritante in-app banners.",
       "mechanism": "In plaats van dure advertering via Meta of Google, bouw je een portfolio van 3 tot 5 kleine, enkelvoudige tools. Zodra een gebruiker actief is in tool A, bied je direct contextuele waarde aan via een integratie of banner naar tool B.",
-      "evidence": "Indie developers met een portfolio van micro-SaaS toepassingen zien tot wel 20% van hun nieuwe sign-ups voor grotere producten direct afkomstig uit interne cross-promotie binnen bestaande, gratis hulpprogramma's.",
-      "addedAt": "2026-11-26"
+      "evidence": "Niet onderbouwd. Het eerdere cijfer (\"tot 20% van de sign-ups\") had geen bron en is verwijderd. Te meten via UTM-tags tussen eigen apps.",
+      "addedAt": "2026-11-26",
+      "evidenceLevel": "HYPOTHESIS",
+      "auditedAt": "2026-11-26"
     },
     {
       "id": "engine-12-item-01",
@@ -91,7 +95,9 @@
       "summary": "Strikt beleid om verdere investeringen in een experiment te staken zodra de dertigdaagse retentie onder de kritische drempel zakt.",
       "mechanism": "Stel vooraf harde kwantitatieve drempels in per experiment; bij niet-halen wordt het budget direct doorgeschoven naar het best presterende spoor.",
       "evidence": "Analyse van portfolio-synergie en risicospreiding (geen live data).",
-      "addedAt": "2026-11-26"
+      "addedAt": "2026-11-26",
+      "evidenceLevel": "HYPOTHESIS",
+      "auditedAt": "2026-11-26"
     },
     {
       "id": "engine-12-item-02",
@@ -100,7 +106,9 @@
       "summary": "Beperk de ontwikkel- en testfase per micro-app tot maximaal drie weken om te voorkomen dat tijd weglekt naar marginaal projectwerk.",
       "mechanism": "Door een harde deadline te hanteren dwing je focus af op de kernfunctionaliteit die direct waarde bewijst voor de gebruiker.",
       "evidence": "Schatting op basis van historische projectdoorlooptijden (geen live data).",
-      "addedAt": "2026-11-26"
+      "addedAt": "2026-11-26",
+      "evidenceLevel": "HYPOTHESIS",
+      "auditedAt": "2026-11-26"
     }
   ]
 }

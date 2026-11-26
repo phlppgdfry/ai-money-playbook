@@ -79,19 +79,23 @@
       "id": "feinternational",
       "name": "FE International",
       "category": "Overnameplatform",
-      "pricing": "Success-fee basis",
+      "pricing": "Op aanvraag (fee-model niet geverifieerd)",
       "url": "https://feinternational.com",
-      "whyUseful": "Gespecialiseerd M&A-adviesbureau voor de verkoop en overname van gevestigde SaaS- en AI-bedrijven met bewezen omzet.",
-      "addedAt": "2026-11-26"
+      "whyUseful": "M&A-adviesbureau dat zich toelegt op de verkoop van online bedrijven (SaaS, e-commerce, content), volgens de eigen website. Nuttig om exit-multiples en verkoopklaarheid te begrijpen.",
+      "addedAt": "2026-11-26",
+      "evidenceLevel": "VERIFIED",
+      "auditedAt": "2026-11-26"
     },
     {
       "id": "rewardful",
       "name": "Rewardful",
       "category": "Partnerkanaal / Affiliate",
-      "pricing": "Vanaf $39/maand",
+      "pricing": "Vanaf $49/maand (prijspagina gecontroleerd op 2026-11-26)",
       "url": "https://www.rewardful.com",
       "whyUseful": "Maakt het eenvoudig om affiliate- en partnerprogramma's op te zetten voor SaaS-producten, gekoppeld aan Stripe of Paddle.",
-      "addedAt": "2026-11-26"
+      "addedAt": "2026-11-26",
+      "evidenceLevel": "VERIFIED",
+      "auditedAt": "2026-11-26"
     }
   ]
 }

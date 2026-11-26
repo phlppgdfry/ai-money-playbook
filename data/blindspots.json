@@ -63,17 +63,25 @@
       "id": "eu-ai-act-art-50-transparantieplicht",
       "area": "Regulation & Deadline Scout",
       "title": "EU AI Act Art. 50 transparantieplicht voor gegenereerde content",
-      "risk": "Boetes tot 15 miljoen euro of 3% van de wereldwijde omzet bij het niet tijdig labelen van AI-gegenereerde output of chatbots richting consumenten in NL/BE.",
-      "action": "Implementeer verplichte machine-leesbare watermerken en duidelijke visuele disclaimers in de UI voordat de gebruiker interacteert met AI-gegenereerde content.",
-      "addedAt": "2026-11-26"
+      "risk": "Art. 50 AI Act (Verordening (EU) 2024/1689) geldt sinds 2 augustus 2026: aanbieders moeten gebruikers informeren dat ze met een AI-systeem interageren (lid 1) en generatieve output machine-leesbaar markeren (lid 2); gebruiksverantwoordelijken moeten deepfakes en bepaalde AI-teksten als zodanig kenbaar maken (lid 4). Niet-naleving: boetes tot EUR 15 miljoen of 3% van de wereldwijde jaaromzet (art. 99 lid 4). Volgens secundaire bronnen geeft de Digital Omnibus (Verordening (EU) 2026/1744) alleen bestaande generatieve systemen uitstel voor de markering (lid 2) tot 2 december 2026; die datum is niet in het Publicatieblad gecontroleerd.",
+      "action": "Bepaal per product of je aanbieder of gebruiksverantwoordelijke bent. Toon een duidelijke melding vóór chatbot-interactie en markeer gegenereerde media machine-leesbaar (bv. C2PA-metadata). Laat de toepasselijkheid juridisch toetsen.",
+      "addedAt": "2026-11-26",
+      "sourceUrl": "https://eur-lex.europa.eu/eli/reg/2024/1689/oj",
+      "evidenceLevel": "VERIFIED",
+      "verificationNote": "Art. 50, art. 99(4) en de toepassingsdatum 2 augustus 2026 gecontroleerd in de EUR-Lex-tekst op 2026-11-26. Het uitstel via de Omnibus is niet primair geverifieerd.",
+      "auditedAt": "2026-11-26"
     },
     {
       "id": "peppol-efacturatie-b2b-verplichting",
       "area": "Regulation & Deadline Scout",
-      "title": "Verplichte e-facturatie via Peppol-netwerk voor B2B SaaS",
-      "risk": "Verlies van zakelijke klanten in de Benelux en administratieve stilstand doordat facturatiesystemen niet aansluiten op de vernieuwde Europese e-facturatiestandaarden.",
-      "action": "Integreer direct een gecertificeerd Peppol-access point binnen je SaaS-facturatiemodule om automatische B2B-compliance te waarborgen.",
-      "addedAt": "2026-11-26"
+      "title": "Verplichte B2B e-facturatie via Peppol in België (sinds 1 januari 2026)",
+      "risk": "Sinds 1 januari 2026 moeten btw-plichtige ondernemingen in België binnenlandse B2B-facturen gestructureerd elektronisch (EN 16931, via Peppol) versturen en ontvangen. Nederland kent (nog) geen algemene B2B-verplichting; dit is dus géén Benelux-brede regel. Een SaaS die Belgische B2B-klanten factureert zonder Peppol-ondersteuning, verstuurt niet-conforme facturen.",
+      "action": "Factureer Belgische B2B-klanten via een Peppol-access point of een boekhoudpakket met Peppol-ondersteuning. Controleer de actuele regels en sanctie-/overgangsbepalingen bij de FOD Financiën.",
+      "addedAt": "2026-11-26",
+      "sourceUrl": "https://ec.europa.eu/digital-building-blocks/sites/spaces/DIGITAL/pages/467108877/eInvoicing+in+Belgium",
+      "evidenceLevel": "VERIFIED",
+      "verificationNote": "Startdatum 1/1/2026 en de Peppol-route volgens de Europese Commissie (Digital Building Blocks) en einvoice.belgium.be, gecontroleerd op 2026-11-26. De bewering over \"Benelux\" en \"Europese standaarden\" uit de engine-output is gecorrigeerd.",
+      "auditedAt": "2026-11-26"
     }
   ]
 }
