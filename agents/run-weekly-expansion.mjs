@@ -585,7 +585,12 @@ if (isMain) {
 
   runExpansion({ agentId, runAll, isDryRun })
     .then((res) => {
-      if (res.failures.length > 0 && res.totalAdded === 0) process.exit(1);
+      if (res.pools) console.log(`\n${renderRunSummary(res)}`);
+      for (const f of res.failures) console.log(`  ⚠️ ${f.agent}: ${f.error}`);
+      // Rejected candidates (schema guard / quality gate) mean "no findings", not a broken run.
+      // Fail only on real errors: provider/network/blocked, and only when nothing was added.
+      const hardFailures = res.failures.filter((f) => !/^Kandidaat '.*' afgewezen/.test(f.error));
+      if (res.status === 'BLOCKED' || (hardFailures.length > 0 && res.totalAdded === 0)) process.exit(1);
     })
     .catch((err) => {
       console.error(`❌ Fatale fout: ${formatErrorWithCause(err)}`);
