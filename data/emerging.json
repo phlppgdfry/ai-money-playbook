@@ -1,7 +1,7 @@
 {
   "section": "emerging",
   "title": "Nieuwe dingen & opkomende kansen",
-  "updatedAt": "2026-11-21",
+  "updatedAt": "2026-11-26",
   "items": [
     {
       "id": "outcome-based-pricing",
@@ -52,6 +52,30 @@
       "whyNow": "Multimodale modellen zijn snel en spotgoedkoop geworden, terwijl TikTok/Reels-demos van 'richt camera → magisch resultaat' organisch viraal gaan.",
       "example": "Cal AI bewees het model in voeding; dezelfde formule werkt in tientallen kleinere App Store-niches met hoge zoekvolumes en zwakke bestaande apps.",
       "addedAt": "2026-11-21"
+    },
+    {
+      "id": "item-money-leak-1",
+      "title": "Trage offerte-doorlooptijd bij installateurs en bouwbedrijven",
+      "stage": "Vroeg",
+      "horizon": "1-2 jaar",
+      "summary": "Hypothese: installateurs en bouwbedrijven verliezen opdrachten doordat offertes traag worden opgemaakt. Er is geen meting van doorlooptijden of beslissnelheid van klanten.",
+      "whyNow": "Generatieve AI kan ongestructureerde aanvragen (e-mail, telefoonnotities) omzetten in een concept-offerte. Het effect op de conversie is niet gemeten.",
+      "example": "Te valideren bij 5 installateurs: huidige doorlooptijd van aanvraag tot offerte, en hoeveel aanvragen verloren gaan. De eerdere bedragen (EUR 12.000/maand) waren verzonnen en zijn verwijderd.",
+      "addedAt": "2026-11-26",
+      "evidenceLevel": "HYPOTHESIS",
+      "auditedAt": "2026-11-26"
+    },
+    {
+      "id": "item-money-leak-2",
+      "title": "Handmatige factuur- en urencontrole in de zakelijke dienstverlening",
+      "stage": "Groeiend",
+      "horizon": "0-1 jaar",
+      "summary": "Urenregistraties en ingekochte materialen worden nog te vaak handmatig vergeleken met contractafspraken, wat leidt tot vergeten nacalculatie.",
+      "whyNow": "Slimme AI-agenten scannen dagelijks achter de schermen afwijkingen tussen urenstaten en projectbudgetten voordat de factuur de deur uitgaat.",
+      "example": "Te valideren: het aandeel niet-gefactureerd meerwerk bij 3–5 dienstverleners via een steekproef van urenstaten. Het eerdere bedrag (EUR 4.500/maand) was verzonnen en is verwijderd.",
+      "addedAt": "2026-11-26",
+      "evidenceLevel": "HYPOTHESIS",
+      "auditedAt": "2026-11-26"
     }
   ]
 }

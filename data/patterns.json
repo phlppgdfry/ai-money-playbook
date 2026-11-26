@@ -1,7 +1,7 @@
 {
   "section": "patterns",
   "title": "Patronen achter het succes",
-  "updatedAt": "2026-11-21",
+  "updatedAt": "2026-11-26",
   "items": [
     {
       "id": "distribution-beats-code",
@@ -65,6 +65,50 @@
       "mechanism": "In plaats van maanden gokken in een lege kamer, financier je je eigen productontwikkeling met klanten die al bewezen hebben dat ze willen betalen.",
       "evidence": "Lokale AI-bureaus → verticale SaaS",
       "addedAt": "2026-11-21"
+    },
+    {
+      "id": "da-01",
+      "title": "Programmatic SEO voor niche AI-tools",
+      "category": "Programmatic SEO",
+      "summary": "Het automatische genereren van duizenden landingspagina's gericht op long-tail zoekwoorden om gratis organisch verkeer te vangen.",
+      "mechanism": "Je koppelt een dataset (bijv. openbare data of API's) aan een template in WordPress of Next.js om systematisch pagina's te publiceren voor elke mogelijke zoekvraag in een niche, zoals 'beste AI tool voor [specifieke taak] in [stad]'.",
+      "evidence": "Anekdotisch: individuele indie-oprichters beschrijven dit op Indie Hackers/Hacker News. Geen specifieke bron gecontroleerd en geen cijfers. Risico: Google beoordeelt grootschalige, dunne pagina's als spam.",
+      "addedAt": "2026-11-26",
+      "evidenceLevel": "UNVERIFIED",
+      "auditedAt": "2026-11-26"
+    },
+    {
+      "id": "da-02",
+      "title": "In-app cross-promotie via netwerken van micro-apps",
+      "category": "In-app cross-promo",
+      "summary": "Gebruikers doorsturen vanuit je eerste gratis of goedkope tool naar je duurdere product via subtiele, niet-irritante in-app banners.",
+      "mechanism": "In plaats van dure advertering via Meta of Google, bouw je een portfolio van 3 tot 5 kleine, enkelvoudige tools. Zodra een gebruiker actief is in tool A, bied je direct contextuele waarde aan via een integratie of banner naar tool B.",
+      "evidence": "Niet onderbouwd. Het eerdere cijfer (\"tot 20% van de sign-ups\") had geen bron en is verwijderd. Te meten via UTM-tags tussen eigen apps.",
+      "addedAt": "2026-11-26",
+      "evidenceLevel": "HYPOTHESIS",
+      "auditedAt": "2026-11-26"
+    },
+    {
+      "id": "engine-12-item-01",
+      "title": "Kapitaalbevriezing bij onvoldoende retentie",
+      "category": "Kapitaalallocatie",
+      "summary": "Strikt beleid om verdere investeringen in een experiment te staken zodra de dertigdaagse retentie onder de kritische drempel zakt.",
+      "mechanism": "Stel vooraf harde kwantitatieve drempels in per experiment; bij niet-halen wordt het budget direct doorgeschoven naar het best presterende spoor.",
+      "evidence": "Analyse van portfolio-synergie en risicospreiding (geen live data).",
+      "addedAt": "2026-11-26",
+      "evidenceLevel": "HYPOTHESIS",
+      "auditedAt": "2026-11-26"
+    },
+    {
+      "id": "engine-12-item-02",
+      "title": "Tijdsarbitrage via strakke timeboxing",
+      "category": "Tijdsallocatie",
+      "summary": "Beperk de ontwikkel- en testfase per micro-app tot maximaal drie weken om te voorkomen dat tijd weglekt naar marginaal projectwerk.",
+      "mechanism": "Door een harde deadline te hanteren dwing je focus af op de kernfunctionaliteit die direct waarde bewijst voor de gebruiker.",
+      "evidence": "Schatting op basis van historische projectdoorlooptijden (geen live data).",
+      "addedAt": "2026-11-26",
+      "evidenceLevel": "HYPOTHESIS",
+      "auditedAt": "2026-11-26"
     }
   ]
 }

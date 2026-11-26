@@ -1,7 +1,7 @@
 {
   "section": "tips",
   "title": "Tips & tricks uit de praktijk",
-  "updatedAt": "2026-11-22",
+  "updatedAt": "2026-11-26",
   "items": [
     {
       "id": "tip-hard-paywall-5x",
@@ -66,6 +66,36 @@
       "detail": "Vermijd een prijzenoorlog per belminuut bij lokale bedrijven. Verkoop vaste bundels (bv. €299–750/maand voor tot 500 gesprekken + agenda-koppeling + factuur op BTW-nummer) zodat je marge voorspelbaar blijft.",
       "impact": "Hoog",
       "addedAt": "2026-11-22"
+    },
+    {
+      "id": "ca-strat-01",
+      "category": "Customer Acquisition",
+      "title": "Vervang koude outreach door 'Build-in-Public' leadgeneratie",
+      "detail": "Deel concrete conversiedata en falende AI-experimenten op LinkedIn of X om intrinsiek geïnteresseerde B2B-kopers aan te trekken in plaats van te spammen.",
+      "impact": "Hoog",
+      "addedAt": "2026-11-26",
+      "evidenceLevel": "HYPOTHESIS",
+      "auditedAt": "2026-11-26"
+    },
+    {
+      "id": "ca-strat-02",
+      "category": "Sales Strategie",
+      "title": "Integreer interactieve product-tours in plaats van statische demo's",
+      "detail": "Laat potentiële zakelijke klanten direct zelf binnen 60 seconden door een gesimuleerde AI-workflow klikken voordat ze een menselijke salesmedewerker spreken.",
+      "impact": "Middel",
+      "addedAt": "2026-11-26",
+      "evidenceLevel": "HYPOTHESIS",
+      "auditedAt": "2026-11-26"
+    },
+    {
+      "id": "pricing-unit-econ-01",
+      "category": "Pricing & Unit Economics",
+      "title": "API-kostenbescherming via dynamische tokenlimieten per abonnementslaag",
+      "detail": "Zware gebruikers kunnen bij vaste abonnementsprijzen de API-kosten boven de marge duwen. Stel per tier een dagelijkse token- of gebruikslimiet in en meet de kosten per actieve gebruiker.",
+      "impact": "Hoog",
+      "addedAt": "2026-11-26",
+      "evidenceLevel": "HYPOTHESIS",
+      "auditedAt": "2026-11-26"
     }
   ]
 }

@@ -1,7 +1,7 @@
 {
   "section": "resources",
   "title": "Handige tools, bronnen & benchmarks",
-  "updatedAt": "2026-11-21",
+  "updatedAt": "2026-11-26",
   "items": [
     {
       "id": "res-trustmrr",
@@ -74,6 +74,30 @@
       "url": "https://polar.sh",
       "whyUseful": "Gebruik een Merchant of Record (Paddle, Lemon Squeezy of Polar) voor wereldwijde SaaS-verkopen zodat je niet handmatig in 50 landen BTW hoeft af te dragen.",
       "addedAt": "2026-11-21"
+    },
+    {
+      "id": "feinternational",
+      "name": "FE International",
+      "category": "Overnameplatform",
+      "pricing": "Op aanvraag",
+      "url": "https://feinternational.com",
+      "whyUseful": "M&A-adviesbureau dat zich toelegt op de verkoop van online bedrijven (SaaS, e-commerce, content), volgens de eigen website. Nuttig om exit-multiples en verkoopklaarheid te begrijpen.",
+      "addedAt": "2026-11-26",
+      "evidenceLevel": "VERIFIED",
+      "auditedAt": "2026-11-26",
+      "verificationNote": "Fee-model niet geverifieerd; beschrijving volgens eigen website (2026-11-26)."
+    },
+    {
+      "id": "rewardful",
+      "name": "Rewardful",
+      "category": "Partnerkanaal / Affiliate",
+      "pricing": "Vanaf $49/maand",
+      "url": "https://www.rewardful.com",
+      "whyUseful": "Maakt het eenvoudig om affiliate- en partnerprogramma's op te zetten voor SaaS-producten, gekoppeld aan Stripe of Paddle.",
+      "addedAt": "2026-11-26",
+      "evidenceLevel": "VERIFIED",
+      "auditedAt": "2026-11-26",
+      "verificationNote": "Prijspagina gecontroleerd op 2026-11-26."
     }
   ]
 }

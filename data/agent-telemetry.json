@@ -1,8 +1,22 @@
 {
   "section": "agent-telemetry",
   "title": "Agent Activity, Costs & Reliability",
-  "updatedAt": "2026-11-22",
+  "updatedAt": "2026-11-26",
   "runs": [
+    {
+      "id": "run-mwwu8heq",
+      "date": "2026-11-26",
+      "week": "2026-W48",
+      "provider": "gemini",
+      "liveResearchPoolsUsed": 2,
+      "totalPools": 4,
+      "enginesExecuted": 12,
+      "itemsAdded": 24,
+      "costCapReached": false,
+      "failures": [],
+      "estimatedCostUsd": 0.0166,
+      "durationMs": 70022
+    },
     {
       "id": "audit-2026-w47",
       "date": "2026-11-22",

@@ -1,8 +1,28 @@
 {
   "section": "changelog",
   "title": "Wekelijkse agent-updates",
-  "updatedAt": "2026-11-22",
+  "updatedAt": "2026-11-26",
   "runs": [
+    {
+      "id": "weekly-2026-w48-8her",
+      "date": "2026-11-26",
+      "week": "2026-W48",
+      "agent": "Playbook 2.0 Cloud Engines (12)",
+      "summary": "1. Money Leak Detector: +2 • 2. Competitor Complaint Miner: +2 • 3. Demand & Willingness-to-Pay Validator: +2 • 4. Regulation & Deadline Scout: +2 • 5. Distribution Arbitrage Analyst: +2 • 6. Agency-to-SaaS Opportunity Builder: +2 • 7. Acquisition & Partnership Scout: +2 • 8. Customer Acquisition & Sales Strategist: +2 • 9. Pricing, Profitability & Unit Economics Analyst: +2 • 10. Experiment Designer & Kill-Criteria Analyst: +2 • 11. Evidence Verification & Source Quality Auditor: +2 • 12. Portfolio Learning & Capital Allocation Strategist: +2 • Audit 2026-11-26: 5 items verwijderd (2 placeholder-bewijzen, 2 verzonnen omzetschattingen, 1 ongefundeerde juridische tip); 19 items gecorrigeerd en gelabeld (4 VERIFIED na broncontrole, 15 HYPOTHESIS/UNVERIFIED).",
+      "itemsAdded": 19,
+      "sectionsTouched": [
+        "data/emerging.json",
+        "data/niches.json",
+        "data/earners.json",
+        "data/blindspots.json",
+        "data/patterns.json",
+        "data/actions.json",
+        "data/resources.json",
+        "data/tips.json",
+        "data/pitfalls.json",
+        "data/evidence.json"
+      ]
+    },
     {
       "id": "live-research-2026-w47",
       "date": "2026-11-22",

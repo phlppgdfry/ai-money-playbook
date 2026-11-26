@@ -1,7 +1,7 @@
 {
   "section": "pitfalls",
   "title": "Valkuilen & anti-patronen",
-  "updatedAt": "2026-11-22",
+  "updatedAt": "2026-11-26",
   "items": [
     {
       "id": "ai-app-retention-paradox",
@@ -65,6 +65,28 @@
       "reality": "Zonder gevalideerd zoekvolume (Appfigures/SEO) of vooraf bereidwillige kopers bouw je vaak iets waar niemand naar zoekt.",
       "instead": "Valideer eerst vraag (zoektermen, slechte reviews van concurrenten, of 3 voorverkochte lokale klanten) en lanceer een eerste versie binnen 14 dagen.",
       "addedAt": "2026-11-21"
+    },
+    {
+      "id": "item-ed-01",
+      "title": "Het blind staren op vroege API-downloads als validatie",
+      "severity": "hoog",
+      "myth": "Een stijgende lijn in vroege app-downloads of API-aanmeldingen bewijst product-market fit.",
+      "reality": "Downloads of aanmeldingen zeggen weinig over blijvend gebruik. Pas retentie en betalend gebruik tonen of het probleem echt is. (Het eerdere \"meer dan 80% inactief binnen 30 dagen\" had geen bron en is verwijderd.)",
+      "instead": "Leg vooraf een kill-criterium op dag-7 en dag-30 retentie vast. De drempel (bv. 15%) is een zelf gekozen startwaarde, geen benchmark.",
+      "addedAt": "2026-11-26",
+      "evidenceLevel": "HYPOTHESIS",
+      "auditedAt": "2026-11-26"
+    },
+    {
+      "id": "item-ed-02",
+      "title": "Oneindig doorontwikkelen zonder keiharde budgetlimiet",
+      "severity": "middel",
+      "myth": "Nog even een extra AI-feature toevoegen lost het onderliggende tractieprobleem vanzelf op.",
+      "reality": "Elke extra maand doorontwikkelen zonder betalende gebruikers verbrandt onnodig kapitaal, waarbij projecten vaak sterven in schoonheid door feature-bloat in plaats van een gebrek aan techniek.",
+      "instead": "Fixeer vooraf een maximaal budget en een harde deadline van maximaal zes weken; geen betalende gebruiker binnen die periode betekent onherroepelijk een KILL van het concept.",
+      "addedAt": "2026-11-26",
+      "evidenceLevel": "HYPOTHESIS",
+      "auditedAt": "2026-11-26"
     }
   ]
 }
