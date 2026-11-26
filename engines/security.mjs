@@ -15,8 +15,23 @@ const SECRET_PATTERNS = [
   { name: 'GitHub PAT', regex: /\bgh[pousr]_[A-Za-z0-9]{20,}\b/g },
   { name: 'Anthropic API key', regex: /\bsk-ant-[A-Za-z0-9_-]{20,}\b/g },
   { name: 'AWS Access Key', regex: /\bAKIA[0-9A-Z]{16}\b/g },
+  { name: 'Google API key (classic)', regex: /\bAIza[0-9A-Za-z_-]{35}\b/g },
+  { name: 'Google/Gemini API key (AQ.)', regex: /\bAQ\.[A-Za-z0-9_-]{40,}/g },
   { name: 'Private Key Header', regex: /-----BEGIN (RSA |EC |OPENSSH )?PRIVATE KEY-----/g }
 ];
+
+// Removes secrets from free text (error messages, telemetry) before it is logged or written to data/*.json.
+export function redactSecrets(text, knownSecrets = []) {
+  let clean = String(text ?? '');
+  for (const secret of knownSecrets) {
+    if (typeof secret === 'string' && secret.length >= 8) clean = clean.split(secret).join('[REDACTED_SECRET]');
+  }
+  for (const { regex } of SECRET_PATTERNS) {
+    regex.lastIndex = 0;
+    clean = clean.replace(regex, '[REDACTED_SECRET]');
+  }
+  return clean.replace(/([?&](?:key|api_key|token)=)[^&\s"']+/gi, '$1[REDACTED_SECRET]');
+}
 
 const PII_PATTERNS = [
   { name: 'Personal email address', regex: /\b[A-Za-z0-9._%+-]+@(?!example\.com\b)[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b/g },

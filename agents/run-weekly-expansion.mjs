@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { sanitizeExternalText, normalizeTextKey, scanForLeaks } from '../engines/security.mjs';
+import { sanitizeExternalText, normalizeTextKey, scanForLeaks, redactSecrets } from '../engines/security.mjs';
 import { RULES } from '../schemas/validate.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -16,10 +16,27 @@ function getIsoWeek(date) {
   return `${d.getUTCFullYear()}-W${String(weekNo).padStart(2, '0')}`;
 }
 
-export function formatErrorWithCause(err) {
+const SECRET_ENV_KEYS = ['GEMINI_API_KEY', 'OPENAI_API_KEY', 'ANTHROPIC_API_KEY', 'OPENROUTER_API_KEY', 'TAVILY_API_KEY', 'BRAVE_API_KEY'];
+
+export function formatErrorWithCause(err, env = process.env) {
   if (!err) return 'Onbekende fout';
   const cause = err.cause ? ` (cause: ${err.cause.code || err.cause.message || String(err.cause)})` : '';
-  return `${err.message || String(err)}${cause}`;
+  return redactSecrets(`${err.message || String(err)}${cause}`, SECRET_ENV_KEYS.map((k) => env[k]));
+}
+
+// Conservative Gemini cost estimate: paid Standard-tier list prices (USD per 1M tokens, output incl. thinking).
+// On the free tier the real cost is $0; the estimate deliberately over-counts so the cost cap stays safe.
+export const GEMINI_PRICING_USD_PER_M = {
+  'gemini-3.5-flash-lite': { input: 0.30, output: 2.50 },
+  default: { input: 1.50, output: 7.50 }
+};
+
+export function estimateGeminiCostUsd(model, usage = {}) {
+  const price = GEMINI_PRICING_USD_PER_M[model] || GEMINI_PRICING_USD_PER_M.default;
+  const input = Number(usage.total_input_tokens || 0);
+  const output = Number(usage.total_output_tokens || 0) + Number(usage.total_thought_tokens || 0);
+  if (!input && !output) return 0.01; // usage missing: assume a non-trivial call
+  return (input * price.input + output * price.output) / 1_000_000;
 }
 
 export function validateCandidateItem(sectionKey, item) {
@@ -104,7 +121,7 @@ export async function fetchPoolResearch(poolKey, query, { env = process.env, fet
         if (snippets.length > 0) sourceUsed = 'tavily';
       }
     } catch (err) {
-      console.warn(`⚠️ Tavily fout voor pool '${poolKey}': ${formatErrorWithCause(err)}`);
+      console.warn(`⚠️ Tavily fout voor pool '${poolKey}': ${formatErrorWithCause(err, env)}`);
     }
   } else if (env.BRAVE_API_KEY) {
     try {
@@ -120,7 +137,7 @@ export async function fetchPoolResearch(poolKey, query, { env = process.env, fet
         if (snippets.length > 0) sourceUsed = 'brave';
       }
     } catch (err) {
-      console.warn(`⚠️ Brave Search fout voor pool '${poolKey}': ${formatErrorWithCause(err)}`);
+      console.warn(`⚠️ Brave Search fout voor pool '${poolKey}': ${formatErrorWithCause(err, env)}`);
     }
   } else {
     // Free, official, zero-key live public APIs so cloud runs still perform real web/store research without paid keys
@@ -233,19 +250,40 @@ export async function callLLM(systemPrompt, userPrompt, { env = process.env, fet
     return { parsed: JSON.parse(text), estimatedCostUsd: 0.02 };
   }
 
-  const model = env.GEMINI_MODEL || 'gemini-2.5-flash';
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${env.GEMINI_API_KEY}`;
-  const res = await fetchWithRetry(url, {
+  // Gemini Interactions API (generateContent for gemini-2.5-* is closed to new users since 2026).
+  // The key travels in the x-goog-api-key header, never in the URL, so it cannot end up in error text.
+  const model = env.GEMINI_MODEL || 'gemini-3.5-flash-lite';
+  const res = await fetchWithRetry('https://generativelanguage.googleapis.com/v1beta/interactions', {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers: {
+      'Content-Type': 'application/json',
+      'x-goog-api-key': env.GEMINI_API_KEY,
+      'Api-Revision': '2026-05-20'
+    },
     body: JSON.stringify({
-      contents: [{ role: 'user', parts: [{ text: `${systemPrompt}\n\n${userPrompt}` }] }],
-      generationConfig: { responseMimeType: 'application/json', temperature: 0.3 }
+      model,
+      input: `${systemPrompt}\n\n${userPrompt}`,
+      response_format: { type: 'text', mime_type: 'application/json' }
     })
   }, netOpts);
-  if (!res.ok) throw new Error(`Gemini API fout (${res.status}): ${(await res.text()).slice(0, 300)}`);
-  const data = await res.json();
-  return { parsed: JSON.parse(data.candidates[0].content.parts[0].text), estimatedCostUsd: 0.005 };
+  const rawBody = await res.text();
+  if (!res.ok) throw new Error(`Gemini API fout (${res.status}, model ${model}): ${rawBody.slice(0, 300)}`);
+  let data;
+  try {
+    data = JSON.parse(rawBody);
+  } catch {
+    throw new Error(`Gemini gaf geen geldige JSON terug (HTTP ${res.status}): ${JSON.stringify(rawBody.slice(0, 120))}`);
+  }
+  if (data.status && data.status !== 'completed') throw new Error(`Gemini interaction status '${data.status}'`);
+  const text = (data.steps || [])
+    .filter((step) => step.type === 'model_output')
+    .flatMap((step) => step.content || [])
+    .filter((part) => part.type === 'text')
+    .map((part) => part.text)
+    .join('')
+    .replace(/^```json\s*/i, '').replace(/```\s*$/, '').trim();
+  if (!text) throw new Error('Gemini response bevat geen model_output-tekst');
+  return { parsed: JSON.parse(text), estimatedCostUsd: estimateGeminiCostUsd(model, data.usage) };
 }
 
 export async function runExpansion({
@@ -380,8 +418,8 @@ export async function runExpansion({
       totalAdded += freshItems.length;
       summaries.push(`${agent.name}: +${freshItems.length}`);
     } catch (err) {
-      failures.push({ agent: agent.id, error: formatErrorWithCause(err) });
-      console.error(`  ❌ ${agent.name} mislukt: ${formatErrorWithCause(err)}`);
+      failures.push({ agent: agent.id, error: formatErrorWithCause(err, env) });
+      console.error(`  ❌ ${agent.name} mislukt: ${formatErrorWithCause(err, env)}`);
     }
   }
 
@@ -401,7 +439,7 @@ export async function runExpansion({
       enginesExecuted: selectedAgents.length,
       itemsAdded: totalAdded,
       costCapReached,
-      failures,
+      failures: failures.map((f) => ({ ...f, error: redactSecrets(f.error, SECRET_ENV_KEYS.map((k) => env[k])) })),
       estimatedCostUsd: Math.round(totalCostUsd * 10000) / 10000,
       durationMs: Date.now() - startedAt
     });
