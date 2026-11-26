@@ -3,6 +3,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { sanitizeExternalText, normalizeTextKey, scanForLeaks, redactSecrets } from '../engines/security.mjs';
 import { RULES } from '../schemas/validate.mjs';
+import { assessResearchItem, normaliseLiveUrls, extractUrls } from '../engines/research-quality.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const defaultRootDir = path.resolve(__dirname, '..');
@@ -30,6 +31,22 @@ export const GEMINI_PRICING_USD_PER_M = {
   'gemini-3.5-flash-lite': { input: 0.30, output: 2.50 },
   default: { input: 1.50, output: 7.50 }
 };
+
+// USD per 1M tokens (input, output). Sources: OpenRouter public model list and Anthropic pricing, checked 2026-11-26.
+export const CHAT_PRICING_USD_PER_M = {
+  'gpt-4o-mini': { input: 0.15, output: 0.60 },
+  'openai/gpt-4o-mini': { input: 0.15, output: 0.60 },
+  'claude-sonnet-5-5': { input: 2.00, output: 10.00 },
+  default: { input: 5.00, output: 25.00 }
+};
+
+export function estimateChatCostUsd(model, inputTokens, outputTokens) {
+  const price = CHAT_PRICING_USD_PER_M[model] || CHAT_PRICING_USD_PER_M.default;
+  const i = Number(inputTokens || 0);
+  const o = Number(outputTokens || 0);
+  if (!i && !o) return 0.02; // usage missing: assume a non-trivial call
+  return (i * price.input + o * price.output) / 1_000_000;
+}
 
 export function estimateGeminiCostUsd(model, usage = {}) {
   const price = GEMINI_PRICING_USD_PER_M[model] || GEMINI_PRICING_USD_PER_M.default;
@@ -171,6 +188,7 @@ export async function fetchPoolResearch(poolKey, query, { env = process.env, fet
 
   return {
     poolKey,
+    liveUrls: snippets.flatMap((line) => extractUrls(line)),
     liveResearchUsed: snippets.length > 0,
     sourceUsed,
     contextText: snippets.length > 0
@@ -224,11 +242,17 @@ export async function callLLM(systemPrompt, userPrompt, { env = process.env, fet
     }
     const content = data.choices?.[0]?.message?.content;
     if (!content) throw new Error(`${provider} response mist choices[0].message.content`);
-    const tokens = data.usage?.total_tokens || 1200;
-    return { parsed: JSON.parse(content), estimatedCostUsd: (tokens / 1_000_000) * 0.6 };
+    const usage = data.usage || {};
+    const cost = usage.prompt_tokens !== undefined
+      ? estimateChatCostUsd(model, usage.prompt_tokens, usage.completion_tokens)
+      : ((usage.total_tokens || 1200) / 1_000_000) * CHAT_PRICING_USD_PER_M.default.output; // conservative when split is missing
+    return { parsed: JSON.parse(content), estimatedCostUsd: cost };
   }
 
   if (provider === 'anthropic') {
+    // claude-3-5-sonnet-latest is retired; claude-sonnet-5-5 rejects non-default temperature, and
+    // thinking blocks can precede the text block, so the text block is looked up by type.
+    const model = env.ANTHROPIC_MODEL || 'claude-sonnet-5-5';
     const res = await fetchWithRetry('https://api.anthropic.com/v1/messages', {
       method: 'POST',
       headers: {
@@ -237,17 +261,20 @@ export async function callLLM(systemPrompt, userPrompt, { env = process.env, fet
         'anthropic-version': '2023-06-01'
       },
       body: JSON.stringify({
-        model: env.ANTHROPIC_MODEL || 'claude-3-5-sonnet-latest',
-        max_tokens: 2048,
-        temperature: 0.3,
+        model,
+        max_tokens: 8000,
         system: systemPrompt,
         messages: [{ role: 'user', content: `${userPrompt}\n\nAntwoord uitsluitend met geldige JSON.` }]
       })
     }, netOpts);
-    if (!res.ok) throw new Error(`Anthropic API fout (${res.status}): ${(await res.text()).slice(0, 300)}`);
-    const data = await res.json();
-    const text = data.content[0].text.replace(/^```json\s*/i, '').replace(/```\s*$/, '').trim();
-    return { parsed: JSON.parse(text), estimatedCostUsd: 0.02 };
+    const rawBody = await res.text();
+    if (!res.ok) throw new Error(`Anthropic API fout (${res.status}): ${rawBody.slice(0, 300)}`);
+    const data = JSON.parse(rawBody);
+    if (data.stop_reason === 'refusal') throw new Error(`Anthropic weigerde het verzoek (${data.stop_details?.category || 'onbekend'})`);
+    const textBlock = (data.content || []).find((b) => b.type === 'text');
+    if (!textBlock) throw new Error(`Anthropic response bevat geen tekstblok (stop_reason: ${data.stop_reason})`);
+    const text = textBlock.text.replace(/^```json\s*/i, '').replace(/```\s*$/, '').trim();
+    return { parsed: JSON.parse(text), estimatedCostUsd: estimateChatCostUsd(model, data.usage?.input_tokens, data.usage?.output_tokens) };
   }
 
   // Gemini Interactions API (generateContent for gemini-2.5-* is closed to new users since 2026).
@@ -286,6 +313,27 @@ export async function callLLM(systemPrompt, userPrompt, { env = process.env, fet
   return { parsed: JSON.parse(text), estimatedCostUsd: estimateGeminiCostUsd(model, data.usage) };
 }
 
+export async function checkLinkReachable(url, fetchImpl = fetch) {
+  const opts = { redirect: 'follow', headers: { 'User-Agent': 'Mozilla/5.0 (ai-money-playbook link check)' } };
+  for (const method of ['HEAD', 'GET']) {
+    try {
+      const controller = new AbortController();
+      const timer = setTimeout(() => controller.abort(), 10000);
+      const res = await fetchImpl(url, { ...opts, method, signal: controller.signal });
+      clearTimeout(timer);
+      if (res.status >= 200 && res.status < 400) return true;
+      if (method === 'GET') return false;
+    } catch {
+      if (method === 'GET') return false;
+    }
+  }
+  return false;
+}
+
+export function isQuotaError(message) {
+  return /HTTP 429|RESOURCE_EXHAUSTED|quota/i.test(String(message || ''));
+}
+
 export async function runExpansion({
   rootDir = defaultRootDir,
   agentId = null,
@@ -293,8 +341,10 @@ export async function runExpansion({
   isDryRun = false,
   env = process.env,
   fetchImpl = fetch,
-  retryDelayMs = 800
+  retryDelayMs = 800,
+  checkLink = null
 } = {}) {
+  const linkChecker = checkLink || ((url) => checkLinkReachable(url, fetchImpl));
   const startedAt = Date.now();
   const config = JSON.parse(fs.readFileSync(path.join(rootDir, 'agents/config.json'), 'utf8'));
   const selectedAgents = agentId
@@ -319,7 +369,9 @@ export async function runExpansion({
       const existing = JSON.parse(fs.readFileSync(path.join(rootDir, agent.file), 'utf8'));
       console.log(`  - ${agent.name} (${agent.id}) [pool: ${agent.pool}] → ${existing.items.length} items in ${agent.file}`);
     }
-    return { status: 'DRY_RUN', totalAdded: 0, failures: [], totalCostUsd: 0, liveResearchPoolsUsed: 0 };
+    const dry = { status: 'DRY_RUN', totalAdded: 0, failures: [], quarantined: [], accepted: [], totalCostUsd: 0, liveResearchPoolsUsed: 0, totalPools: 0, pools: [], provider: 'geen' };
+    writeRunOutputs(dry, env);
+    return dry;
   }
 
   if (!provider) {
@@ -340,10 +392,18 @@ export async function runExpansion({
   let totalAdded = 0;
   let totalCostUsd = 0;
   let costCapReached = false;
+  let quotaExhausted = false;
   const summaries = [];
   const failures = [];
+  const quarantined = [];
+  const accepted = [];
 
   for (const agent of selectedAgents) {
+    if (quotaExhausted) {
+      console.warn(`🛑 Provider-quota uitgeput: ${agent.id} overgeslagen (geen extra kosten of retries).`);
+      failures.push({ agent: agent.id, error: 'Overgeslagen: provider-quota uitgeput tijdens deze run' });
+      continue;
+    }
     if (totalCostUsd >= maxCostUsd) {
       costCapReached = true;
       console.warn(`🛑 Kostenplafond ($${maxCostUsd}) bereikt — resterende engines overgeslagen.`);
@@ -365,6 +425,9 @@ export async function runExpansion({
       '3. Zonder live webbron mag verification NOOIT "geverifieerd" en status NOOIT "VERIFIED" zijn.',
       '4. Geen duplicaten van bestaande items. Geen PII (e-mails/telefoonnummers) of API-keys.',
       `5. Gebruik exact '${today}' als waarde voor 'addedAt' / 'observedAt'.`,
+      '7. Verzin nooit bedragen, percentages, omzet, reviewaantallen of Appfigures-cijfers. Een cijfer mag alleen als het letterlijk in de research-context staat, met die bron-URL in sourceUrl.',
+      '8. Gebruik als sourceUrl/url uitsluitend URLs uit de research-context, of voor juridische claims een officiële bron (eur-lex.europa.eu, overheid). Nooit example.com of placeholders.',
+      "9. Voeg 'evidenceLevel' toe: VERIFIED | SELF_REPORTED | ESTIMATE | HYPOTHESIS | UNVERIFIED. Zonder live bron is het hoogstens HYPOTHESIS/UNVERIFIED.",
       '6. Antwoord uitsluitend als JSON: { "newItems": [...], "summary": "1 zin samenvatting" }.'
     ].join('\n');
 
@@ -394,15 +457,28 @@ export async function runExpansion({
           if (item.status === 'VERIFIED') item.status = 'UNVERIFIED';
         }
 
-        const check = validateCandidateItem(sectionKey, item);
+        const gate = await assessResearchItem(sectionKey, item, {
+          today,
+          liveUrls: normaliseLiveUrls(pool.liveUrls || []),
+          existingItems: [...currentData.items, ...freshItems],
+          checkLink: linkChecker
+        });
+        if (!gate.accepted) {
+          quarantined.push({ agent: agent.id, id: item.id, title: item.title || item.name || '', reasons: gate.reasons });
+          continue;
+        }
+        const gatedItem = gate.item;
+
+        const check = validateCandidateItem(sectionKey, gatedItem);
         if (!check.ok) {
-          failures.push({ agent: agent.id, error: `Kandidaat '${item.id}' afgewezen: ${check.reason}` });
+          failures.push({ agent: agent.id, error: `Kandidaat '${gatedItem.id}' afgewezen: ${check.reason}` });
           continue;
         }
 
-        existingIds.add(item.id);
+        existingIds.add(gatedItem.id);
         if (titleKey) existingTitleKeys.add(titleKey);
-        freshItems.push(item);
+        freshItems.push(gatedItem);
+        accepted.push({ agent: agent.id, file: agent.file, id: gatedItem.id, title: gatedItem.title || gatedItem.name || '', evidenceLevel: gatedItem.evidenceLevel, notes: gate.notes });
       }
 
       if (freshItems.length === 0) continue;
@@ -418,6 +494,7 @@ export async function runExpansion({
       totalAdded += freshItems.length;
       summaries.push(`${agent.name}: +${freshItems.length}`);
     } catch (err) {
+      if (isQuotaError(err.message)) quotaExhausted = true;
       failures.push({ agent: agent.id, error: formatErrorWithCause(err, env) });
       console.error(`  ❌ ${agent.name} mislukt: ${formatErrorWithCause(err, env)}`);
     }
@@ -436,6 +513,9 @@ export async function runExpansion({
       provider: provider || 'none',
       liveResearchPoolsUsed,
       totalPools: neededPools.length,
+      pools: Object.values(researchCache).map((p) => ({ pool: p.poolKey, live: p.liveResearchUsed, source: p.sourceUsed })),
+      quarantined: quarantined.map((q) => ({ agent: q.agent, id: q.id, reasons: q.reasons })),
+      quotaExhausted,
       enginesExecuted: selectedAgents.length,
       itemsAdded: totalAdded,
       costCapReached,
@@ -463,7 +543,36 @@ export async function runExpansion({
     }
   }
 
-  return { totalAdded, failures, totalCostUsd, costCapReached, liveResearchPoolsUsed };
+  const result = { status: totalAdded > 0 ? 'FINDINGS' : 'NO_FINDINGS', totalAdded, failures, quarantined, accepted, totalCostUsd, costCapReached, quotaExhausted, liveResearchPoolsUsed, totalPools: neededPools.length, pools: Object.values(researchCache).map((p) => ({ pool: p.poolKey, live: p.liveResearchUsed, source: p.sourceUsed })), provider };
+  writeRunOutputs(result, env);
+  return result;
+}
+
+export function renderRunSummary(res) {
+  const lines = [
+    '## Wekelijkse onderzoeksrun (Cloud Engines)',
+    '',
+    `- Provider: ${res.provider} · geschatte kosten: $${(res.totalCostUsd || 0).toFixed(4)} (bovengrens op het betaalde tarief)`,
+    `- **Live brondekking: ${res.liveResearchPoolsUsed}/${res.totalPools} research-pools.** Items uit pools zonder live data zijn LLM-analyse zonder externe bron.`,
+    ...res.pools.map((p) => `  - \`${p.pool}\`: ${p.live ? `live (${p.source})` : '**geen live data**'}`),
+    `- Opgenomen items: ${res.totalAdded} · in quarantaine: ${res.quarantined.length} · fouten: ${res.failures.length}${res.quotaExhausted ? ' · **quota uitgeput, run afgebroken**' : ''}${res.costCapReached ? ' · **kostenplafond bereikt**' : ''}`,
+    '',
+    '### Opgenomen (review per item vereist)',
+    ...(res.accepted.length ? res.accepted.map((a) => `- [${a.evidenceLevel}] \`${a.file}\` · ${a.title} (${a.id})`) : ['- geen']),
+    '',
+    '### Quarantaine (niet opgenomen)',
+    ...(res.quarantined.length ? res.quarantined.map((q) => `- \`${q.agent}\` · ${q.title || q.id}: ${q.reasons.join('; ')}`) : ['- geen']),
+    '',
+    'Niet automatisch mergen: alleen een mens beslist na controle van de bronnen. Niets in deze PR is geverifieerd tenzij het als VERIFIED gelabeld is en de bron-URL uit de live research komt.'
+  ];
+  return `${lines.join('\n')}\n`;
+}
+
+function writeRunOutputs(res, env) {
+  if (env.RUN_SUMMARY_PATH) fs.writeFileSync(env.RUN_SUMMARY_PATH, renderRunSummary(res), 'utf8');
+  if (env.GITHUB_OUTPUT) {
+    fs.appendFileSync(env.GITHUB_OUTPUT, `has_findings=${res.totalAdded > 0}\nitems_added=${res.totalAdded}\nquarantined=${res.quarantined.length}\n`);
+  }
 }
 
 const isMain = process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url);

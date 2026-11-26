@@ -378,13 +378,20 @@ function renderFounderOs(founder) {
   `).join('');
 }
 
+const LEVEL_CLASS = { VERIFIED: 'badge-ok', SELF_REPORTED: 'badge-accent', ESTIMATE: 'badge-warn', HYPOTHESIS: 'badge-accent', UNVERIFIED: 'badge-warn' };
+function levelBadge(item) {
+  const level = item && item.evidenceLevel;
+  if (!level || !LEVEL_CLASS[level]) return '';
+  return `<span class="badge ${LEVEL_CLASS[level]}" title="Bewijsniveau">${esc(level)}</span>`;
+}
+
 function renderEvidenceAndPitfalls(evidence, pitfalls) {
   const evFiltered = evidence.filter(matchesQuery);
   document.getElementById('evidence-list').innerHTML = evFiltered.map((e) => `
     <article class="panel">
       <div class="panel-head">
         <h3>${esc(e.title)}</h3>
-        <span class="badge ${e.status === 'VERIFIED' ? 'badge-ok' : 'badge-warn'}">${esc(e.status)}</span>
+        <span class="badge ${e.status === 'VERIFIED' ? 'badge-ok' : 'badge-warn'}">${esc(e.status)}</span>${levelBadge(e)}
       </div>
       <div class="muted" style="font-size:12px;margin-bottom:6px">${esc(e.sourceType)} · ${esc(e.observedAt)} · onzekerheid: ${esc(e.uncertainty)}</div>
       <p>${esc(e.summary)}</p>
@@ -395,7 +402,7 @@ function renderEvidenceAndPitfalls(evidence, pitfalls) {
   const pitFiltered = pitfalls.filter(matchesQuery);
   document.getElementById('pitfalls-list').innerHTML = pitFiltered.map((p) => `
     <article class="panel" style="border-left:4px solid var(--danger)">
-      <div class="panel-head"><h3>${esc(p.title)}</h3><span class="badge badge-danger">Risico: ${esc(p.severity)}</span></div>
+      <div class="panel-head"><h3>${esc(p.title)}</h3><span class="badge badge-danger">Risico: ${esc(p.severity)}</span>${levelBadge(p)}</div>
       <div class="three-col-grid" style="font-size:13.2px">
         <div><strong>Mythe</strong><br/>${esc(p.myth)}</div>
         <div><strong>Realiteit</strong><br/>${esc(p.reality)}</div>
@@ -425,7 +432,7 @@ function renderNiches(section) {
           <span class="badge badge-accent">Synergie: ${esc(n.synergy)}</span>
           <span class="badge badge-neutral">${esc(n.platform)}</span>
         </div>
-        <span class="score-pill">${n.opportunityScore}/100</span>
+        <span class="score-pill" title="Ongevalideerde inschatting, geen kans op succes">${n.opportunityScore}/100</span>${levelBadge(n)}
       </div>
       <p><strong>Appfigures:</strong> ${esc(n.appfiguresBenchmark)}</p>
       <div class="three-col-grid" style="font-size:13px">
@@ -452,7 +459,7 @@ function renderEarnersTipsResources(earners, tips, resources) {
         <div><strong>${esc(e.name)}</strong> — <span class="muted">${esc(e.product)}</span></div>
         <div style="display:flex;gap:6px;align-items:center">
           <span class="badge ${e.verification === 'geverifieerd' ? 'badge-ok' : 'badge-accent'}">${esc(e.verification)}</span>
-          <span class="mono" style="font-weight:700">${esc(e.reportedRevenue)}</span>
+          <span class="mono" style="font-weight:700">${esc(e.reportedRevenue)}</span>${levelBadge(e)}
         </div>
       </div>
       <p>${esc(e.howItWorks)} <strong>Les:</strong> ${esc(e.keyLesson)}</p>
@@ -460,7 +467,7 @@ function renderEarnersTipsResources(earners, tips, resources) {
   `).join('');
 
   document.getElementById('tips-list').innerHTML = tips.filter(matchesQuery).map((t) => `
-    <article class="panel"><div class="panel-head"><strong>${esc(t.title)}</strong><span class="badge badge-accent">${esc(t.category)}</span></div><p>${esc(t.detail)}</p></article>
+    <article class="panel"><div class="panel-head"><strong>${esc(t.title)}</strong><span class="badge badge-accent">${esc(t.category)}</span>${levelBadge(t)}</div><p>${esc(t.detail)}</p></article>
   `).join('');
 
   document.getElementById('resources-list').innerHTML = resources.filter(matchesQuery).map((r) => {
