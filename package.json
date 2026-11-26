@@ -1,10 +1,11 @@
 {
   "name": "ai-money-playbook",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "private": true,
-  "description": "Verifieerbare kennisbank & werkboek over wie echt geld verdient met AI, patronen, valkuilen, concrete playbooks en blinde vlekken — wekelijks uitgebreid door autonome agents.",
+  "description": "AI Opportunity-to-Revenue Operating System — Opportunity Intelligence, 12 samenwerkende engines, financiële simulator, validatielab en Founder OS.",
   "type": "module",
   "scripts": {
+    "test": "node --test tests/*.test.mjs",
     "validate": "node schemas/validate.mjs",
     "build": "node schemas/validate.mjs && node build.mjs",
     "serve": "node build.mjs && npx serve dist -l 4173",

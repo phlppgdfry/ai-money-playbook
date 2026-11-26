@@ -1,0 +1,117 @@
+{
+  "section": "evidence",
+  "title": "Evidence Vault & Source Quality Audit",
+  "updatedAt": "2026-11-24",
+  "items": [
+    {
+      "id": "ev-appfigures-coinio",
+      "title": "Appfigures Live Sync (24 nov): Coinio & Verzamel-Identifiers",
+      "status": "VERIFIED",
+      "sourceType": "Appfigures MCP (Live API)",
+      "observedAt": "2026-11-24",
+      "uncertainty": "laag",
+      "summary": "Live Appfigures-sync op 24 nov 2026 bevestigt: Coinio: Coin Identifier haalt 290k downloads/mnd en ~$1,0M/mnd; kleinere concurrenten (Coinoscope 15k dl, Coin Identifier <5k dl) blijven rond <$5k/mnd — sterke bevestiging dat verzamel-/metaal-identifiers enorme schaal hebben bij goede paywall/distributie.",
+      "caveat": "Appfigures-omzetcijfers zijn gemodelleerde wereldwijde maandschattingen.",
+      "url": "https://appfigures.com"
+    },
+    {
+      "id": "ev-appfigures-antique-rock",
+      "title": "Appfigures Live Benchmark: AntiqueWorth, Curio & RockIn",
+      "status": "VERIFIED",
+      "sourceType": "Appfigures MCP (Live API)",
+      "observedAt": "2026-11-22",
+      "uncertainty": "laag",
+      "summary": "Live opgehaald via Appfigures apps_search: AntiqueWorth (170k downloads/mnd, $680k/mnd), Curio (60k downloads/mnd, $230k/mnd), Rock Identifier (180k downloads/mnd, $720k/mnd), RockIn (<5k downloads/mnd, toch $35k/mnd).",
+      "caveat": "Appfigures-omzetcijfers zijn gemodelleerde wereldwijde schattingen van de vorige kalendermaand, geen gecontroleerde jaarrekeningen.",
+      "url": "https://appfigures.com"
+    },
+    {
+      "id": "ev-appfigures-ringsizer",
+      "title": "Appfigures Eigen Portfolio: RingSizer (ID 338677961569)",
+      "status": "VERIFIED",
+      "sourceType": "Appfigures MCP (Own Account)",
+      "observedAt": "2026-11-22",
+      "uncertainty": "laag",
+      "summary": "RingSizer – Ring Size Tool (ReflectBuddy) staat live op iOS en rankt op #5 voor 'ring circumference', #7 voor 'ring gauge' en #11 voor 'ring size chart' (competitiveness 40–43).",
+      "caveat": "Zoekvolume van deze specifieke long-tail termen is laag (pop 5), maar de koopintentie voor sieraden/ringwaarde is hoog.",
+      "url": "https://appfigures.com/reports/app-profile/338677961569"
+    },
+    {
+      "id": "ev-appfigures-handmirror",
+      "title": "Appfigures Eigen Portfolio: Hand Mirror (ID 338063291072)",
+      "status": "VERIFIED",
+      "sourceType": "Appfigures MCP (Own Account)",
+      "observedAt": "2026-11-22",
+      "uncertainty": "laag",
+      "summary": "Hand Mirror: HD, Light & Zoom rankt op #12 voor 'mirror with light' (pop 24), #16 voor 'mirror' (pop 30) en #21 voor 'mirror app' (pop 53).",
+      "caveat": "Sterk bestaand organisch verkeer voor interne cross-promotie van beauty/color/grooming AI-spin-offs.",
+      "url": "https://appfigures.com/reports/app-profile/338063291072"
+    },
+    {
+      "id": "ev-appfigures-mirrormate",
+      "title": "Appfigures Eigen Portfolio: Mirror Mate (ID 338543862211)",
+      "status": "VERIFIED",
+      "sourceType": "Appfigures MCP (Own Account)",
+      "observedAt": "2026-11-22",
+      "uncertainty": "laag",
+      "summary": "Mirror Mate - Menubar Mirror draait op macOS waar keyword-concurrentie laag ligt (28–29).",
+      "caveat": "macOS App Store heeft kleiner totaalvolume dan iOS, maar hogere bereidheid voor eenmalige aankopen of B2B-onkosten.",
+      "url": "https://appfigures.com/reports/app-profile/338543862211"
+    },
+    {
+      "id": "ev-appfigures-posture",
+      "title": "Appfigures Benchmark: PostureScreen Mobile",
+      "status": "VERIFIED",
+      "sourceType": "Appfigures MCP (Live API)",
+      "observedAt": "2026-11-22",
+      "uncertainty": "middel",
+      "summary": "PostureScreen Mobile (ID 6416325) haalt ~$85k/mnd op iOS; keywords 'posture screen' (pop 28, comp 43) en 'posture assessment' (comp 45) hebben gematigde concurrentie.",
+      "caveat": "PostureScreen bedient deels professionals/chiropractors; consumenten/macOS-bereidheid moet apart getest worden.",
+      "url": "https://appfigures.com"
+    },
+    {
+      "id": "ev-appfigures-dressika",
+      "title": "Appfigures Benchmark: Color Analysis - Dressika",
+      "status": "VERIFIED",
+      "sourceType": "Appfigures MCP (Live API)",
+      "observedAt": "2026-11-22",
+      "uncertainty": "middel",
+      "summary": "Dressika (ID 323471774896) haalt 55k downloads/mnd en ~$45k/mnd, maar keywords 'seasonal color analysis' (comp 93) en '12 season color analysis' (comp 85) zijn zwaar beconcurreerd.",
+      "caveat": "Zonder UGC of cross-promo is organisch ranken op kleurtype-termen lastig.",
+      "url": "https://appfigures.com"
+    },
+    {
+      "id": "ev-revenuecat-2026",
+      "title": "RevenueCat State of Subscription Apps (115.000+ apps, $16B+ omzet)",
+      "status": "VERIFIED",
+      "sourceType": "Industrierapport (2025/2026)",
+      "observedAt": "2026-11-22",
+      "uncertainty": "laag",
+      "summary": "Harde paywall converteert 10,7% vs. 2,1% freemium; 55% van 3-dagen trial-annuleringen gebeurt op Dag 0; AI-apps leveren +41% startomzet per klant maar churnen ~30% sneller; maandelijkse app-lanceringen stegen naar ~15.000/mnd.",
+      "caveat": "Mediaancijfers verschillen sterk per categorie (Health/Utilities presteren beter dan generieke AI-chat).",
+      "url": "https://www.revenuecat.com"
+    },
+    {
+      "id": "ev-eu-ai-act-50",
+      "title": "EU AI Act Artikel 50 & GDPR-grondslag voor Voice AI",
+      "status": "VERIFIED",
+      "sourceType": "Europese regelgeving & compliance-analyse",
+      "observedAt": "2026-11-22",
+      "uncertainty": "laag",
+      "summary": "AI-systemen die direct met burgers interageren (zoals telefoonreceptionisten) moeten transparant melden dat de gebruiker met AI spreekt. Voor GDPR geldt onderscheid tussen inkomende klantenservice (contractuele noodzaak) en uitgaande koude acquisitie (expliciete opt-in).",
+      "caveat": "Geen formeel juridisch advies; laat definitieve DPA voor schaal controleren door een BE/NL jurist.",
+      "url": "https://artificialintelligenceact.eu"
+    },
+    {
+      "id": "ev-b2b-voice-market",
+      "title": "Europese Vertical Voice AI & Agency-to-SaaS Bandbreedte",
+      "status": "PARTIALLY_VERIFIED",
+      "sourceType": "Marktonderzoek & publieke cases",
+      "observedAt": "2026-11-22",
+      "uncertainty": "middel",
+      "summary": "Lokale AI-bureaus rekenen €1.500–4.000 opstart + €500–1.200/mnd of bundelen in €299–750/mnd pakketten. US-tools botsen in Europa op dialecten, lokale agenda/ERP-koppelingen en ontbrekende EU-DPA's.",
+      "caveat": "Lokale Belgische/Nederlandse sluitingsratio moet met echte prospectgesprekken gevalideerd worden (nog 0 eigen gesprekken gevoerd).",
+      "url": "https://vapi.ai"
+    }
+  ]
+}
