@@ -37,7 +37,7 @@
       "file": "data/niches.json",
       "role": "Analyseert 2–3 sterren reviews en klachten bij grote apps en SaaS-tools (ook rond Hand Mirror, Mirror Mate & RingSizer) om directe productgaten te vinden.",
       "focus": "Focus op herhalende klachten die met één scherpere workflow of AI-stap zijn op te lossen.",
-      "schemaHint": "{ id, title, platform, synergy, opportunityScore (geheel getal 0-100, ongevalideerde inschatting), primaryKeywords, appfiguresBenchmark (laat leeg: de cloud heeft geen Appfigures-toegang), competitivenessNote, competitorWeakness, mvpConcept, monetization, addedAt }"
+      "schemaHint": "{ id, title, platform, synergy (exact één van: 'Hand Mirror' | 'Mirror Mate' | 'RingSizer' | 'Geen directe synergie'), opportunityScore (geheel getal 0-100, ongevalideerde inschatting), primaryKeywords, appfiguresBenchmark (laat leeg: de cloud heeft geen Appfigures-toegang), competitivenessNote, competitorWeakness, mvpConcept, monetization, addedAt }"
     },
     {
       "id": "demand-wtp-validator",

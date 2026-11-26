@@ -34,6 +34,7 @@ const CLAIM_FIELDS = {
   evidence: ['summary', 'caveat']
 };
 
+export const NO_SYNERGY = 'Geen directe synergie';
 export const NO_APPFIGURES_TEXT = 'Geen Appfigures-data: deze cloud-engine heeft geen toegang tot Appfigures. Eventuele reviewklachten zijn niet geteld of geverifieerd (HYPOTHESIS).';
 
 function hostOf(url) {
@@ -137,6 +138,15 @@ export async function assessResearchItem(section, rawItem, ctx) {
     const s = Number(item.opportunityScore);
     if (!Number.isFinite(s) || s < 0 || s > 100) reasons.push('opportunityScore buiten 0–100');
     else if (s <= 10) reasons.push('opportunityScore lijkt op een 0–10-schaal (site verwacht 0–100)');
+    // `synergy` is a filter key on the site (short portfolio-app name); long prose breaks the layout.
+    const allowed = new Set([...(ctx.allowedSynergies || []), NO_SYNERGY]);
+    if (!allowed.has(item.synergy)) {
+      if (typeof item.synergy === 'string' && item.synergy.length > 40) {
+        item.competitivenessNote = `${item.synergy} ${item.competitivenessNote || ''}`.trim();
+      }
+      item.synergy = NO_SYNERGY;
+      notes.push(`synergy genormaliseerd naar '${NO_SYNERGY}'`);
+    }
     // The cloud engines have no Appfigures access: never let invented "Appfigures" observations through.
     item.appfiguresBenchmark = NO_APPFIGURES_TEXT;
     notes.push('appfiguresBenchmark vervangen: geen Appfigures-toegang in de cloud');

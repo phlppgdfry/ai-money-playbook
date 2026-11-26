@@ -55,6 +55,15 @@ test('Gate regression (PR #2): invented Appfigures text is replaced and 0-10 sco
   assert.equal(good.item.evidenceLevel, 'HYPOTHESIS');
 });
 
+test('Gate regression (PR #2): long synergy prose is normalised to a filter value', async () => {
+  const r = await assessResearchItem('niches', { id: 'n', title: 'Iets nieuws', platform: 'iOS', synergy: 'Speelt in op de frustratie van algemene object-scanners die alleen een naam geven', opportunityScore: 70, primaryKeywords: ['a'], appfiguresBenchmark: 'x', competitivenessNote: 'Note.', competitorWeakness: 'y', mvpConcept: 'z', monetization: 'm', addedAt: today }, ctx({ allowedSynergies: ['RingSizer', 'Hand Mirror'] }));
+  assert.equal(r.accepted, true);
+  assert.equal(r.item.synergy, 'Geen directe synergie');
+  assert.match(r.item.competitivenessNote, /^Speelt in op/);
+  const ok = await assessResearchItem('niches', { id: 'n2', title: 'Ander idee', platform: 'iOS', synergy: 'RingSizer', opportunityScore: 70, primaryKeywords: ['a'], appfiguresBenchmark: 'x', competitorWeakness: 'y', mvpConcept: 'z', monetization: 'm', addedAt: today }, ctx({ allowedSynergies: ['RingSizer'] }));
+  assert.equal(ok.item.synergy, 'RingSizer');
+});
+
 test('Gate regression (PR #2): unsourced money and percentage claims are quarantined', async () => {
   const money = await assessResearchItem('emerging', { id: 'e1', title: 'Offertelek', stage: 'Vroeg', horizon: '1 jaar', summary: 's', whyNow: 'w', example: 'mist maandelijks circa 12.000 euro', addedAt: today }, ctx());
   assert.equal(money.accepted, false);

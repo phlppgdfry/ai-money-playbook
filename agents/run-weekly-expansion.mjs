@@ -461,6 +461,7 @@ export async function runExpansion({
           today,
           liveUrls: normaliseLiveUrls(pool.liveUrls || []),
           existingItems: [...currentData.items, ...freshItems],
+          allowedSynergies: [...new Set(currentData.items.map((i) => i.synergy).filter((v) => typeof v === 'string' && v.length <= 40))],
           checkLink: linkChecker
         });
         if (!gate.accepted) {
