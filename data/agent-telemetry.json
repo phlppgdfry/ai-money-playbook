@@ -4,6 +4,29 @@
   "updatedAt": "2026-11-26",
   "runs": [
     {
+      "id": "run-mwxew118",
+      "date": "2026-11-26",
+      "week": "2026-W48",
+      "provider": "gemini",
+      "liveResearchPoolsUsed": 1,
+      "totalPools": 1,
+      "pools": [
+        {
+          "pool": "consumer-apps",
+          "live": true,
+          "source": "apple-itunes-public"
+        }
+      ],
+      "quarantined": [],
+      "quotaExhausted": false,
+      "enginesExecuted": 1,
+      "itemsAdded": 1,
+      "costCapReached": false,
+      "failures": [],
+      "estimatedCostUsd": 0.0012,
+      "durationMs": 2932
+    },
+    {
       "id": "run-mwwu8heq",
       "date": "2026-11-26",
       "week": "2026-W48",

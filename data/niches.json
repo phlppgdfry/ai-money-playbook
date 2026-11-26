@@ -134,6 +134,26 @@
       "addedAt": "2026-11-26",
       "evidenceLevel": "HYPOTHESIS",
       "auditedAt": "2026-11-26"
+    },
+    {
+      "id": "item-1",
+      "title": "AI Universal Scanner Foutcorrectie & Waarde-Validatie",
+      "platform": "iOS",
+      "synergy": "Geen directe synergie",
+      "opportunityScore": 72,
+      "primaryKeywords": [
+        "AI scanner",
+        "object identifier",
+        "foutcorrectie",
+        "waardebepaling"
+      ],
+      "appfiguresBenchmark": "Geen Appfigures-data: deze cloud-engine heeft geen toegang tot Appfigures. Eventuele reviewklachten zijn niet geteld of geverifieerd (HYPOTHESIS).",
+      "competitivenessNote": "Bestaande universele scanner-apps missen vaak betrouwbare verificatie voor zeldzame objecten of munten, wat leidt tot frustratie bij gebruikers over onjuiste identificaties.",
+      "competitorWeakness": "Generieke herkenning zonder ingebouwde feitelijke cross-check of contextuele validatiestap voor munten, sieraden en antiek.",
+      "mvpConcept": "Een AI-scanner die niet alleen objecten benoemt, maar direct een betrouwbaarheidsscore en bronverificatie meestuurt met een optie voor expert-review.",
+      "monetization": "Freemium met abonnementsmodel voor onbeperkte geavanceerde scans en diepgaande analyses.",
+      "addedAt": "2026-11-26",
+      "evidenceLevel": "HYPOTHESIS"
     }
   ]
 }

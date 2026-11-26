@@ -4,6 +4,17 @@
   "updatedAt": "2026-11-26",
   "runs": [
     {
+      "id": "weekly-2026-w48-w118",
+      "date": "2026-11-26",
+      "week": "2026-W48",
+      "agent": "Playbook 2.0 Cloud Engines (1)",
+      "summary": "2. Competitor Complaint Miner: +1",
+      "itemsAdded": 1,
+      "sectionsTouched": [
+        "data/niches.json"
+      ]
+    },
+    {
       "id": "weekly-2026-w48-8her",
       "date": "2026-11-26",
       "week": "2026-W48",
