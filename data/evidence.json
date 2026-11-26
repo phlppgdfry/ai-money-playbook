@@ -1,7 +1,7 @@
 {
   "section": "evidence",
   "title": "Evidence Vault & Source Quality Audit",
-  "updatedAt": "2026-11-24",
+  "updatedAt": "2026-11-26",
   "items": [
     {
       "id": "ev-appfigures-coinio",
@@ -112,6 +112,28 @@
       "summary": "Lokale AI-bureaus rekenen €1.500–4.000 opstart + €500–1.200/mnd of bundelen in €299–750/mnd pakketten. US-tools botsen in Europa op dialecten, lokale agenda/ERP-koppelingen en ontbrekende EU-DPA's.",
       "caveat": "Lokale Belgische/Nederlandse sluitingsratio moet met echte prospectgesprekken gevalideerd worden (nog 0 eigen gesprekken gevoerd).",
       "url": "https://vapi.ai"
+    },
+    {
+      "id": "item-ev-01",
+      "title": "Analyse AI-gedreven abonnementsmodellen in mobiele app-economie",
+      "status": "UNVERIFIED",
+      "sourceType": "Interne analyse",
+      "observedAt": "2026-11-26",
+      "uncertainty": "hoog",
+      "summary": "Kritische evaluatie van de houdbaarheid van AI-features als primaire drijfveer voor in-app aankopen zonder directe live marktomgevingsdata.",
+      "caveat": "Geen live bron beschikbaar; uitsluitend gebaseerd op theoretische aannames en eerdere markttrends.",
+      "url": "https://example.com/unverified-ai-subs"
+    },
+    {
+      "id": "item-ev-02",
+      "title": "Schatting impact van strengere handhaving op AI-transparantie",
+      "status": "UNVERIFIED",
+      "sourceType": "Redactionele schatting",
+      "observedAt": "2026-11-26",
+      "uncertainty": "hoog",
+      "summary": "Verwachte operationele kostenverhoging voor Nederlandse AI-startups door toenemende compliance-druk vanuit Europese regelgeving.",
+      "caveat": "Ontbreekt aan harde empirische bewijzen en actuele juridische jurisprudentie voor 2026.",
+      "url": "https://example.com/unverified-compliance-cost"
     }
   ]
 }

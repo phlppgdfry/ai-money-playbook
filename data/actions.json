@@ -1,7 +1,7 @@
 {
   "section": "actions",
   "title": "Concrete acties & playbooks",
-  "updatedAt": "2026-11-21",
+  "updatedAt": "2026-11-26",
   "items": [
     {
       "id": "playbook-appstore-cal-ai",
@@ -114,6 +114,52 @@
         }
       ],
       "addedAt": "2026-11-21"
+    },
+    {
+      "id": "item-2026-05",
+      "title": "Spoor 5: Automatische offerte- en calculatietool voor lokale bouwaannemers",
+      "track": "Agency-to-SaaS",
+      "timeToFirstEuro": "4-6 weken",
+      "riskLevel": "Gemiddeld",
+      "fitReason": "Lokale aannemers in BE en NL verkwisten wekelijks uren aan handmatige calculaties op basis van PDF-bouwtekeningen; een gerichte AI-tool lost dit direct op met hoge betalingsbereidheid.",
+      "steps": [
+        {
+          "id": "step-1",
+          "text": "Voer 5 betaalde handmatige audits uit bij lokale aannemers om de exacte calculatiestroom in kaart te brengen."
+        },
+        {
+          "id": "step-2",
+          "text": "Bouw een rudimentaire workflow in Retool of Bubble gekoppeld aan vision-LLM's voor het uitlezen van plattegronden."
+        },
+        {
+          "id": "step-3",
+          "text": "Introduceer een vast maandabonnement zodra de eerste 3 pilotklanten structureel tijd besparen op offertes."
+        }
+      ],
+      "addedAt": "2026-11-26"
+    },
+    {
+      "id": "item-2026-06",
+      "title": "Spoor 6: AI-gedreven compliance- en vergunningchecker voor regionale vastgoedbeleggers",
+      "track": "Agency-to-SaaS",
+      "timeToFirstEuro": "8-10 weken",
+      "riskLevel": "Hoog",
+      "fitReason": "Complexe lokale bestemmingsplannen en vergunningseisen in Nederlandse gemeenten vormen een juridisch mijnenveld waar beleggers fors voor willen betalen om risico's te mitigeren.",
+      "steps": [
+        {
+          "id": "step-1",
+          "text": "Verzamel handmatig openbare gemeentelijke bestemmingsplanregels en koppel deze aan een Retrieval-Augmented Generation (RAG) pipeline."
+        },
+        {
+          "id": "step-2",
+          "text": "Lever de eerste rapportages als dure consultancy-dienst om de RAG-output te valideren op nauwkeurigheid."
+        },
+        {
+          "id": "step-3",
+          "text": "Migreer de validatiedienst naar een self-service SaaS-portaal met een freemium model voor snelle leadgeneratie."
+        }
+      ],
+      "addedAt": "2026-11-26"
     }
   ]
 }

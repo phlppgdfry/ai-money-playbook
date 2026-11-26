@@ -1,7 +1,7 @@
 {
   "section": "niches",
   "title": "App Store Niches (Live Appfigures Data)",
-  "updatedAt": "2026-11-22",
+  "updatedAt": "2026-11-26",
   "portfolioContext": [
     {
       "name": "Hand Mirror: HD, Light & Zoom",
@@ -92,6 +92,44 @@
       "mvpConcept": "1 spiegelscan voor huidtype/droogheid/roodheid (met duidelijke non-medische disclaimer) + barcodescan van verzorgingsproducten met directe match-score.",
       "monetization": "Freemium scanlimiet (3 gratis scans) → €34,99/jaar voor onbeperkte scans en persoonlijke routine.",
       "addedAt": "2026-11-22"
+    },
+    {
+      "id": "ai-coin-collection-portfolio-tracker",
+      "title": "AI Munt- en Waardetaxatie Portefeuille",
+      "platform": "iOS / Web",
+      "synergy": "Speelt in op de frustratie van algemene object-scanners die alleen een oppervlakkige naam geven zonder actuele marktwaarde of portfolio-beheer.",
+      "opportunityScore": 8.4,
+      "primaryKeywords": [
+        "coin identifier",
+        "munt taxatie app",
+        "numismatiek ai",
+        "collectie beheer"
+      ],
+      "appfiguresBenchmark": "Veel 2- tot 3-sterren reviews bij 'Coin Identifier'-apps klagen over foute jaartallen en het ontbreken van een totaalwaarde van hun verzameling.",
+      "competitivenessNote": "Bestaande apps zijn te generiek; een niche-oplossing specifiek voor munten met live marktplaatskoppelingen ontbreekt.",
+      "competitorWeakness": "Geen historisch prijzenoverzicht, onbetrouwbare jaartal-herkenning bij slechte belichting en geforceerde jaarabonnementen.",
+      "mvpConcept": "Een gerichte AI-scanner die munten direct koppelt aan actuele veilingprijzen en automatisch een digitale inventarislijst bijhoudt.",
+      "monetization": "Freemium met een pro-abonnement voor onbeperkt taxeren en export naar Excel/PDF.",
+      "addedAt": "2026-11-26"
+    },
+    {
+      "id": "ai-universal-object-dispute-checker",
+      "title": "AI Object- & Plant-Identificatie met Foutcorrectie",
+      "platform": "iOS / Android",
+      "synergy": "Lost de ergernis op van blinde AI-herkenning in apps zoals LensAI en Lens Scan die zelden uitleggen *waarom* een object zo is geclassificeerd.",
+      "opportunityScore": 8.1,
+      "primaryKeywords": [
+        "object identifier",
+        "plant scanner ai",
+        "foutcorrectie",
+        "visuele zoekmachine"
+      ],
+      "appfiguresBenchmark": "Gebruikers geven massaal 3 sterren omdat de app bij twijfel een fout antwoord geeft in plaats van toe te geven dat de foto onvoldoende kwaliteit heeft.",
+      "competitivenessNote": "Apps claimen 'identificeer alles', maar missen transparantie in betrouwbaarheidsscores per foto.",
+      "competitorWeakness": "Geen feedbackloop voor foutieve scans en agressieve paywalls direct na de eerste gratis scan.",
+      "mvpConcept": "Een scanner die per identificatie een betrouwbaarheidspercentage toont en direct alternatieven aandraagt bij twijfel.",
+      "monetization": "Pay-per-scan credits of een maandelijks onbeperkt premium model.",
+      "addedAt": "2026-11-26"
     }
   ]
 }

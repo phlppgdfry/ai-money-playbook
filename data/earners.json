@@ -1,7 +1,7 @@
 {
   "section": "earners",
   "title": "Wie echt geld verdient met AI",
-  "updatedAt": "2026-11-22",
+  "updatedAt": "2026-11-26",
   "items": [
     {
       "id": "danny-postma-headshotpro",
@@ -192,6 +192,44 @@
       "keyLesson": "Geverifieerde transparantie (zoals TrustMRR) is zelf een sterk marketingkanaal geworden in een markt vol neppe screenshots.",
       "sourceUrl": "https://trustmrr.com",
       "addedAt": "2026-11-21"
+    },
+    {
+      "id": "coin-identifier-ai-scanner",
+      "name": "Onbekende Ontwikkelaar (Coin Identifier)",
+      "teamSize": "1-3",
+      "teamType": "solo",
+      "product": "Coin Identifier & AI Scanner",
+      "category": "Consumer Utility Micro-SaaS",
+      "reportedRevenue": "Onbekend (hoge review-volume duidt op aanzienlijke in-app aankopen)",
+      "monthlyUsdEstimate": 45000,
+      "revenueModel": "In-app abonnementen",
+      "marginNote": "Hoge app store marges na 15-30% platformkosten, lage serverkosten voor API-proxy's.",
+      "distributionChannel": "App Store SEO & betaalde advertenties",
+      "verification": "schatting",
+      "verificationNote": "Gebaseerd op 4.451 reviews op de App Store, maar geen openbare omzetcijfers geverifieerd.",
+      "howItWorks": "Gebruikers scannen munten met de camera; de app herkent de waarde en herkomst via AI.",
+      "keyLesson": "Niche 'identifier' apps met visuele AI genereren sterke betalingsbereidheid bij verzamelaars.",
+      "sourceUrl": "https://apps.apple.com/us/app/coin-identifier-ai-scanner/id6737041776?uo=4",
+      "addedAt": "2026-11-26"
+    },
+    {
+      "id": "lens-scan-identify-anything",
+      "name": "Onbekende Ontwikkelaar (Lens Scan)",
+      "teamSize": "1-5",
+      "teamType": "small-team",
+      "product": "Lens Scan: Identify Anything",
+      "category": "Consumer Utility Micro-SaaS",
+      "reportedRevenue": "Niet gepubliceerd",
+      "monthlyUsdEstimate": 90000,
+      "revenueModel": "Freemium abonnement",
+      "marginNote": "Standaard App Store commissie, lage marginale kosten per API-call.",
+      "distributionChannel": "App Store Search Optimization (ASO)",
+      "verification": "schatting",
+      "verificationNote": "Omzet geschat op basis van 20.796 reviews; geen hard bewijs of API-koppeling aanwezig.",
+      "howItWorks": "All-in-one scanner voor planten, insecten en munten die gebruikers dwingt te betalen na een gratis limiet.",
+      "keyLesson": "Bredere 'identify anything' apps hebben een enorm volume, maar vereisen strakke acquisitiekosten.",
+      "sourceUrl": "https://apps.apple.com/us/app/lens-scan-identify-anything/id6560107458?uo=4",
+      "addedAt": "2026-11-26"
     }
   ]
 }

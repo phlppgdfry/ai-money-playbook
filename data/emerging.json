@@ -1,7 +1,7 @@
 {
   "section": "emerging",
   "title": "Nieuwe dingen & opkomende kansen",
-  "updatedAt": "2026-11-21",
+  "updatedAt": "2026-11-26",
   "items": [
     {
       "id": "outcome-based-pricing",
@@ -52,6 +52,26 @@
       "whyNow": "Multimodale modellen zijn snel en spotgoedkoop geworden, terwijl TikTok/Reels-demos van 'richt camera → magisch resultaat' organisch viraal gaan.",
       "example": "Cal AI bewees het model in voeding; dezelfde formule werkt in tientallen kleinere App Store-niches met hoge zoekvolumes en zwakke bestaande apps.",
       "addedAt": "2026-11-21"
+    },
+    {
+      "id": "item-money-leak-1",
+      "title": "Trage offerte-doorlooptijd bij installateurs en bouwbedrijven",
+      "stage": "Vroeg",
+      "horizon": "1-2 jaar",
+      "summary": "Mkb-installateurs verliezen opdrachten omdat offertes pas na 3 tot 5 werkdagen worden verstuurd, terwijl de consument binnen 24 uur kiest.",
+      "whyNow": "Generatieve AI kan inkomende e-mails of telefoongesprekken direct omzetten in een technisch kloppende concept-offerte, wat de conversie direct verdubbelt.",
+      "example": "Een loodgietersbedrijf met 10 monteurs mist maandelijks circa 12.000 euro aan omzet door trage offertevorming, omdat traditioneel ERP-software geen ongenstructured aanvraagtekst automatisch omzet naar prijzen.",
+      "addedAt": "2026-11-26"
+    },
+    {
+      "id": "item-money-leak-2",
+      "title": "Handmatige factuur- en urencontrole in de zakelijke dienstverlening",
+      "stage": "Groeiend",
+      "horizon": "0-1 jaar",
+      "summary": "Urenregistraties en ingekochte materialen worden nog te vaak handmatig vergeleken met contractafspraken, wat leidt tot vergeten nacalculatie.",
+      "whyNow": "Slimme AI-agenten scannen dagelijks achter de schermen afwijkingen tussen urenstaten en projectbudgetten voordat de factuur de deur uitgaat.",
+      "example": "Een adviesbureau van 25 FTE lekt maandelijks zo'n 4.500 euro aan niet-gefactureerde meerwerkuren en kleine kostenposten die door de administratieve mand vallen.",
+      "addedAt": "2026-11-26"
     }
   ]
 }

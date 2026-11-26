@@ -1,7 +1,7 @@
 {
   "section": "blindspots",
   "title": "Dingen die we vaak vergeten (Blinde vlekken)",
-  "updatedAt": "2026-11-22",
+  "updatedAt": "2026-11-26",
   "items": [
     {
       "id": "bs-gdpr-eu-ai-act",
@@ -58,6 +58,22 @@
       "risk": "Een product dat volledig leunt op jouw persoonlijke gezicht of ongedocumenteerde scripts is later nauwelijks te verkopen.",
       "action": "Houd per product aparte Stripe/App Store-tracking, schone code en gedocumenteerde distributieprocessen aan; micro-SaaS verkoopt vaak tegen 3–5× jaarwinst.",
       "addedAt": "2026-11-21"
+    },
+    {
+      "id": "eu-ai-act-art-50-transparantieplicht",
+      "area": "Regulation & Deadline Scout",
+      "title": "EU AI Act Art. 50 transparantieplicht voor gegenereerde content",
+      "risk": "Boetes tot 15 miljoen euro of 3% van de wereldwijde omzet bij het niet tijdig labelen van AI-gegenereerde output of chatbots richting consumenten in NL/BE.",
+      "action": "Implementeer verplichte machine-leesbare watermerken en duidelijke visuele disclaimers in de UI voordat de gebruiker interacteert met AI-gegenereerde content.",
+      "addedAt": "2026-11-26"
+    },
+    {
+      "id": "peppol-efacturatie-b2b-verplichting",
+      "area": "Regulation & Deadline Scout",
+      "title": "Verplichte e-facturatie via Peppol-netwerk voor B2B SaaS",
+      "risk": "Verlies van zakelijke klanten in de Benelux en administratieve stilstand doordat facturatiesystemen niet aansluiten op de vernieuwde Europese e-facturatiestandaarden.",
+      "action": "Integreer direct een gecertificeerd Peppol-access point binnen je SaaS-facturatiemodule om automatische B2B-compliance te waarborgen.",
+      "addedAt": "2026-11-26"
     }
   ]
 }
