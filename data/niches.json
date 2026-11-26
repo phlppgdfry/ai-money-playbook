@@ -97,7 +97,7 @@
       "id": "ai-coin-collection-portfolio-tracker",
       "title": "AI Munt- en Waardetaxatie Portefeuille",
       "platform": "iOS / Web",
-      "synergy": "Speelt in op de frustratie van algemene object-scanners die alleen een oppervlakkige naam geven zonder actuele marktwaarde of portfolio-beheer.",
+      "synergy": "RingSizer",
       "opportunityScore": 84,
       "primaryKeywords": [
         "coin identifier",
@@ -106,7 +106,7 @@
         "collectie beheer"
       ],
       "appfiguresBenchmark": "Geen Appfigures-data opgehaald voor deze niche (engine-output op basis van App Store-zoekresultaten). De review-klachten zijn niet geteld of geverifieerd: HYPOTHESIS.",
-      "competitivenessNote": "Hypothese: bestaande scanners zijn generiek. Niet onderzocht of er al munt-specifieke apps met marktplaatskoppeling bestaan. Score is een ongevalideerde engine-inschatting, geen kans op succes.",
+      "competitivenessNote": "Speelt in op de frustratie van algemene object-scanners die alleen een oppervlakkige naam geven zonder actuele marktwaarde of portfolio-beheer. Hypothese: bestaande scanners zijn generiek. Niet onderzocht of er al munt-specifieke apps met marktplaatskoppeling bestaan. Score is een ongevalideerde engine-inschatting, geen kans op succes.",
       "competitorWeakness": "Geen historisch prijzenoverzicht, onbetrouwbare jaartal-herkenning bij slechte belichting en geforceerde jaarabonnementen.",
       "mvpConcept": "Een gerichte AI-scanner die munten direct koppelt aan actuele veilingprijzen en automatisch een digitale inventarislijst bijhoudt.",
       "monetization": "Freemium met een pro-abonnement voor onbeperkt taxeren en export naar Excel/PDF.",
@@ -118,7 +118,7 @@
       "id": "ai-universal-object-dispute-checker",
       "title": "AI Object- & Plant-Identificatie met Foutcorrectie",
       "platform": "iOS / Android",
-      "synergy": "Hypothese: gebruikers van algemene identificatie-apps willen weten hoe zeker een herkenning is. Niet getoetst aan echte reviews.",
+      "synergy": "Geen directe synergie",
       "opportunityScore": 81,
       "primaryKeywords": [
         "object identifier",
@@ -127,7 +127,7 @@
         "visuele zoekmachine"
       ],
       "appfiguresBenchmark": "Geen Appfigures-data opgehaald voor deze niche (engine-output op basis van App Store-zoekresultaten). De review-klachten zijn niet geteld of geverifieerd: HYPOTHESIS.",
-      "competitivenessNote": "Hypothese, niet onderzocht. Score is een ongevalideerde engine-inschatting, geen kans op succes.",
+      "competitivenessNote": "Hypothese: gebruikers van algemene identificatie-apps willen weten hoe zeker een herkenning is. Niet getoetst aan echte reviews. Hypothese, niet onderzocht. Score is een ongevalideerde engine-inschatting, geen kans op succes.",
       "competitorWeakness": "Geen feedbackloop voor foutieve scans en agressieve paywalls direct na de eerste gratis scan.",
       "mvpConcept": "Een scanner die per identificatie een betrouwbaarheidspercentage toont en direct alternatieven aandraagt bij twijfel.",
       "monetization": "Pay-per-scan credits of een maandelijks onbeperkt premium model.",
