@@ -107,4 +107,6 @@ jobs:
 
       - name: Report PR
         if: steps.cpr.outputs.pull-request-number
-        run: echo "PR #${{ steps.cpr.outputs.pull-request-number }} (${{ steps.cpr.outputs.pull-request-operation }}) — ${{ steps.cpr.outputs.pull-request-url }}"
+        # Block scalar: in a plain YAML scalar " #" would start a comment and truncate the command.
+        run: |
+          echo "PR #${{ steps.cpr.outputs.pull-request-number }} (${{ steps.cpr.outputs.pull-request-operation }}): ${{ steps.cpr.outputs.pull-request-url }}"
