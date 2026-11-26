@@ -1,25 +1,25 @@
 {
   "section": "niches",
   "title": "App Store Niches (Live Appfigures Data)",
-  "updatedAt": "2026-11-22",
+  "updatedAt": "2026-11-26",
   "portfolioContext": [
     {
       "name": "Hand Mirror: HD, Light & Zoom",
       "platform": "iOS / iPadOS",
       "productId": 338063291072,
-      "footprint": "#12 op 'mirror with light' (pop 24), #16 op 'mirror' (pop 30), #21 op 'mirror app' (pop 53)"
+      "footprint": "#14 op 'mirror with light' (pop 24), #20 op 'mirror app' (pop 53), #20 op 'mirror' (pop 30)"
     },
     {
       "name": "Mirror Mate - Menubar Mirror",
       "platform": "macOS",
       "productId": 338543862211,
-      "footprint": "Menubar webcam-app; lage macOS-concurrentie (28–29)"
+      "footprint": "Niet in de top 250 (US) voor de 5 gevolgde keywords"
     },
     {
       "name": "RingSizer – Ring Size Tool",
       "platform": "iOS",
       "productId": 338677961569,
-      "footprint": "#5 op 'ring circumference', #7 op 'ring gauge', #11 op 'ring size chart' (comp 40–43)"
+      "footprint": "#1 op 'ring size tool' (pop 5), #11 op 'ring size chart' (pop 5), #32 op 'measure ring size' (pop 5)"
     }
   ],
   "items": [

@@ -1,7 +1,7 @@
 {
   "section": "evidence",
   "title": "Evidence Vault & Source Quality Audit",
-  "updatedAt": "2026-11-24",
+  "updatedAt": "2026-11-26",
   "items": [
     {
       "id": "ev-appfigures-coinio",
@@ -29,10 +29,10 @@
       "id": "ev-appfigures-ringsizer",
       "title": "Appfigures Eigen Portfolio: RingSizer (ID 338677961569)",
       "status": "VERIFIED",
-      "sourceType": "Appfigures MCP (Own Account)",
-      "observedAt": "2026-11-22",
+      "sourceType": "Appfigures API via af CLI (eigen account)",
+      "observedAt": "2026-11-26",
       "uncertainty": "laag",
-      "summary": "RingSizer – Ring Size Tool (ReflectBuddy) staat live op iOS en rankt op #5 voor 'ring circumference', #7 voor 'ring gauge' en #11 voor 'ring size chart' (competitiveness 40–43).",
+      "summary": "RingSizer – Ring Size Tool (US): #1 op 'ring size tool' (pop 5), #11 op 'ring size chart' (pop 5), #32 op 'measure ring size' (pop 5). Opgehaald met `af keywords tracked-ranks`.",
       "caveat": "Zoekvolume van deze specifieke long-tail termen is laag (pop 5), maar de koopintentie voor sieraden/ringwaarde is hoog.",
       "url": "https://appfigures.com/reports/app-profile/338677961569"
     },
@@ -40,10 +40,10 @@
       "id": "ev-appfigures-handmirror",
       "title": "Appfigures Eigen Portfolio: Hand Mirror (ID 338063291072)",
       "status": "VERIFIED",
-      "sourceType": "Appfigures MCP (Own Account)",
-      "observedAt": "2026-11-22",
+      "sourceType": "Appfigures API via af CLI (eigen account)",
+      "observedAt": "2026-11-26",
       "uncertainty": "laag",
-      "summary": "Hand Mirror: HD, Light & Zoom rankt op #12 voor 'mirror with light' (pop 24), #16 voor 'mirror' (pop 30) en #21 voor 'mirror app' (pop 53).",
+      "summary": "Hand Mirror: HD, Light & Zoom (US): #14 op 'mirror with light' (pop 24), #20 op 'mirror app' (pop 53), #20 op 'mirror' (pop 30). Opgehaald met `af keywords tracked-ranks`.",
       "caveat": "Sterk bestaand organisch verkeer voor interne cross-promotie van beauty/color/grooming AI-spin-offs.",
       "url": "https://appfigures.com/reports/app-profile/338063291072"
     },
@@ -51,10 +51,10 @@
       "id": "ev-appfigures-mirrormate",
       "title": "Appfigures Eigen Portfolio: Mirror Mate (ID 338543862211)",
       "status": "VERIFIED",
-      "sourceType": "Appfigures MCP (Own Account)",
-      "observedAt": "2026-11-22",
+      "sourceType": "Appfigures API via af CLI (eigen account)",
+      "observedAt": "2026-11-26",
       "uncertainty": "laag",
-      "summary": "Mirror Mate - Menubar Mirror draait op macOS waar keyword-concurrentie laag ligt (28–29).",
+      "summary": "Mirror Mate - Menubar Mirror (US, desktop): Niet in de top 250 (US) voor de 5 gevolgde keywords. Opgehaald met `af keywords tracked-ranks`.",
       "caveat": "macOS App Store heeft kleiner totaalvolume dan iOS, maar hogere bereidheid voor eenmalige aankopen of B2B-onkosten.",
       "url": "https://appfigures.com/reports/app-profile/338543862211"
     },
