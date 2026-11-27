@@ -39,4 +39,7 @@ test('Build artifacts compile cleanly and contain zero leaked secrets or persona
   assert.equal(bundle.version, '2.0.0');
   assert.equal(bundle.weeklyBrief.validatableNow.length, 2);
   assert.equal(bundle.agentsConfig.agents.length, 12);
+
+  // Private prospect files must never be published in dist/
+  assert.equal(fs.existsSync(path.join(distDir, 'private')), false, 'private/ mag nooit in dist/ belanden');
 });
