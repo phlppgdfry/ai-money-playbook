@@ -34,6 +34,10 @@ Elk opgenomen item krijgt een `evidenceLevel`: `VERIFIED` (alleen met een bron u
 
 De gate vangt geen inhoudelijke fouten achter een geldige officiële link: **elke onderzoeks-PR vereist menselijke review en wordt nooit automatisch gemerged.**
 
+De gate herkent ook geen **semantische duplicaten**. Deduplicatie werkt op id en op overlap van titelwoorden; een item met andere woorden voor hetzelfde idee (bv. "AI Universal Scanner Foutcorrectie" naast "AI Object- & Plant-Identificatie met Foutcorrectie") komt erdoor. Controleer bij review dus ook of een item inhoudelijk al bestaat.
+
+Bekende Appfigures-beperking: `app_profile_url` voor macOS-apps (bv. Mirror Mate) geeft een 404. Gebruik daar de App Store-URL als bronlink.
+
 ## Weekly operations
 
 - **Cloud:** `weekly-agents.yml`. Handmatig: `gh workflow run weekly-agents.yml -f agent=all`. Test zonder kosten: `-f dry_run=true` (geen provider-keys, geen PR). Geïsoleerde test: `-f pr_branch=test/<naam>`.
